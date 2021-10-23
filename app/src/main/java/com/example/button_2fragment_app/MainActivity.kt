@@ -1,5 +1,6 @@
 package com.example.button_2fragment_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.example.button_2fragment_app.mainFragments.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,12 +37,16 @@ class MainActivity : AppCompatActivity() {
         // Cada cop que es clica un element del menú, s'executa això:
 
         return when (item.itemId) {
-            R.id.action_settings -> true // S'ha clicat els settings
+            R.id.action_settings -> goToSettings() // S'ha clicat els settings
             else -> super.onOptionsItemSelected(item) // si no es cap dels nostres, ho passem al super
         }
     }
 
-    fun goToSettings() {
+    fun goToSettings(): Boolean {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
 
+        // Retornem ture perquè onOptionsItemSelected necessita un booleà de return que indiqui si l'acció s'ha dut a terme
+        return true
     }
 }
