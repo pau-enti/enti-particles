@@ -39,4 +39,8 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item) // si no es cap dels nostres, ho passem al super
         }
     }
+
+    fun goToSettings() {
+
+    }
 }
