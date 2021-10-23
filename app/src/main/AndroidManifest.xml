@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Button_2Fragment_app">
         <activity
-            android:name=".mainFragments.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
         <activity
             android:name=".MainActivity"

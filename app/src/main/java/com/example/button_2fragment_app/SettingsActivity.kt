@@ -1,9 +1,8 @@
-package com.example.button_2fragment_app.mainFragments
+package com.example.button_2fragment_app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
-import com.example.button_2fragment_app.R
 
 class SettingsActivity : AppCompatActivity() {
 

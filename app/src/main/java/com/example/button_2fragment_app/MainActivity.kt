@@ -8,8 +8,6 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import com.example.button_2fragment_app.mainFragments.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
