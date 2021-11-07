@@ -16,10 +16,19 @@ data class Particle(
 ) {
 
     // Second constructor with optional parameters
-    constructor(name: String, family: Family): this(name, family, Random.nextDouble(),Random.nextDouble(),Random.nextDouble())
+    constructor(name: String, family: Family) : this(
+        name,
+        family,
+        getRandomValue(),
+        getRandomValue(),
+        getRandomValue()
+    )
 
     enum class Family {
         QUARK, LEPTON, GAUGE_BOSON, SCALAR_BOSON
     }
 
+    companion object {
+        private fun getRandomValue(): Double = Random.nextInt(0, 999) / 1000.0
+    }
 }

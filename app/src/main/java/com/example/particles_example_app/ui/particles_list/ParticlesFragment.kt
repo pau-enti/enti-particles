@@ -17,8 +17,12 @@ class ParticlesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         // Set the adapter
-        if (view is RecyclerView)
-            view.adapter = ParticleRecyclerViewAdapter(Particles)
+        if (view is RecyclerView) {
+            context?.let {
+                // Només utilitzo el context si no és null; sino, finalitzo activity
+                view.adapter = ParticleRecyclerViewAdapter(it, Particles)
+            } ?: activity?.finish()
+        }
 
         return view
     }
