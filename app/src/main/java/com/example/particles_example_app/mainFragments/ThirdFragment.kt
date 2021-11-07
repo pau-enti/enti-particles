@@ -1,4 +1,4 @@
-package com.example.button_2fragment_app.mainFragments
+package com.example.particles_example_app.mainFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.button_2fragment_app.R
+import com.example.particles_example_app.R
 
 class ThirdFragment: Fragment() {
 

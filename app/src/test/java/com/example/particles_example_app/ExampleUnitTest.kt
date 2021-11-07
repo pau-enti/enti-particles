@@ -1,4 +1,4 @@
-package com.example.button_2fragment_app
+package com.example.particles_example_app
 
 import org.junit.Test
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.button_2fragment_app.mainFragments.FirstFragment"
+        android:name="com.example.particles_example_app.mainFragments.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.button_2fragment_app.mainFragments.SecondFragment"
+        android:name="com.example.particles_example_app.mainFragments.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/thirdFragment2"
-        android:name="com.example.button_2fragment_app.mainFragments.ThirdFragment"
+        android:name="com.example.particles_example_app.mainFragments.ThirdFragment"
         android:label="ThirdFragment" >
         <action
             android:id="@+id/action_thirdFragment2_to_FirstFragment"

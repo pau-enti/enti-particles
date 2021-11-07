@@ -1,4 +1,4 @@
-package com.example.button_2fragment_app
+package com.example.particles_example_app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

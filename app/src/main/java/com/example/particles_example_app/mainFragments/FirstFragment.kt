@@ -1,4 +1,4 @@
-package com.example.button_2fragment_app.mainFragments
+package com.example.particles_example_app.mainFragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
-import com.example.button_2fragment_app.R
+import com.example.particles_example_app.R
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
