@@ -1,19 +1,20 @@
-package com.example.particles_example_app
+package com.example.particles_example_app.ui.particles_list
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.particles_example_app.R
+import com.example.particles_example_app.data.Particle
 
-import com.example.particles_example_app.dummy.DummyContent.DummyItem
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class ParticleRecyclerViewAdapter(
-    private val values: List<DummyItem>
+    private val particles: List<Particle>
 ) : RecyclerView.Adapter<ParticleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,12 +24,12 @@ class ParticleRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val item = particles[position]
+        holder.idView.text = item.name
+        holder.contentView.text = item.mass.toString()
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount(): Int = particles.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.item_number)

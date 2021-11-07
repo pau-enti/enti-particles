@@ -1,50 +1,32 @@
 package com.example.particles_example_app
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.example.particles_example_app.ui.main.SectionsPagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        val viewPager: ViewPager = findViewById(R.id.view_pager)
+        viewPager.adapter = sectionsPagerAdapter
+        val tabs: TabLayout = findViewById(R.id.tabs)
+        tabs.setupWithViewPager(viewPager)
+        val fab: FloatingActionButton = findViewById(R.id.fab)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+        fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action") {
-                        // Codi del OnClickListener
-                        Log.e("DEBUG", "Ara s'ha apretat a 'Action'")
-                    }.show()
+                .setAction("Action", View.OnClickListener {
+                    // TODO
+                    // Do something
+                }).show()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Aquí es carrega els elements del menú que estan dins del layout indicat
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Cada cop que es clica un element del menú, s'executa això:
-
-        return when (item.itemId) {
-            R.id.action_settings -> goToSettings() // S'ha clicat els settings
-            else -> super.onOptionsItemSelected(item) // si no es cap dels nostres, ho passem al super
-        }
-    }
-
-    fun goToSettings(): Boolean {
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
-
-        // Retornem ture perquè onOptionsItemSelected necessita un booleà de return que indiqui si l'acció s'ha dut a terme
-        return true
     }
 }
