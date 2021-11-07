@@ -20,6 +20,7 @@ class SectionsPagerAdapter(fm: FragmentManager) :
         "PARTICLES"
     )
 
+    // Aquesta funció indica el fragment que s'ha de posar
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> StandardModelFragment()

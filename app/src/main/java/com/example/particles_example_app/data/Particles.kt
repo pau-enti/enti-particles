@@ -2,6 +2,9 @@ package com.example.particles_example_app.data
 
 import com.example.particles_example_app.data.Particle.Family.*
 
+/**
+ * Collection of particles of the Standard Model
+ */
 object Particles: ArrayList<Particle>() {
 
     init {
