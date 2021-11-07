@@ -30,7 +30,7 @@ class FirstFragment : Fragment() {
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             // Exemple ús de dades del PreferenceManager
             val settings = PreferenceManager.getDefaultSharedPreferences(context)
-            val reply = settings.getBoolean("reply", false)
+            val sync = settings.getBoolean("sync", false)
 
             Log.e("DEBUG", PreferenceManager.getDefaultSharedPreferences(context).all.toString())
 
