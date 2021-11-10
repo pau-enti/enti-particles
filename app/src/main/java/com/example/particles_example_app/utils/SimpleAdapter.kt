@@ -6,20 +6,35 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class SimpleAdapter<T>(
+class SimpleAdapter<T>(
     val list: ArrayList<T>,
     @LayoutRes val listLayout: Int,
     @LayoutRes val itemLayout: Int,
     inflater: LayoutInflater,
-    container: ViewGroup?
+    container: ViewGroup?,
+    val onGetItem: ((itemView: View, element: T) -> Unit)?
 ) :
     RecyclerView.Adapter<SimpleAdapter<T>.ViewHolder>() {
 
-    init {
-        val view = inflater.inflate(listLayout, container, false)
+    var onGetItemIndexed: ((itemView: View, element: T, i: Int) -> Unit)? = null
+
+    constructor(
+        list: ArrayList<T>,
+        @LayoutRes listLayout: Int,
+        @LayoutRes itemLayout: Int,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        onGetItemIndexed: (itemView: View, element: T, i: Int) -> Unit
+    ) : this(list, listLayout, itemLayout, inflater, container, null) {
+        this.onGetItemIndexed = onGetItemIndexed
     }
 
-    abstract fun onGetItem(itemView: View, element: T)
+    val view: View
+
+    init {
+        view = inflater.inflate(listLayout, container, false) as RecyclerView
+        view.adapter = this
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,7 +43,13 @@ abstract class SimpleAdapter<T>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        onGetItem(holder.view, list[position])
+        onGetItem?.let { function ->
+            function(holder.view, list[position])
+        }
+
+        onGetItemIndexed?.let { function ->
+            function(holder.view, list[position], position)
+        }
     }
 
     override fun getItemCount(): Int = list.size

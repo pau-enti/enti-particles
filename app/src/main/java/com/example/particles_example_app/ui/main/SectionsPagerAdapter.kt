@@ -3,6 +3,7 @@ package com.example.particles_example_app.ui.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.particles_example_app.ui.ParticlesWithSimpleAdapterFragment
 import com.example.particles_example_app.ui.StandardModelFragment
 import com.example.particles_example_app.ui.particles_list.ParticlesFragment
 import java.lang.IllegalStateException
@@ -17,7 +18,8 @@ class SectionsPagerAdapter(fm: FragmentManager) :
 
     private val TAB_TITLES = arrayOf(
         "STANDARD MODEL",
-        "PARTICLES"
+        "PARTICLES",
+        "PARTICLES 2"
     )
 
     // Aquesta funció indica el fragment que s'ha de posar
@@ -25,7 +27,8 @@ class SectionsPagerAdapter(fm: FragmentManager) :
         return when (position) {
             0 -> StandardModelFragment()
             1 -> ParticlesFragment()
-            else -> throw IllegalStateException("There's only 2 tabs")
+            2 -> ParticlesWithSimpleAdapterFragment()
+            else -> throw IllegalStateException("There's only 3 tabs")
         }
     }
 
