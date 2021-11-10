@@ -11,7 +11,7 @@ import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.particles_example_app.R
-import com.example.particles_example_app.toast
+import com.example.particles_example_app.utils.toast
 
 class StandardModelFragment : Fragment() {
 

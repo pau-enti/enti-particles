@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles_example_app.R
 import com.example.particles_example_app.data.Particle
-import com.example.particles_example_app.toast
+import com.example.particles_example_app.utils.toast
 
 
 /**
@@ -20,7 +20,7 @@ class ParticleRecyclerViewAdapter(val context: Context, private val particles: L
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_item, parent, false)
+            .inflate(R.layout.fragment_particles, parent, false)
         // Assignem el layout al ViewHolder
         return ViewHolder(view)
     }
