@@ -11,12 +11,22 @@ class SimpleAdapter<T>(
     @LayoutRes val listLayout: Int,
     @LayoutRes val itemLayout: Int,
     inflater: LayoutInflater,
-    container: ViewGroup?,
-    val onGetItem: ((itemView: View, element: T) -> Unit)?
-) :
+    container: ViewGroup?) :
     RecyclerView.Adapter<SimpleAdapter<T>.ViewHolder>() {
 
     var onGetItemIndexed: ((itemView: View, element: T, i: Int) -> Unit)? = null
+    var onGetItem: ((itemView: View, element: T) -> Unit)? = null
+
+    constructor(
+        list: ArrayList<T>,
+        @LayoutRes listLayout: Int,
+        @LayoutRes itemLayout: Int,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        onGetItem: (itemView: View, element: T) -> Unit
+    ) : this(list, listLayout, itemLayout, inflater, container) {
+        this.onGetItem = onGetItem
+    }
 
     constructor(
         list: ArrayList<T>,
@@ -25,7 +35,7 @@ class SimpleAdapter<T>(
         inflater: LayoutInflater,
         container: ViewGroup?,
         onGetItemIndexed: (itemView: View, element: T, i: Int) -> Unit
-    ) : this(list, listLayout, itemLayout, inflater, container, null) {
+    ) : this(list, listLayout, itemLayout, inflater, container) {
         this.onGetItemIndexed = onGetItemIndexed
     }
 
