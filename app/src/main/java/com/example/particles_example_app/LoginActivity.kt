@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
@@ -40,12 +39,14 @@ class LoginActivity : AppCompatActivity() {
         // que les dades que ha introduit són correctes
         usernameInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                usernameInput.error = if (usernameInput.text.isValidEmail())
-                // Si les dades són correctes, esborrem l'error (per si n'hi hagués)
-                    null
-                else
-                // Si les dades no són correctes, mostrem aquest error
-                    "Invalid username"
+                usernameInput.error =
+                        // Si les dades són correctes, esborrem l'error (per si n'hi hagués)
+                    if (usernameInput.text.isValidEmail())
+                        null
+
+                    // Si les dades no són correctes, mostrem aquest error
+                    else
+                        "Invalid username"
             }
         }
 
@@ -93,16 +94,6 @@ class LoginActivity : AppCompatActivity() {
         return !this.isNullOrEmpty() && this.length >= 5
     }
 
-    private fun TextInputLayout.isValidPassword(): Boolean {
-        val text = this.editText?.text
-        return if (text.isNullOrEmpty() || text.length < 5) {
-            this.error = "Invalid password"
-            false
-        } else {
-            this.error = null
-            true
-        }
-    }
 
     private fun startAnimations() {
         // Anima icono

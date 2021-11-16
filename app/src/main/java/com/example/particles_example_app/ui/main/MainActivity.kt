@@ -34,6 +34,12 @@ class MainActivity : AppCompatActivity() {
                     toast("Maybe we live in a simulation")
                 }.show()
         }
+
+        // Agafem els paràmetres que ens porta l'extra
+        intent.extras?.get(USERNAME_EXTRA)?.let {
+            toast("Welcome $it") // Si l'usuari no és null, fem el toast
+        }
+
     }
 
     companion object {
