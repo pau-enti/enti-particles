@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
@@ -60,9 +61,18 @@ class LoginActivity : AppCompatActivity() {
 
         // Incorporem funcionalitats al botó de login
         findViewById<Button>(R.id.loginButton).setOnClickListener {
+
+            val user = usernameInput.text
+            val pass = passwordInput.text
+
             // Comprovem que les dades al formulari siguin correctes
-            if (validateData()) {
+            if (user.isValidEmail() && pass.isValidPassword()) {
                 val intent = Intent(this, MainActivity::class.java)
+
+                // Passem les dades a la següent activity a través de l'Intent
+                intent.putExtra(MainActivity.USERNAME_EXTRA, user)
+                intent.putExtra(MainActivity.PASSWORD_EXTRA, pass)
+
                 startActivity(intent)
 
                 // Matem lla LoginAcitivity, perquè no volem que quedi "darrere" de la MainActivity
@@ -73,13 +83,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Retorna true si totes les dades són correctes
-     */
-    private fun validateData(): Boolean {
-        return usernameInput.text.isValidEmail()
-                && passwordInput.text.isValidPassword()
-    }
 
     private fun CharSequence?.isValidEmail(): Boolean {
         return if (this.isNullOrEmpty()) false

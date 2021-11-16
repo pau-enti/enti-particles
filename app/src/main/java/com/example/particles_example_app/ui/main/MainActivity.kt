@@ -35,4 +35,9 @@ class MainActivity : AppCompatActivity() {
                 }.show()
         }
     }
+
+    companion object {
+        const val USERNAME_EXTRA = "USERNAME_EXTRA"
+        const val PASSWORD_EXTRA = "PASSWORD_EXTRA"
+    }
 }
