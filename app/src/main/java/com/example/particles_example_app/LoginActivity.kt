@@ -117,8 +117,8 @@ class LoginActivity : AppCompatActivity() {
         // Anima icono
         ObjectAnimator.ofInt(
             findViewById(R.id.particleIcon), "colorFilter",
-            applicationContext.getColor(R.color.quarks),
             applicationContext.getColor(R.color.leptons),
+            applicationContext.getColor(R.color.quarks),
             applicationContext.getColor(R.color.higgs),
             applicationContext.getColor(R.color.gauge_bosons)
         ).apply {
@@ -132,10 +132,10 @@ class LoginActivity : AppCompatActivity() {
         // Anima fondo
         ObjectAnimator.ofInt(
             findViewById(R.id.loginBackground), "backgroundColor",
-            applicationContext.getColor(R.color.gauge_bosons).applyTransparency(),
-            applicationContext.getColor(R.color.higgs).applyTransparency(),
+            applicationContext.getColor(R.color.quarks).applyTransparency(),
             applicationContext.getColor(R.color.leptons).applyTransparency(),
-            applicationContext.getColor(R.color.quarks).applyTransparency()
+            applicationContext.getColor(R.color.gauge_bosons).applyTransparency(),
+            applicationContext.getColor(R.color.higgs).applyTransparency()
         ).apply {
             duration = ANIMATION_DURATION
             setEvaluator(ArgbEvaluator())
