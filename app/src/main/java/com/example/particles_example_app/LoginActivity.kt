@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
             if (!hasFocus) {
                 usernameInput.error =
                         // Si les dades són correctes, esborrem l'error (per si n'hi hagués)
-                    if (usernameInput.text.isValidEmail())
+                    if (usernameInput.text.toString().isValidEmail())
                         null
 
                     // Si les dades no són correctes, mostrem aquest error
@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
         // Fem el mateix check, però pel password
         passwordInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                passwordInput.error = if (passwordInput.text.isValidPassword())
+                passwordInput.error = if (passwordInput.text.toString().isValidPassword())
                     null
                 else
                     "Invalid password"
@@ -64,16 +64,17 @@ class LoginActivity : AppCompatActivity() {
         // Incorporem funcionalitats al botó de login
         findViewById<Button>(R.id.loginButton).setOnClickListener {
 
-            val user = usernameInput.text
-            val pass = passwordInput.text
+            val user = usernameInput.text.toString()
+            val pass = passwordInput.text.toString()
 
             // Comprovem que les dades al formulari siguin correctes
-            if (user.isValidEmail() && pass.isValidPassword()) {
+            if (checkLogin(user, pass)) {
+                doLogin(user, pass)
+
                 val intent = Intent(this, MainActivity::class.java)
 
                 // Passem les dades a la següent activity a través de l'Intent
-                intent.putExtra(MainActivity.USERNAME_EXTRA, user)
-                intent.putExtra(MainActivity.PASSWORD_EXTRA, pass)
+                intent.putExtra(MainActivity.USER_EXTRA, user.split("@").first())
 
                 startActivity(intent)
 
@@ -92,12 +93,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun CharSequence?.isValidEmail(): Boolean {
+    private fun doLogin(user: String, pass: String) {
+        // TODO: Aquí l'app hauria de memoritzar les dades per tal que el login fos efectiu
+    }
+
+    private fun checkLogin(user: String?, pass: String?): Boolean {
+        // TODO: Aquí també s'ha de consultar a la BBDD que la contrasenya és correcta
+        return user.isValidEmail() && pass.isValidPassword()
+    }
+
+
+    private fun String?.isValidEmail(): Boolean {
         return if (this.isNullOrEmpty()) false
         else Patterns.EMAIL_ADDRESS.matcher(this).matches()
     }
 
-    private fun CharSequence?.isValidPassword(): Boolean {
+    private fun String?.isValidPassword(): Boolean {
         return !this.isNullOrEmpty() && this.length >= 5
     }
 
