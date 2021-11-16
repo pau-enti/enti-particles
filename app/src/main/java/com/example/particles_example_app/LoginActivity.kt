@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles_example_app.ui.main.MainActivity
 import com.example.particles_example_app.utils.applyTransparency
@@ -18,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
 
     val ANIMATION_DURATION = 30000L // ms
 
+    lateinit var usernameInput: EditText
+    lateinit var passwordInput: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
@@ -25,21 +29,27 @@ class LoginActivity : AppCompatActivity() {
         // Amaga la appBar
         supportActionBar?.hide()
 
+        usernameInput = findViewById<TextInputLayout>(R.id.usernameInput).editText ?: return
+        passwordInput = findViewById<TextInputLayout>(R.id.passwordInput).editText ?: return
+
         // Comencem animacions
         startAnimations()
-        val usernameInput = findViewById<TextInputLayout>(R.id.usernameInput).editText
-        val passwordInput = findViewById<TextInputLayout>(R.id.passwordInput).editText
 
-        usernameInput?.setOnFocusChangeListener { _, hasFocus ->
+        // Quan l'usuari acaba d'escriure i passa al següent camp (es perd el focus), llavors comprovem
+        // que les dades que ha introduit són correctes
+        usernameInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 usernameInput.error = if (usernameInput.text.isValidEmail())
+                // Si les dades són correctes, esborrem l'error (per si n'hi hagués)
                     null
-                 else
+                else
+                // Si les dades no són correctes, mostrem aquest error
                     "Invalid username"
             }
         }
 
-        passwordInput?.setOnFocusChangeListener { _, hasFocus ->
+        // Fem el mateix check, però pel password
+        passwordInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 passwordInput.error = if (passwordInput.text.isValidPassword())
                     null
@@ -63,9 +73,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Retorna true si totes les dades són correctes
+     */
     private fun validateData(): Boolean {
-        return findViewById<TextInputLayout>(R.id.usernameInput).editText?.text.isValidEmail()
-                && findViewById<TextInputLayout>(R.id.passwordInput).editText?.text.isValidPassword()
+        return usernameInput.text.isValidEmail()
+                && passwordInput.text.isValidPassword()
     }
 
     private fun CharSequence?.isValidEmail(): Boolean {
