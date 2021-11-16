@@ -38,7 +38,7 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8">
+            app:layout_constraintVertical_bias="0.62">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/usernameInput"
@@ -46,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="Username"
                 android:layout_marginBottom="16dp"
+                android:hint="Username"
                 app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -68,18 +68,20 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/loginButton"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_margin="16dp"
-                android:text="Login" />
+                android:text="Login"
+                />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
