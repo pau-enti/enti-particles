@@ -3,15 +3,19 @@ package com.example.particles_example_app.ui
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import com.example.particles_example_app.R
 import com.example.particles_example_app.utils.toast
+import java.io.File
 
 class StandardModelFragment : Fragment() {
 
@@ -23,6 +27,11 @@ class StandardModelFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_standard_model, container, false)
     }
 
+    private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmapThumbnail ->
+            view?.findViewById<ImageView>(R.id.standardModelImage)?.setImageBitmap(bitmapThumbnail)
+        }
+
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission())
         { isGranted: Boolean ->
@@ -30,6 +39,7 @@ class StandardModelFragment : Fragment() {
                 // Permission is granted. Continue the action or workflow in your
                 // app.
                 context?.toast("Now I can use camera :)")
+                cameraLauncher.launch()
             } else {
                 // Explain to the user that the feature is unavailable because the
                 // features requires a permission that the user has denied. At the
@@ -55,6 +65,7 @@ class StandardModelFragment : Fragment() {
             ) {
                 // Ja tinc el permís
                 ctx.toast("I can use camera because I already have the permission :D")
+                cameraLauncher.launch()
             } else {
                 // No tinc el permís i l'he de sol·licitar
                 requestPermissionLauncher.launch(Manifest.permission.CAMERA)
