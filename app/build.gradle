@@ -11,8 +11,8 @@ android {
         applicationId "com.example.button_2fragment_app"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 6
-        versionName "5.0"
+        versionCode 7
+        versionName "6.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
