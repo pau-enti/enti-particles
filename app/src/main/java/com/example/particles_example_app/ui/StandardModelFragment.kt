@@ -11,11 +11,9 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.example.particles_example_app.R
 import com.example.particles_example_app.utils.toast
-import java.io.File
 
 class StandardModelFragment : Fragment() {
 
