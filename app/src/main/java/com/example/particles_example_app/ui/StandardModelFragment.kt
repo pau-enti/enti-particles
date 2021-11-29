@@ -13,24 +13,28 @@ import androidx.activity.result.launch
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.particles_example_app.R
+import com.example.particles_example_app.databinding.FragmentStandardModelBinding
 import com.example.particles_example_app.utils.toast
 
 class StandardModelFragment : Fragment() {
 
+    lateinit var binding: FragmentStandardModelBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_standard_model, container, false)
+    ): View {
+        // Inflate the layout, save it on the binding and return the view
+        return FragmentStandardModelBinding.inflate(inflater).also {
+            binding = it
+        }.root
     }
 
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmapThumbnail ->
             // Serà null si l'usuari no fa cap foto
             if (bitmapThumbnail != null)
-                view?.findViewById<ImageView>(R.id.standardModelImage)
-                    ?.setImageBitmap(bitmapThumbnail)
+                binding.standardModelImage.setImageBitmap(bitmapThumbnail)
         }
 
     private val requestPermissionLauncher =
@@ -55,7 +59,7 @@ class StandardModelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.requestPermissionsButton).setOnClickListener {
+        binding.requestPermissionsButton.setOnClickListener {
             // IMPORTANT: abans de tot això, recorda declarar el permís al manifest o el permís es
             // denegarà automàticament
 
