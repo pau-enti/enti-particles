@@ -41,7 +41,7 @@
             app:layout_constraintVertical_bias="0.62">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/usernameInput"
+                android:id="@+id/usernameInputWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -52,12 +52,13 @@
                 app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/usernameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwordInput"
+                android:id="@+id/passwordInputWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -68,6 +69,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_login_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
