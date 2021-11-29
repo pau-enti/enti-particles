@@ -27,7 +27,10 @@ class StandardModelFragment : Fragment() {
 
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmapThumbnail ->
-            view?.findViewById<ImageView>(R.id.standardModelImage)?.setImageBitmap(bitmapThumbnail)
+            // Serà null si l'usuari no fa cap foto
+            if (bitmapThumbnail != null)
+                view?.findViewById<ImageView>(R.id.standardModelImage)
+                    ?.setImageBitmap(bitmapThumbnail)
         }
 
     private val requestPermissionLauncher =
