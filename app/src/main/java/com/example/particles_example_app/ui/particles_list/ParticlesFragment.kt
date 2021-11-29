@@ -8,13 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles_example_app.R
 import com.example.particles_example_app.data.Particles
+import com.example.particles_example_app.databinding.FragmentParticlesBinding
 
 class ParticlesFragment : Fragment() {
 
+    private lateinit var binding: FragmentParticlesBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_particles_list, container, false)
+    ): View {
+        binding = FragmentParticlesBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         // Set the adapter
         if (view is RecyclerView) {
