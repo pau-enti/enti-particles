@@ -20,7 +20,7 @@ class ParticlesWithSimpleAdapterFragment : Fragment() {
         val adapter = SimpleAdapter(
             Particles,
             R.layout.fragment_particles_list,
-            R.layout.fragment_particles,
+            R.layout.item_list_particle,
             inflater, container
         ) { itemView, element, i ->
 
