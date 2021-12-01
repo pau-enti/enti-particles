@@ -11,4 +11,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.particles_list.ParticlesFragment"
-    tools:listitem="@layout/fragment_particles" />
+    tools:listitem="@layout/item_list_particle" />

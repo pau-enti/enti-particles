@@ -7,42 +7,36 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.particles_example_app.databinding.ActivityLoginBinding
 import com.example.particles_example_app.ui.main.MainActivity
 import com.example.particles_example_app.utils.applyTransparency
 import com.example.particles_example_app.utils.toast
-import com.google.android.material.textfield.TextInputLayout
 
 
 class LoginActivity : AppCompatActivity() {
 
     val ANIMATION_DURATION = 30000L // ms
 
-    lateinit var usernameInput: EditText
-    lateinit var passwordInput: EditText
+    lateinit var b: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_activity)
+        b = ActivityLoginBinding.inflate(layoutInflater)
 
         // Amaga la appBar
         supportActionBar?.hide()
-
-        usernameInput = findViewById<TextInputLayout>(R.id.usernameInput).editText ?: return
-        passwordInput = findViewById<TextInputLayout>(R.id.passwordInput).editText ?: return
 
         // Comencem animacions
         startAnimations()
 
         // Quan l'usuari acaba d'escriure i passa al següent camp (es perd el focus), llavors comprovem
         // que les dades que ha introduit són correctes
-        usernameInput.setOnFocusChangeListener { _, hasFocus ->
+        b.usernameInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                usernameInput.error =
+                b.usernameInput.error =
                         // Si les dades són correctes, esborrem l'error (per si n'hi hagués)
-                    if (usernameInput.text.toString().isValidEmail())
+                    if (b.usernameInput.text.toString().isValidEmail())
                         null
 
                     // Si les dades no són correctes, mostrem aquest error
@@ -52,9 +46,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Fem el mateix check, però pel password
-        passwordInput.setOnFocusChangeListener { _, hasFocus ->
+        b.passwordInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                passwordInput.error = if (passwordInput.text.toString().isValidPassword())
+                b.passwordInput.error = if (b.passwordInput.text.toString().isValidPassword())
                     null
                 else
                     "Invalid password"
@@ -62,10 +56,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Incorporem funcionalitats al botó de login
-        findViewById<Button>(R.id.loginButton).setOnClickListener {
+        b.loginButton.setOnClickListener {
 
-            val user = usernameInput.text.toString()
-            val pass = passwordInput.text.toString()
+            val user = b.usernameInput.text.toString()
+            val pass = b.passwordInput.text.toString()
 
             // Comprovem que les dades al formulari siguin correctes
             if (checkLogin(user, pass)) {
@@ -86,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Skip login
-        findViewById<ImageView>(R.id.particleIcon).setOnClickListener {
+        b.particleIcon.setOnClickListener {
             toast("> Skip login <")
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -116,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
     private fun startAnimations() {
         // Anima icono
         ObjectAnimator.ofInt(
-            findViewById(R.id.particleIcon), "colorFilter",
+            b.particleIcon, "colorFilter",
             applicationContext.getColor(R.color.leptons),
             applicationContext.getColor(R.color.quarks),
             applicationContext.getColor(R.color.higgs),
@@ -131,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Anima fondo
         ObjectAnimator.ofInt(
-            findViewById(R.id.loginBackground), "backgroundColor",
+            b.loginBackground, "backgroundColor",
             applicationContext.getColor(R.color.quarks).applyTransparency(),
             applicationContext.getColor(R.color.leptons).applyTransparency(),
             applicationContext.getColor(R.color.gauge_bosons).applyTransparency(),

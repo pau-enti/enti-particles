@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles_example_app.R
 import com.example.particles_example_app.data.Particle
+import com.example.particles_example_app.databinding.ItemListParticleBinding
 import com.example.particles_example_app.utils.toast
 
 
@@ -19,8 +20,9 @@ class ParticleRecyclerViewAdapter(val context: Context, private val particles: L
     RecyclerView.Adapter<ParticleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_particles, parent, false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.item_list_particle, parent, false)
+
         // Assignem el layout al ViewHolder
         return ViewHolder(view)
     }
@@ -52,7 +54,9 @@ class ParticleRecyclerViewAdapter(val context: Context, private val particles: L
     override fun getItemCount(): Int = particles.size
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.particleName)
-        val image: ImageView = view.findViewById(R.id.particleImage)
+        val binding = ItemListParticleBinding.bind(view)
+
+        val name: TextView = binding.particleName
+        val image: ImageView = binding.particleImage
     }
 }
