@@ -6,7 +6,6 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles_example_app.databinding.ActivityLoginBinding
 import com.example.particles_example_app.ui.main.MainActivity
@@ -18,11 +17,11 @@ class LoginActivity : AppCompatActivity() {
 
     val ANIMATION_DURATION = 30000L // ms
 
-    lateinit var b: ActivityLoginBinding
+    lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        b = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
 
         // Amaga la appBar
         supportActionBar?.hide()
@@ -32,11 +31,11 @@ class LoginActivity : AppCompatActivity() {
 
         // Quan l'usuari acaba d'escriure i passa al següent camp (es perd el focus), llavors comprovem
         // que les dades que ha introduit són correctes
-        b.usernameInput.setOnFocusChangeListener { _, hasFocus ->
+        binding.usernameInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                b.usernameInput.error =
+                binding.usernameInput.error =
                         // Si les dades són correctes, esborrem l'error (per si n'hi hagués)
-                    if (b.usernameInput.text.toString().isValidEmail())
+                    if (binding.usernameInput.text.toString().isValidEmail())
                         null
 
                     // Si les dades no són correctes, mostrem aquest error
@@ -46,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Fem el mateix check, però pel password
-        b.passwordInput.setOnFocusChangeListener { _, hasFocus ->
+        binding.passwordInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                b.passwordInput.error = if (b.passwordInput.text.toString().isValidPassword())
+                binding.passwordInput.error = if (binding.passwordInput.text.toString().isValidPassword())
                     null
                 else
                     "Invalid password"
@@ -56,10 +55,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Incorporem funcionalitats al botó de login
-        b.loginButton.setOnClickListener {
+        binding.loginButton.setOnClickListener {
 
-            val user = b.usernameInput.text.toString()
-            val pass = b.passwordInput.text.toString()
+            val user = binding.usernameInput.text.toString()
+            val pass = binding.passwordInput.text.toString()
 
             // Comprovem que les dades al formulari siguin correctes
             if (checkLogin(user, pass)) {
@@ -80,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Skip login
-        b.particleIcon.setOnClickListener {
+        binding.particleIcon.setOnClickListener {
             toast("> Skip login <")
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -110,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
     private fun startAnimations() {
         // Anima icono
         ObjectAnimator.ofInt(
-            b.particleIcon, "colorFilter",
+            binding.particleIcon, "colorFilter",
             applicationContext.getColor(R.color.leptons),
             applicationContext.getColor(R.color.quarks),
             applicationContext.getColor(R.color.higgs),
@@ -125,7 +124,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Anima fondo
         ObjectAnimator.ofInt(
-            b.loginBackground, "backgroundColor",
+            binding.loginBackground, "backgroundColor",
             applicationContext.getColor(R.color.quarks).applyTransparency(),
             applicationContext.getColor(R.color.leptons).applyTransparency(),
             applicationContext.getColor(R.color.gauge_bosons).applyTransparency(),

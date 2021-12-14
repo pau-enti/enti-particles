@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         // Afegim el layout del main
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         // Creem l'adapter pel ViewPager i el coloquem on toca
         val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
