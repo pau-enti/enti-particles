@@ -1,5 +1,6 @@
 package com.example.particles.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Do you want to know something?", Snackbar.LENGTH_LONG)
                 .setAction("YES") {
-                    applicationContext?.toast("Maybe we live in a simulation")
+                    toast("Maybe we live in a simulation")
                 }.show()
         }
 

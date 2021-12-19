@@ -1,8 +1,10 @@
 package com.example.particles.ui.particles_list
 
+import android.content.ClipData
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.DRAG_FLAG_GLOBAL
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView

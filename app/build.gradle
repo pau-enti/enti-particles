@@ -3,12 +3,14 @@ plugins {
     id 'kotlin-android'
 }
 
+apply plugin:'com.google.gms.google-services'
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.button_2fragment_app"
+        applicationId "com.example.particles"
         minSdkVersion 23
         targetSdkVersion 31
         versionCode 8
@@ -52,6 +54,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation "androidx.activity:activity-ktx:1.4.0"
     implementation "androidx.fragment:fragment-ktx:1.4.0"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
