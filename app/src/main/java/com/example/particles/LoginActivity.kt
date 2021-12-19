@@ -11,24 +11,25 @@ import com.example.particles.databinding.ActivityLoginBinding
 import com.example.particles.ui.main.MainActivity
 import com.example.particles.utils.applyTransparency
 import com.example.particles.utils.toast
-
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
     val ANIMATION_DURATION = 30000L // ms
 
     lateinit var binding: ActivityLoginBinding
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Amaga la appBar
         supportActionBar?.hide()
 
-        // Comencem animacions
+        // Init
         startAnimations()
+        firebaseAuth = FirebaseAuth.getInstance()
 
         // Quan l'usuari acaba d'escriure i passa al següent camp (es perd el focus), llavors comprovem
         // que les dades que ha introduit són correctes
@@ -48,10 +49,11 @@ class LoginActivity : AppCompatActivity() {
         // Fem el mateix check, però pel password
         binding.passwordInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                binding.passwordInput.error = if (binding.passwordInput.text.toString().isValidPassword())
-                    null
-                else
-                    "Invalid password"
+                binding.passwordInput.error =
+                    if (binding.passwordInput.text.toString().isValidPassword())
+                        null
+                    else
+                        "Invalid password"
             }
         }
 
@@ -62,20 +64,23 @@ class LoginActivity : AppCompatActivity() {
             val pass = binding.passwordInput.text.toString()
 
             // Comprovem que les dades al formulari siguin correctes
-            if (checkLogin(user, pass)) {
-                doLogin(user, pass)
+            if (!checkLogin(user, pass)) {
+                toast("Check the data")
+                return@setOnClickListener
+            }
 
-                val intent = Intent(this, MainActivity::class.java)
-
+            firebaseAuth.signInWithEmailAndPassword(user, pass).addOnSuccessListener {
                 // Passem les dades a la següent activity a través de l'Intent
-                intent.putExtra(MainActivity.USER_EXTRA, user.split("@").first())
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra(MainActivity.USER_EXTRA, user.split("@").first())
+                }
 
                 startActivity(intent)
 
-                // Matem lla LoginAcitivity, perquè no volem que quedi "darrere" de la MainActivity
+                // Matem la LoginAcitivity, perquè no volem que quedi "darrere" de la MainActivity
                 finish()
-            } else {
-                toast("Check the data")
+            }.addOnFailureListener {
+                toast("Incorrect user or password")
             }
         }
 
@@ -87,12 +92,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun doLogin(user: String, pass: String) {
-        // TODO: Aquí l'app hauria de memoritzar les dades per tal que el login fos efectiu
-    }
-
     private fun checkLogin(user: String?, pass: String?): Boolean {
-        // TODO: Aquí també s'ha de consultar a la BBDD que la contrasenya és correcta
         return user.isValidEmail() && pass.isValidPassword()
     }
 
@@ -141,3 +141,5 @@ class LoginActivity : AppCompatActivity() {
 
 
 }
+
+
