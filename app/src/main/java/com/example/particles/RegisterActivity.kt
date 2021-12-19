@@ -11,14 +11,13 @@ import com.example.particles.databinding.ActivityRegisterBinding
 import com.example.particles.ui.main.MainActivity
 import com.example.particles.utils.toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
-//    private lateinit var firebase: Firebase
+    private lateinit var db: FirebaseFirestore
 
     private fun String?.isValidName(): Boolean {
         return !this.isNullOrEmpty()
@@ -31,22 +30,34 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
         setDataCheckers()
 
         binding.signUpButton.setOnClickListener {
-            val user = binding.emailInput.text.toString()
+            val email = binding.emailInput.text.toString()
             val name = binding.nameInput.text.toString()
             val surname = binding.lastNameInput.text.toString()
             val pass = binding.passwordInput.text.toString()
             val rpass = binding.repeatPasswordInput.text.toString()
 
 
-            if (checkSignUp(user, name, surname, pass, rpass)) {
+            if (checkSignUp(email, name, surname, pass, rpass)) {
                 binding.singnUpProgress.visibility = View.VISIBLE
 
-                firebaseAuth.createUserWithEmailAndPassword(user, pass).addOnSuccessListener {
-                    firebaseAuth.signInWithEmailAndPassword(user, pass)
-//                    firebase.app.
+                firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnSuccessListener {
+                    // Fem login
+                    firebaseAuth.signInWithEmailAndPassword(email, pass)
+
+                    // Guardem les dades de l'usuari
+                    db.collection("users").document(email).set(
+                        hashMapOf(
+                            "name" to name,
+                            "last_names" to surname
+                        )
+                    )
+
+                    // TODO should check errors on this 2 calls
+
                     toast(getString(R.string.register_ok))
 
                     // Notify the user has registered successfully
