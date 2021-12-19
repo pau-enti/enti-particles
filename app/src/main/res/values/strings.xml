@@ -32,5 +32,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
-    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="register">Not registered yet?</string>
+    <string name="user_name">Name</string>
+    <string name="user_last_names">Last names</string>
+    <string name="repeat_the_password">Repeat the password</string>
 </resources>
