@@ -11,6 +11,7 @@ import com.example.particles.databinding.ActivityMainBinding
 import com.example.particles.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,8 +60,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun logout() {
-        // TODO: Make the necessary things to logout the user
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
 
         // Then, finish this activity and go to the LoginActivity
         startActivity(Intent(this, LoginActivity::class.java))

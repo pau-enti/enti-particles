@@ -96,8 +96,9 @@ class LoginActivity : AppCompatActivity() {
 
         // Skip login
         binding.particleIcon.setOnClickListener {
-            toast("> Skip login <")
+            toast("> Skipping login <")
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
