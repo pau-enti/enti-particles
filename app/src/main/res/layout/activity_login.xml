@@ -77,6 +77,15 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Not registered yet?"
+                android:textColor="@color/design_default_color_primary"
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/loginButton"
                 style="@style/Widget.MaterialComponents.Button"
@@ -87,7 +96,6 @@
                 android:text="@string/login"
                 />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

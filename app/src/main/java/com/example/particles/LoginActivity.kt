@@ -11,6 +11,7 @@ import com.example.particles.databinding.ActivityLoginBinding
 import com.example.particles.ui.main.MainActivity
 import com.example.particles.utils.applyTransparency
 import com.example.particles.utils.toast
+import com.google.firebase.auth.FederatedAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -82,6 +83,10 @@ class LoginActivity : AppCompatActivity() {
             }.addOnFailureListener {
                 toast("Incorrect user or password")
             }
+        }
+
+        binding.register.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         // Skip login
