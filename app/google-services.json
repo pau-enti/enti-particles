@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941264042992",
+    "project_id": "particles-38ca0",
+    "storage_bucket": "particles-38ca0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941264042992:android:e9cfdacaa80a971360fb35",
+        "android_client_info": {
+          "package_name": "com.example.particles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941264042992-adrmk4e81ajm5oh3rfcqrjulosvpc675.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD05VnjQPOH45wzU9XP46xx4Rd6Kgef0VE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941264042992-adrmk4e81ajm5oh3rfcqrjulosvpc675.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
