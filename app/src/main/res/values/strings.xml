@@ -37,4 +37,12 @@
     <string name="user_name">Name</string>
     <string name="user_last_names">Last names</string>
     <string name="repeat_the_password">Repeat the password</string>
+    <string name="err_invalid_username">Invalid username</string>
+    <string name="err_invalid_password">Invalid password</string>
+    <string name="err_login_data">Check the data</string>
+    <string name="err_login">Incorrect user or password</string>
+    <string name="err_password_mismatches">Passwords mismatches</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="err_general">Something went wrong :( Try again</string>
+    <string name="register_ok">User created successfully!</string>
 </resources>
