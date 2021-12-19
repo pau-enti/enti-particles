@@ -1,4 +1,4 @@
-package com.example.particles_example_app
+package com.example.particles
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
@@ -7,10 +7,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
-import com.example.particles_example_app.databinding.ActivityLoginBinding
-import com.example.particles_example_app.ui.main.MainActivity
-import com.example.particles_example_app.utils.applyTransparency
-import com.example.particles_example_app.utils.toast
+import com.example.particles.databinding.ActivityLoginBinding
+import com.example.particles.ui.main.MainActivity
+import com.example.particles.utils.applyTransparency
+import com.example.particles.utils.toast
 
 
 class LoginActivity : AppCompatActivity() {

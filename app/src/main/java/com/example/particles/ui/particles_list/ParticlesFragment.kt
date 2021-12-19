@@ -1,12 +1,12 @@
-package com.example.particles_example_app.ui.particles_list
+package com.example.particles.ui.particles_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.particles_example_app.data.Particles
-import com.example.particles_example_app.databinding.FragmentParticlesListBinding
+import com.example.particles.data.Particles
+import com.example.particles.databinding.FragmentParticlesListBinding
 
 class ParticlesFragment : Fragment() {
 

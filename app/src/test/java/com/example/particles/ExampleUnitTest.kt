@@ -1,4 +1,4 @@
-package com.example.particles_example_app
+package com.example.particles
 
 import org.junit.Test
 

@@ -1,11 +1,11 @@
-package com.example.particles_example_app.ui.main
+package com.example.particles.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.particles_example_app.ui.ParticlesWithSimpleAdapterFragment
-import com.example.particles_example_app.ui.StandardModelFragment
-import com.example.particles_example_app.ui.particles_list.ParticlesFragment
+import com.example.particles.ui.ParticlesWithSimpleAdapterFragment
+import com.example.particles.ui.StandardModelFragment
+import com.example.particles.ui.particles_list.ParticlesFragment
 import java.lang.IllegalStateException
 
 

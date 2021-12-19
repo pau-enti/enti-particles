@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.particles_example_app">
+    package="com.example.particles">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -13,21 +13,21 @@
         android:theme="@style/Theme.Physics_model">
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.particles.LoginActivity"
             android:label="Login"
             android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity
+            android:name="com.example.particles.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name="com.example.particles.ui.main.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Physics_model.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Physics_model.NoActionBar">
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.particles_example_app.utils
+package com.example.particles.utils
 
 import android.content.Context
 import android.widget.Toast

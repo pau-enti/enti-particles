@@ -1,4 +1,4 @@
-package com.example.particles_example_app.data
+package com.example.particles.data
 
 import kotlin.random.Random
 

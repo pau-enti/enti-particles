@@ -1,4 +1,4 @@
-package com.example.particles_example_app.ui
+package com.example.particles.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -6,15 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.particles_example_app.R
-import com.example.particles_example_app.databinding.FragmentStandardModelBinding
-import com.example.particles_example_app.utils.toast
+import com.example.particles.databinding.FragmentStandardModelBinding
+import com.example.particles.utils.toast
 
 class StandardModelFragment : Fragment() {
 

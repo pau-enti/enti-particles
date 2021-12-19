@@ -1,19 +1,15 @@
-package com.example.particles_example_app.ui.main
+package com.example.particles.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
-import com.example.particles_example_app.LoginActivity
-import com.example.particles_example_app.R
-import com.example.particles_example_app.SettingsActivity
-import com.example.particles_example_app.databinding.ActivityMainBinding
-import com.example.particles_example_app.utils.toast
-import com.google.android.material.appbar.MaterialToolbar
+import com.example.particles.LoginActivity
+import com.example.particles.R
+import com.example.particles.SettingsActivity
+import com.example.particles.databinding.ActivityMainBinding
+import com.example.particles.utils.toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         binding.tabs.setupWithViewPager(binding.viewPager)
 
         // Afegim una acció al botó flotant
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Do you want to know something?", Snackbar.LENGTH_LONG)
                 .setAction("YES") {
-                    toast("Maybe we live in a simulation")
+                    applicationContext?.toast("Maybe we live in a simulation")
                 }.show()
         }
 

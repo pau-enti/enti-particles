@@ -1,4 +1,4 @@
-package com.example.particles_example_app.ui.particles_list
+package com.example.particles.ui.particles_list
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.particles_example_app.R
-import com.example.particles_example_app.data.Particle
-import com.example.particles_example_app.databinding.ItemListParticleBinding
-import com.example.particles_example_app.utils.toast
+import com.example.particles.R
+import com.example.particles.data.Particle
+import com.example.particles.databinding.ItemListParticleBinding
+import com.example.particles.utils.toast
 
 
 /**

@@ -1,4 +1,4 @@
-package com.example.particles_example_app.ui
+package com.example.particles.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.particles_example_app.R
-import com.example.particles_example_app.data.Particles
-import com.example.particles_example_app.utils.SimpleAdapter
+import com.example.particles.R
+import com.example.particles.data.Particles
+import com.example.particles.utils.SimpleAdapter
 import kotlin.random.Random
 
 class ParticlesWithSimpleAdapterFragment : Fragment() {
