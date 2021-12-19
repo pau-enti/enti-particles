@@ -54,7 +54,7 @@ class ParticleRecyclerViewAdapter(val context: Context, private val particles: L
     override fun getItemCount(): Int = particles.size
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemListParticleBinding.bind(view)
+        private val binding = ItemListParticleBinding.bind(view)
 
         val name: TextView = binding.particleName
         val image: ImageView = binding.particleImage
