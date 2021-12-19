@@ -109,7 +109,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.repeatPasswordInput.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus && binding.repeatPasswordInput.text == binding.passwordInput.text)
+            if (!hasFocus && binding.repeatPasswordInput.text != binding.passwordInput.text)
                 binding.repeatPasswordInput.error = getString(R.string.err_password_mismatches)
         }
     }
