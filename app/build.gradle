@@ -13,8 +13,8 @@ android {
         applicationId "com.example.particles"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 8
-        versionName "7.0"
+        versionCode 9
+        versionName "8.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
