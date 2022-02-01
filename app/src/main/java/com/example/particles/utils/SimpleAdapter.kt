@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SimpleAdapter<T>(
     val list: ArrayList<T>,
-    @LayoutRes val listLayout: Int,
-    @LayoutRes val itemLayout: Int,
-    inflater: LayoutInflater,
-    container: ViewGroup?) :
+    @LayoutRes val itemLayout: Int) :
     RecyclerView.Adapter<SimpleAdapter<T>.ViewHolder>() {
 
     var onGetItemIndexed: ((itemView: View, element: T, i: Int) -> Unit)? = null
@@ -19,31 +16,18 @@ class SimpleAdapter<T>(
 
     constructor(
         list: ArrayList<T>,
-        @LayoutRes listLayout: Int,
         @LayoutRes itemLayout: Int,
-        inflater: LayoutInflater,
-        container: ViewGroup?,
         onGetItem: (itemView: View, element: T) -> Unit
-    ) : this(list, listLayout, itemLayout, inflater, container) {
+    ) : this(list,  itemLayout) {
         this.onGetItem = onGetItem
     }
 
     constructor(
         list: ArrayList<T>,
-        @LayoutRes listLayout: Int,
         @LayoutRes itemLayout: Int,
-        inflater: LayoutInflater,
-        container: ViewGroup?,
         onGetItemIndexed: (itemView: View, element: T, i: Int) -> Unit
-    ) : this(list, listLayout, itemLayout, inflater, container) {
+    ) : this(list, itemLayout) {
         this.onGetItemIndexed = onGetItemIndexed
-    }
-
-    val view: View
-
-    init {
-        view = inflater.inflate(listLayout, container, false) as RecyclerView
-        view.adapter = this
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

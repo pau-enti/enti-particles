@@ -20,7 +20,7 @@ class ParticlesFragment : Fragment() {
 
         // Només utilitzo el context si no és null; sino, finalitzo activity
         context?.let {
-            view.adapter = ParticleRecyclerViewAdapter(it, Particles)
+            binding.list.adapter = ParticleRecyclerViewAdapter(it, Particles)
         } ?: activity?.finish()
 
         return view
