@@ -15,6 +15,7 @@
         android:layout_marginEnd="8dp"
         android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
         android:drawablePadding="10dp"
+        android:hint="Search"
         android:minHeight="55dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,11 +24,10 @@
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipsGroup"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchBar"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/searchBar"
         app:layout_constraintStart_toStartOf="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="@+id/searchBar">
+        app:layout_constraintTop_toBottomOf="@+id/searchBar">
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -36,14 +36,13 @@
         android:name="com.example.button_2fragment_app.ParticleFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:layout_constraintTop_toBottomOf="@+id/chipsGroup"
         tools:context=".ui.particles_list.ParticlesFragment"
-        tools:listitem="@layout/item_list_particle" >
+        tools:listitem="@layout/item_list_particle">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
