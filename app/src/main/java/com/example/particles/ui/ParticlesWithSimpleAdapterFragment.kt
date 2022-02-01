@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
@@ -23,6 +24,7 @@ class ParticlesWithSimpleAdapterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentParticlesListBinding.inflate(inflater)
+        binding.searchBar.isGone = true
 
         val adapter = SimpleAdapter(
             Particles,

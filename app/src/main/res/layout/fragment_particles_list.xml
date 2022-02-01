@@ -8,19 +8,28 @@
     android:layout_height="match_parent">
 
     <AutoCompleteTextView
-        android:id="@+id/findBar"
+        android:id="@+id/searchBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
         android:drawablePadding="10dp"
-        android:minHeight="48dp"
-        android:text="Find a particle"
+        android:minHeight="55dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipsGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBar"
+        app:layout_constraintEnd_toEndOf="@+id/searchBar"
+        app:layout_constraintStart_toStartOf="@+id/searchBar"
+        app:layout_constraintTop_toTopOf="@+id/searchBar">
+
+    </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
@@ -32,7 +41,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/findBar"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
         tools:context=".ui.particles_list.ParticlesFragment"
-        tools:listitem="@layout/item_list_particle" />
+        tools:listitem="@layout/item_list_particle" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

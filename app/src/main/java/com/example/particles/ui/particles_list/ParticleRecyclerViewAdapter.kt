@@ -36,15 +36,8 @@ class ParticleRecyclerViewAdapter(val context: Context, private val particles: L
         holder.name.text = particle.name
 
         // Set color
-        // It selects the ID of the color in function of the family of this particle
-        val color = when (particle.family) {
-            Particle.Family.QUARK -> R.color.quarks
-            Particle.Family.LEPTON -> R.color.leptons
-            Particle.Family.GAUGE_BOSON -> R.color.gauge_bosons
-            Particle.Family.SCALAR_BOSON-> R.color.higgs
-        }
         // It converts the ID to the properly color and set it to the image
-        holder.image.setColorFilter(context.getColor(color))
+        holder.image.setColorFilter(context.getColor(particle.family.color()))
 
         // Set on item click listener
         holder.view.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.example.particles.data
 
+import com.example.particles.R
 import kotlin.random.Random
 
 /**
@@ -25,7 +26,14 @@ data class Particle(
     )
 
     enum class Family {
-        QUARK, LEPTON, GAUGE_BOSON, SCALAR_BOSON
+        QUARK, LEPTON, GAUGE_BOSON, SCALAR_BOSON;
+
+        fun color(): Int = when (this) {
+            QUARK -> R.color.quarks
+            LEPTON -> R.color.leptons
+            GAUGE_BOSON -> R.color.gauge_bosons
+            SCALAR_BOSON -> R.color.higgs
+        }
     }
 
     companion object {
