@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.particles"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 31
         versionCode 10
         versionName "9.0"
