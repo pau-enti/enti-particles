@@ -1,12 +1,15 @@
 package com.example.particles.ui
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.particles.R
 import com.example.particles.databinding.FragmentDragAndDropBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -16,9 +19,9 @@ class DragAndDropFragment : Fragment() {
 
     private lateinit var binding: FragmentDragAndDropBinding
     private val chipsLabel = listOf(
+        "Blue supergiant", "Sun-Like Star", "Red Dwarf", "Brown Dwarf", "Red Giant",// 1st phase
+        "Supernova",  "Blackhole", "Neutron Star", "White Dwarf", // 2nd phase
         "Neutrino", "Chupa-chups", // Not star life
-        "Blue supergiant", "Sun-Like Star", "Red Dwarf", "Brown Dwarf", // 1st phase
-        "Supernova", "Red Giant", "Blackhole", "Neutron Star", "White Dwarf" // 2nd phase
     )
 
     override fun onCreateView(
@@ -29,9 +32,10 @@ class DragAndDropFragment : Fragment() {
         binding = FragmentDragAndDropBinding.inflate(inflater)
 
         // Creem els Chips
-        val chips = chipsLabel.map {
+        val chips = chipsLabel.mapIndexed { idx, label ->
             Chip(requireContext()).apply {
-                text = it
+                text = label
+                chipIcon = getIcon(idx)
 
                 setOnLongClickListener {
                     val drag = View.DragShadowBuilder(it)
@@ -126,4 +130,15 @@ class DragAndDropFragment : Fragment() {
             else -> false
         }
     }
+
+    // Hardcorejar les posicions d'una llista és molt mala opció!
+    private fun getIcon(idx: Int): Drawable? {
+        val ic = when (idx) {
+            in 0..4 -> R.drawable.ic_star_life
+            in 5..8 -> R.drawable.ic_star_death
+            else -> R.drawable.ic_star_not
+        }
+        return ContextCompat.getDrawable(requireContext(), ic)
+    }
+
 }
