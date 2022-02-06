@@ -31,9 +31,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_chainStyle="spread">
-
-    </com.google.android.material.chip.ChipGroup>
+        app:layout_constraintVertical_chainStyle="spread"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -51,7 +49,7 @@
         android:id="@+id/backgroundView2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="#48009688"
+        android:background="#2C009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,12 +86,13 @@
 
     <ImageView
         android:id="@+id/recicleBin"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/blackhole"
         tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.example.particles.ui
 
+import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
 import android.graphics.drawable.Drawable
-import android.os.Bundle
+import android.os.*
 import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +17,13 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlin.reflect.safeCast
 
+
 class DragAndDropFragment : Fragment() {
 
     private lateinit var binding: FragmentDragAndDropBinding
     private val chipsLabel = listOf(
         "Blue supergiant", "Sun-Like Star", "Red Dwarf", "Brown Dwarf", "Red Giant",// 1st phase
-        "Supernova",  "Blackhole", "Neutron Star", "White Dwarf", // 2nd phase
+        "Supernova", "Blackhole", "Neutron Star", "White Dwarf", // 2nd phase
         "Neutrino", "Chupa-chups", // Not star life
     )
 
@@ -81,10 +84,6 @@ class DragAndDropFragment : Fragment() {
                 true
             }
 
-            DragEvent.ACTION_DRAG_ENTERED -> true // Ens notifica que hem entrat dins la vista "view"
-            DragEvent.ACTION_DRAG_LOCATION -> true // Ens notifica la posició del objecte dins la "view"
-            DragEvent.ACTION_DRAG_EXITED -> true // Ens notifica que hem sortit de la vista
-
             // 2. Ens notifica que hem deixat anar l'element sobre la vista
             DragEvent.ACTION_DROP -> {
                 // From
@@ -116,13 +115,37 @@ class DragAndDropFragment : Fragment() {
                 true
             }
 
+            // Ens notifica que hem entrat dins la vista "view"
+            DragEvent.ACTION_DRAG_ENTERED -> {
+                vibrate()
+                // Fem gran la icona per suprimir l'objecte (multiplica per 2 la mida)
+                binding.recicleBin.animate().scaleX(2f).scaleY(2f)
+                true
+            }
+
+            DragEvent.ACTION_DRAG_LOCATION -> true // Ens notifica la posició del objecte dins la "view"
+
+            // Ens notifica que l'arrossagament ha sortit de la vista
+            DragEvent.ACTION_DRAG_EXITED -> {
+                // Tornem la icona a la mida original quan arrosseguem fora
+                binding.recicleBin.animate().scaleX(1f).scaleY(1f)
+                true
+            }
+
             DragEvent.ACTION_DROP -> {
+                // Si es deixa anar dins la icona, se suprimeix l'objecte
                 ChipGroup::class.safeCast(moving.parent)?.removeView(moving)
                 true
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
                 moving.isVisible = true
+
+                // Animació de desapareixre: Es fa petit mentres es fa invisible
+                binding.recicleBin.animate().scaleX(0.5f).scaleY(0.5f).withEndAction {
+                    binding.recicleBin.scaleX = 1f // Un cop finalitzada l'animació, deixem l'objecte a la mida original
+                    binding.recicleBin.scaleY = 1f
+                }
                 binding.recicleBin.animate().alpha(0f) // invisible
                 true
             }
@@ -139,6 +162,25 @@ class DragAndDropFragment : Fragment() {
             else -> R.drawable.ic_star_not
         }
         return ContextCompat.getDrawable(requireContext(), ic)
+    }
+
+    private fun vibrate() {
+        val duration = 250L // ms
+
+        // Hem d'obtenir l'objecte per vibrar de manera diferent en funció de la versió d'Android del dispositiu...
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val vibratorManager =
+                context?.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            vibratorManager.defaultVibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    duration,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+                )
+            )
+        } else {
+            val vib = context?.getSystemService(VIBRATOR_SERVICE) as Vibrator
+            vib.vibrate(duration)
+        }
     }
 
 }

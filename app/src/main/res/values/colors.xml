@@ -14,5 +14,7 @@
     <color name="gauge_bosons">#E91E63</color>
     <color name="higgs">#FFC107</color>
 
+    <color name="delete">#E91E63</color>
+
 
 </resources>
