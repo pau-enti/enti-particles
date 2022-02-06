@@ -7,11 +7,12 @@ import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.particles.databinding.FragmentDragAndDropBinding
-import com.example.particles.utils.toast
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import kotlin.reflect.safeCast
 
 class DragAndDropFragment : Fragment() {
 
@@ -35,7 +36,11 @@ class DragAndDropFragment : Fragment() {
                 text = it
 
                 setOnLongClickListener {
-                    val data = ClipData("description", arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), ClipData.Item("yes"))
+                    val data = ClipData(
+                        "description",
+                        arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                        ClipData.Item("yes")
+                    )
 
                     val drag = View.DragShadowBuilder(it)
                     it.startDragAndDrop(data, drag, it, 0)
@@ -50,35 +55,80 @@ class DragAndDropFragment : Fragment() {
         chips.forEach {
             binding.chipGroup1.addView(it)
         }
+        binding.chipGroup1.setOnDragListener(dragListenerMove)
+        binding.chipGroup2.setOnDragListener(dragListenerMove)
 
-        binding.chipGroup1.setOnDragListener(dragListener)
-        binding.chipGroup2.setOnDragListener(dragListener)
-
-
-
+        binding.recicleBin.alpha = 0f // invisible
+        binding.recicleBin.setOnDragListener(dragListenerRemove)
 
 
         return binding.root
     }
 
-    val dragListener = View.OnDragListener { view, event ->
+    /**
+     * El parametre view conté l'objecte en el qual hem posat el listener. Aquest s'encarrega
+     * d'escoltar els esdeveniments que succeeixen durant el dragging. Event contindrà la informació
+     * del que està succeint, així com l'objecte que s'està arrossegant
+     */
+    val dragListenerMove = View.OnDragListener { view, event ->
+        // Obtenim l'objecte que s'està arrossegant de manera segura
+        val moving = Chip::class.safeCast(event.localState) ?: return@OnDragListener false
 
         return@OnDragListener when (event.action) {
-            DragEvent.ACTION_DRAG_STARTED -> true // Hem de retornar ture per continuar el drag
+
+            DragEvent.ACTION_DRAG_STARTED -> {
+                moving.isVisible = false
+                true
+            }
+
+            DragEvent.ACTION_DROP -> {
+                // From
+                ChipGroup::class.safeCast(moving.parent)?.removeView(moving)
+
+                // To
+                ChipGroup::class.safeCast(view)?.addView(moving)
+                true
+            }
+
+            DragEvent.ACTION_DRAG_ENDED -> {
+                moving.isVisible = true
+                true
+            }
+
+            else -> false
+        }
+    }
+
+    val dragListenerRemove = View.OnDragListener { view, event ->
+        val moving = Chip::class.safeCast(event.localState) ?: return@OnDragListener false
+
+        return@OnDragListener when (event.action) {
+
+            // 1. Comença el drag: Hem de retornar ture per continuar el drag. False per detenir-lo
+            DragEvent.ACTION_DRAG_STARTED -> {
+                moving.isVisible = false
+                binding.recicleBin.alpha = 1f // visible
+                true
+            }
+
             DragEvent.ACTION_DRAG_ENTERED -> true // Ens notifica que hem entrat dins la vista "view"
             DragEvent.ACTION_DRAG_LOCATION -> true // Ens notifica la posició del objecte dins la "view"
             DragEvent.ACTION_DRAG_EXITED -> true // Ens notifica que hem sortit de la vista
-            DragEvent.ACTION_DROP -> {
-                // Ens notifica que hem sortit de la vista
-                context?.toast("Inside $view")
 
+            // 2. Ens notifica que hem deixat anar l'element sobre la vista
+            DragEvent.ACTION_DROP -> {
+                ChipGroup::class.safeCast(moving.parent)?.removeView(moving)
                 true
             }
-            DragEvent.ACTION_DRAG_ENDED -> true
+
+            // 3. Quan acabem el drag
+            DragEvent.ACTION_DRAG_ENDED -> {
+                moving.isVisible = true
+                binding.recicleBin.alpha = 0f // invisible
+                true
+            }
+
             else -> false
         }
-
-
-
     }
 }

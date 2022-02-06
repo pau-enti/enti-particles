@@ -18,9 +18,9 @@ class SectionsPagerAdapter(fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val TAB_TITLES = arrayOf(
+        "DRAGGER",
         "STANDARD MODEL",
-        "PARTICLES",
-        "DRAGGER"
+        "PARTICLES"
     )
 
     // Aquesta funció indica el fragment que s'ha de posar
