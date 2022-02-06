@@ -65,14 +65,6 @@ class ParticlesFragment : Fragment() {
                 applyFiltersAndRefresh()
             }
 
-            chip.setOnLongClickListener {
-                val data = ClipData("description", arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN), ClipData.Item("yes"))
-
-                val drag = View.DragShadowBuilder(it)
-                it.startDragAndDrop(data, drag, it, 0)
-                true
-            }
-
             // Afegim el chip a la view, esborrem el text que ha escrit l'usuari i refresh
             filters.add(selection)
             binding.chipsGroup.addView(chip)
@@ -82,12 +74,6 @@ class ParticlesFragment : Fragment() {
         }
 
         return retView
-    }
-
-    val dragListener = View.OnDragListener { v, event ->
-
-
-
     }
 
     /**

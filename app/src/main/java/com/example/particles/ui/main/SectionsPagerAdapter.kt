@@ -3,6 +3,7 @@ package com.example.particles.ui.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.particles.ui.DragAndDropFragment
 import com.example.particles.ui.ParticlesWithSimpleAdapterFragment
 import com.example.particles.ui.StandardModelFragment
 import com.example.particles.ui.particles_list.ParticlesFragment
@@ -19,15 +20,15 @@ class SectionsPagerAdapter(fm: FragmentManager) :
     private val TAB_TITLES = arrayOf(
         "STANDARD MODEL",
         "PARTICLES",
-        "PARTICLES 2"
+        "DRAGGER"
     )
 
     // Aquesta funció indica el fragment que s'ha de posar
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> StandardModelFragment()
+            0 -> DragAndDropFragment() // ParticlesWithSimpleAdapterFragment()
             1 -> ParticlesFragment()
-            2 -> ParticlesWithSimpleAdapterFragment()
+            2 -> StandardModelFragment()
             else -> throw IllegalStateException("There's only 3 tabs")
         }
     }
