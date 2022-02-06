@@ -4,32 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DragAndDropFragment">
+    android:layout_height="match_parent">
 
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup1"
-        android:layout_width="0dp"
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="#009688"
-        app:layout_constraintBottom_toTopOf="@+id/chipGroup2"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup2"
-        android:layout_width="0dp"
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="#48009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/chipGroup2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stars_life_phases"
+            android:textStyle="bold" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup1">
 
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stars_death_phases"
+            android:textStyle="bold" />
     </com.google.android.material.chip.ChipGroup>
 
 

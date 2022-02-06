@@ -45,4 +45,6 @@
     <string name="sign_up">Sign Up</string>
     <string name="err_general">Something went wrong :( Try again</string>
     <string name="register_ok">User created successfully!</string>
+    <string name="stars_life_phases">Stars life phases</string>
+    <string name="stars_death_phases">Stars death phases</string>
 </resources>
