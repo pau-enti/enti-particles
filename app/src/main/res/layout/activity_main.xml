@@ -37,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
         app:maxImageSize="35dp"
-        app:srcCompat="@drawable/ic_baseline_bolt_24" />
+        app:srcCompat="@drawable/ic_baseline_bolt_24"
+        tools:visibility="visible" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

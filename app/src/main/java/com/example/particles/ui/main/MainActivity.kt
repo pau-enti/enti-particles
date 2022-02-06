@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.particles.LoginActivity
 import com.example.particles.R
 import com.example.particles.SettingsActivity
@@ -31,6 +33,25 @@ class MainActivity : AppCompatActivity() {
         // Creem l'adapter pel ViewPager i el coloquem on toca
         val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         binding.viewPager.adapter = sectionsPagerAdapter
+
+        // Amaga el floating action button en funcio de la pagina que es mostra
+        binding.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    0 -> binding.fab.hide()
+                    else ->  binding.fab.show()
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
 
         // Vinculem el ViewPager amb el TabLayout (gestor de pestanyes)
         binding.tabs.setupWithViewPager(binding.viewPager)

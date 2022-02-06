@@ -119,7 +119,7 @@ class DragAndDropFragment : Fragment() {
             DragEvent.ACTION_DRAG_ENTERED -> {
                 vibrate()
                 // Fem gran la icona per suprimir l'objecte (multiplica per 2 la mida)
-                binding.recicleBin.animate().scaleX(2f).scaleY(2f)
+                binding.recicleBin.animate().scaleX(1.6f).scaleY(1.6f)
                 true
             }
 
@@ -142,11 +142,13 @@ class DragAndDropFragment : Fragment() {
                 moving.isVisible = true
 
                 // Animació de desapareixre: Es fa petit mentres es fa invisible
-                binding.recicleBin.animate().scaleX(0.5f).scaleY(0.5f).withEndAction {
-                    binding.recicleBin.scaleX = 1f // Un cop finalitzada l'animació, deixem l'objecte a la mida original
+                binding.recicleBin.animate().scaleX(0f).scaleY(0f).withEndAction {
+                    binding.recicleBin.alpha = 0f // Invisible
+
+                    // Un cop finalitzada l'animació, deixem l'objecte a la mida original
+                    binding.recicleBin.scaleX = 1f
                     binding.recicleBin.scaleY = 1f
                 }
-                binding.recicleBin.animate().alpha(0f) // invisible
                 true
             }
 
