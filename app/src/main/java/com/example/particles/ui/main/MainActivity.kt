@@ -3,17 +3,21 @@ package com.example.particles.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.MotionEvent
+import android.view.View
+import android.view.View.OnTouchListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.particles.LoginActivity
 import com.example.particles.R
 import com.example.particles.SettingsActivity
 import com.example.particles.databinding.ActivityMainBinding
 import com.example.particles.utils.toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 when (position) {
                     0 -> binding.fab.hide()
-                    else ->  binding.fab.show()
+                    else -> binding.fab.show()
                 }
             }
 

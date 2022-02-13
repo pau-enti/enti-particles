@@ -4,10 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.particles.ui.DragAndDropFragment
-import com.example.particles.ui.ParticlesWithSimpleAdapterFragment
 import com.example.particles.ui.StandardModelFragment
 import com.example.particles.ui.particles_list.ParticlesFragment
-import java.lang.IllegalStateException
 
 
 /**
@@ -19,8 +17,8 @@ class SectionsPagerAdapter(fm: FragmentManager) :
 
     private val TAB_TITLES = arrayOf(
         "DRAGGER",
-        "STANDARD MODEL",
-        "PARTICLES"
+        "PARTICLES",
+        "STANDARD MODEL"
     )
 
     // Aquesta funció indica el fragment que s'ha de posar
