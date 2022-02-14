@@ -3,38 +3,53 @@ package com.example.particles.exercicieInterfaces
 import java.lang.Thread.sleep
 import java.util.*
 
-abstract class Program {
+abstract class Program(val name: String) {
     abstract fun compile(): Executable
 }
 
-class KotlinProgram(val instructions: ArrayList<Long>) : Program() {
+interface Executable {
+    fun execute(args: ArrayList<Any>)
+}
+
+class KernelProgram : Program("Kernel") {
+    companion object {
+        var iteration = 0
+    }
+
+    override fun compile(): Executable {
+        val thread = Thread(0) {
+            println("Executing kernel iteration ${iteration++}")
+            sleep(1000L)
+            CPU.run(KernelProgram().compile() as ThreadsPool)
+        }
+
+        return ThreadsPool(arrayListOf(thread))
+    }
+}
+
+class KotlinProgram(name: String, val instructions: ArrayList<Int> /* sec */) : Program(name) {
     override fun compile(): Executable {
         val threads = instructions.map {
             Thread((0..10).random()) {
                 println("Executing thread during $it ms")
-                sleep(it)
-                arrayListOf()
+                sleep(it * 1000L)
             }
         } as ArrayList
 
-        return ExecutableProgram(threads)
+        return ThreadsPool(threads)
     }
 }
 
-class ExecutableProgram(val threads: ArrayList<Thread>) : Executable {
-    @Throws(IllegalThreadStateException::class)
-    override fun execute(): ArrayList<Executable> {
-        val main = threads.maxByOrNull { it.priority }
-        return main?.execute() ?: throw IllegalThreadStateException("No main thread found")
-    }
+class ThreadsPool(val threads: ArrayList<Thread>) : Executable {
 
-    override fun compareTo(other: Thread): Int {
-        return 1 // always proritaire
+    override fun execute(args: ArrayList<Any>) {
+        threads.first().execute(args)
     }
 }
 
-open class Thread(val priority: Int, val assemblerCode: () -> ArrayList<Executable>) : Executable {
-    override fun execute(): ArrayList<Executable> {
+class Thread(val priority: Int, val assemblerCode: () -> Unit) : Executable, Comparable<Thread> {
+
+    override fun execute(args: ArrayList<Any>) {
         return assemblerCode.invoke()
     }
 
@@ -44,38 +59,51 @@ open class Thread(val priority: Int, val assemblerCode: () -> ArrayList<Executab
 }
 
 
-interface Executable : Comparable<Thread> {
-    fun execute(): ArrayList<Executable>
-}
-
-
 object CPU {
     private const val TOTAL_RAM_SIZE = 100
     private const val THREAD_SIZE = 10
 
     private var occupiedRAM = 0
-    private val queue = PriorityQueue<Executable>()
+    private val queue = LinkedList<Thread>()
+
+    fun start() {
+        schedulerLoop()
+    }
+
+    fun run(pool: ThreadsPool) {
+        queue.addAll(pool.threads)
+    }
+
+    fun run(thread: Thread) {
+        queue.add(thread)
+    }
 
     @Throws(OutOfMemoryError::class)
-    fun run(executable: Executable) {
+    private fun schedulerLoop() {
+        val thread = queue.poll()
+
         if (occupiedRAM + THREAD_SIZE >= TOTAL_RAM_SIZE) {
             throw OutOfMemoryError("RAM is full")
         }
 
         occupiedRAM += THREAD_SIZE
 
-        queue.add(executable)
-    }
-
-    private fun schedulerLoop() {
-        val executable = queue.poll()
-
-        print("Thread $executable.")
-        executable?.execute()
+        println("RAM $occupiedRAM")
+        thread?.execute(arrayListOf())
 
         if (queue.isNotEmpty())
             schedulerLoop()
+        else
+            println("CPU without tasks")
     }
+}
+
+fun main() {
+    val program = KotlinProgram("Android", arrayListOf(1, 2, 3))
+    val program2 = KernelProgram()
+
+    CPU.run(program.compile() as ThreadsPool)
+    CPU.start()
 }
 
 
