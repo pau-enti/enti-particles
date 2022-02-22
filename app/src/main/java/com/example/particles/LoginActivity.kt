@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -15,6 +16,11 @@ import com.example.particles.ui.main.MainActivity
 import com.example.particles.utils.applyTransparency
 import com.example.particles.utils.toast
 import com.google.firebase.auth.FirebaseAuth
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
+import java.io.FileOutputStream
+import java.io.ObjectOutputStream
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,6 +50,23 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+    fun a() {
+        // Manera 1
+        val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = sp.edit()
+        editor.putStringSet()
+
+        editor.apply()
+
+
+        // Manera 2
+        val fos: FileOutputStream = openFileOutput("fileName", Context.MODE_PRIVATE)
+        val os = ObjectOutputStream(fos)
+        os.writeObject(this)
+        os.close()
+        fos.close()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

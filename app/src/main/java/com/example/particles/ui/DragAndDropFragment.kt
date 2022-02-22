@@ -180,6 +180,7 @@ class DragAndDropFragment : Fragment() {
                 )
             )
         } else {
+            // En versions inferiors, es fan servir classes i funcions depecated
             val vib = context?.getSystemService(VIBRATOR_SERVICE) as Vibrator
             vib.vibrate(duration)
         }
