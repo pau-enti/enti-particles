@@ -8,13 +8,13 @@ import com.example.particles.data.Particle.Family.*
 object Particles: ArrayList<Particle>() {
 
     init {
-        add(Particle("Up", QUARK, 2200.0, "2/3", "1/2"))
-        add(Particle("Charm", QUARK, 1280.0, "2/3", "1/2"))
-        add(Particle("Top", QUARK, 173100.0, "2/3", "1/2"))
+        add(Particle("Quark Up", QUARK, 2200.0, "2/3", "1/2"))
+        add(Particle("Quark Charm", QUARK, 1280.0, "2/3", "1/2"))
+        add(Particle("Quark Top", QUARK, 173100.0, "2/3", "1/2"))
 
-        add(Particle("Down", QUARK, 4.7, "-1/3", "1/2"))
-        add(Particle("Strange", QUARK, 96.0, "-1/3", "1/2"))
-        add(Particle("Bottom", QUARK, 4.18, "-1/3", "1/2"))
+        add(Particle("Quark Down", QUARK, 4.7, "-1/3", "1/2"))
+        add(Particle("Quark Strange", QUARK, 96.0, "-1/3", "1/2"))
+        add(Particle("Quark Bottom", QUARK, 4.18, "-1/3", "1/2"))
 
         add(Particle("Electron", LEPTON, 0.511, "-1", "1/2"))
         add(Particle("Muon", LEPTON, 105.66, "-1", "1/2"))

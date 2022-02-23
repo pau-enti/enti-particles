@@ -13,7 +13,8 @@ data class Particle(
     val family: Family,
     val mass: Double, // MeV / c^2
     val charge: String,
-    val spin: String
+    val spin: String,
+    val companionParticles: ArrayList<String> = ArrayList()
 ) {
 
     // Second constructor with optional parameters
