@@ -8,27 +8,27 @@ import com.example.particles.data.Particle.Family.*
 object Particles: ArrayList<Particle>() {
 
     init {
-        add(Particle("Up", QUARK))
-        add(Particle("Charm", QUARK))
-        add(Particle("Top", QUARK))
+        add(Particle("Up", QUARK, 2200.0, "2/3", "1/2"))
+        add(Particle("Charm", QUARK, 1280.0, "2/3", "1/2"))
+        add(Particle("Top", QUARK, 173100.0, "2/3", "1/2"))
 
-        add(Particle("Down", QUARK))
-        add(Particle("Strange", QUARK))
-        add(Particle("Bottom", QUARK))
+        add(Particle("Down", QUARK, 4.7, "-1/3", "1/2"))
+        add(Particle("Strange", QUARK, 96.0, "-1/3", "1/2"))
+        add(Particle("Bottom", QUARK, 4.18, "-1/3", "1/2"))
 
-        add(Particle("Electron", LEPTON))
-        add(Particle("Muon", LEPTON))
-        add(Particle("Tau", LEPTON))
+        add(Particle("Electron", LEPTON, 0.511, "-1", "1/2"))
+        add(Particle("Muon", LEPTON, 105.66, "-1", "1/2"))
+        add(Particle("Tau", LEPTON, 1776.8, "-1", "1/2"))
 
-        add(Particle("Electron neutrino", LEPTON))
-        add(Particle("Muon neutrino", LEPTON))
-        add(Particle("Tau neutrino", LEPTON))
+        add(Particle("Electron neutrino", LEPTON, 1.0, "0", "1/2"))
+        add(Particle("Muon neutrino", LEPTON, 0.17, "0", "1/2"))
+        add(Particle("Tau neutrino", LEPTON, 18.2, "0", "1/2"))
 
-        add(Particle("Gluon", GAUGE_BOSON))
-        add(Particle("Photon", GAUGE_BOSON))
-        add(Particle("Z boson", GAUGE_BOSON))
-        add(Particle("W boson", GAUGE_BOSON))
+        add(Particle("Gluon", GAUGE_BOSON, 0.0, "0", "1"))
+        add(Particle("Photon", GAUGE_BOSON, 0.0, "0", "1"))
+        add(Particle("Z boson", GAUGE_BOSON, 91190.0, "0", "1"))
+        add(Particle("W boson", GAUGE_BOSON, 80930.0, "±1", "1"))
 
-        add(Particle("Higgs", SCALAR_BOSON))
+        add(Particle("Higgs", SCALAR_BOSON, 124970.0, "0", "0"))
     }
 }

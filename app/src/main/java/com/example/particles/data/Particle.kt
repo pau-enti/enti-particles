@@ -11,19 +11,19 @@ import kotlin.random.Random
 data class Particle(
     val name: String,
     val family: Family,
-    val mass: Double,
-    val charge: Double,
-    val spin: Double
+    val mass: Double, // MeV / c^2
+    val charge: String,
+    val spin: String
 ) {
 
     // Second constructor with optional parameters
-    constructor(name: String, family: Family) : this(
-        name,
-        family,
-        getRandomValue(),
-        getRandomValue(),
-        getRandomValue()
-    )
+//    constructor(name: String, family: Family) : this(
+//        name,
+//        family,
+//        getRandomValue(),
+//        getRandomValue(),
+//        getRandomValue()
+//    )
 
     enum class Family {
         QUARK, LEPTON, GAUGE_BOSON, SCALAR_BOSON;
@@ -36,7 +36,7 @@ data class Particle(
         }
     }
 
-    companion object {
-        private fun getRandomValue(): Double = Random.nextInt(0, 999) / 1000.0
-    }
+//    companion object {
+//        private fun getRandomValue(): Double = Random.nextInt(0, 999) / 1000.0
+//    }
 }
