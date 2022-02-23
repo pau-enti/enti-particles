@@ -1,22 +1,21 @@
 package com.example.particles.ui.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.GestureDetector.SimpleOnGestureListener
-import android.view.MotionEvent
-import android.view.View
-import android.view.View.OnTouchListener
+import android.provider.Telephony
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.particles.LoginActivity
 import com.example.particles.R
 import com.example.particles.SettingsActivity
+import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding
 import com.example.particles.utils.toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import java.io.FileInputStream
+import java.io.IOException
+import java.io.ObjectInputStream
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,6 +80,28 @@ class MainActivity : AppCompatActivity() {
         // Agafem els paràmetres que ens porta l'extra
         intent.extras?.get(USER_EXTRA)?.let {
             toast("Welcome $it") // Si l'usuari no és null, fem el toast
+        }
+
+        initData()
+    }
+
+    private fun initData() {
+        if (Particles.isEmpty()) {
+            val data = try {
+                openFileInput("particlesInternalData.dat").use { io ->
+                    ObjectInputStream(io).use {
+                        // Si tot va bé, l'objecte llegit estarà dins de "data"
+                        it.readObject() as Particles
+                    }
+                }
+            } catch (e: IOException) {
+                null // En cas d'error, "data" valdrà null
+            }
+
+            if (data?.isNotEmpty() == true)
+                Particles.addAll(data)
+            else
+                Particles.resetParticles()
         }
     }
 
