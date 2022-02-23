@@ -7,6 +7,8 @@ import com.example.particles.data.Particle.Family.*
  */
 object Particles : ArrayList<Particle>() {
 
+    const val PARTICLES_FILENAME = "particlesInternalData.dat"
+
     fun resetParticles() {
         clear()
 

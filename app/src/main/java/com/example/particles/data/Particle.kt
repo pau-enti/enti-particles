@@ -11,12 +11,12 @@ import kotlin.random.Random
  * https://en.wikipedia.org/wiki/Standard_Model
  */
 data class Particle(
-    val name: String,
-    val family: Family,
-    val mass: Double, // MeV / c^2
-    val charge: String,
-    val spin: String,
-    val companionParticles: ArrayList<String> = ArrayList()
+    var name: String,
+    var family: Family,
+    var mass: Double, // MeV / c^2
+    var charge: String,
+    var spin: String,
+    var companionParticles: ArrayList<String> = ArrayList()
 
 // TODO: La interface Parceable és més eficient per Android, però no tan trivial
 ): Serializable {

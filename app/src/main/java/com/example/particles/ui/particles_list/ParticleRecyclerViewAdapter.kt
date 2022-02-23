@@ -1,11 +1,9 @@
 package com.example.particles.ui.particles_list
 
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.DRAG_FLAG_GLOBAL
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,7 +13,6 @@ import com.example.particles.ParticleEditActivity.Companion.INTENT_EXTRA_PARTICL
 import com.example.particles.R
 import com.example.particles.data.Particle
 import com.example.particles.databinding.ItemListParticleBinding
-import com.example.particles.utils.toast
 
 
 /**

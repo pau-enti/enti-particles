@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     private fun initData() {
         if (Particles.isEmpty()) {
             val data = try {
-                openFileInput("particlesInternalData.dat").use { io ->
+                openFileInput(Particles.PARTICLES_FILENAME).use { io ->
                     ObjectInputStream(io).use {
                         // Si tot va bé, l'objecte llegit estarà dins de "data"
                         it.readObject() as Particles

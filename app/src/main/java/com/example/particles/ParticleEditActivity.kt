@@ -2,9 +2,10 @@ package com.example.particles
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityParticleEditBinding
 import java.io.FileOutputStream
@@ -17,6 +18,7 @@ class ParticleEditActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityParticleEditBinding
+    private var particle: Particle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,34 +26,42 @@ class ParticleEditActivity : AppCompatActivity() {
         binding = ActivityParticleEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val particleId = intent.extras?.getInt(INTENT_EXTRA_PARTICLE_ID) ?: return // leave it empty if no extra passed
-        fillParticlesInfo(particleId)
+        val particleId = intent.extras?.getInt(INTENT_EXTRA_PARTICLE_ID)
+            ?: return // leave it empty if no extra passed
+        particle = Particles[particleId]
+        fillParticlesInfo()
     }
 
     override fun onPause() {
         super.onPause()
 
-        val fos: FileOutputStream = openFileOutput("particlesInternalData.dat", Context.MODE_PRIVATE)
-        val os = ObjectOutputStream(fos)
-        os.writeObject(Particles)
+        // Update class with user input data
+        particle?.name = binding.particleNameInput.text.toString()
+        particle?.mass = binding.particleMassInput.text.toString().toDoubleOrNull() ?: 0.0
+        particle?.charge = binding.particleChargeInput.text.toString()
+        particle?.spin = binding.particleSpinInput.text.toString()
 
-        os.close()
-        fos.close()
+        openFileOutput(Particles.PARTICLES_FILENAME, Context.MODE_PRIVATE).use { io ->
+            ObjectOutputStream(io).use {
+                // Save the object on the file
+                it.writeObject(Particles)
+            }
+        }
     }
 
-    private fun fillParticlesInfo(particleId: Int) {
-        val particle = Particles[particleId]
+    private fun fillParticlesInfo() {
+        particle?.let { p ->
+            binding.particleNameInput.setText(p.name)
+            binding.particleMassInput.setText(p.mass.toString())
+            binding.particleChargeInput.setText(p.charge)
+            binding.particleSpinInput.setText(p.spin)
 
-        binding.particleNameInput.setText(particle.name)
-        binding.particleMassInput.setText(particle.mass.toString())
-        binding.particleChargeInput.setText(particle.charge)
-        binding.particleSpinInput.setText(particle.spin)
+            val list = p.companionParticles.fold("") { acc, s ->
+                "$acc*$s\n"
+            }
 
-        val list = particle.companionParticles.fold("") { acc, s ->
-            "$acc*$s\n"
+            binding.companionParticlesList.text = list
         }
-
-        binding.companionParticlesList.text = list
     }
 
     fun a() {
@@ -70,7 +80,6 @@ class ParticleEditActivity : AppCompatActivity() {
         os.close()
         fos.close()
     }
-
 
 
 }
