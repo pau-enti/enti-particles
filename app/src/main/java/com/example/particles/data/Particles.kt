@@ -5,9 +5,11 @@ import com.example.particles.data.Particle.Family.*
 /**
  * Collection of particles of the Standard Model
  */
-object Particles: ArrayList<Particle>() {
+object Particles : ArrayList<Particle>() {
 
-    init {
+    fun resetParticles() {
+        clear()
+
         add(Particle("Quark Up", QUARK, 2200.0, "2/3", "1/2"))
         add(Particle("Quark Charm", QUARK, 1280.0, "2/3", "1/2"))
         add(Particle("Quark Top", QUARK, 173100.0, "2/3", "1/2"))
