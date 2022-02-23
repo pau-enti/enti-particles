@@ -1,6 +1,8 @@
 package com.example.particles.data
 
+import android.os.Parcelable
 import com.example.particles.R
+import java.io.Serializable
 import kotlin.random.Random
 
 /**
@@ -15,7 +17,9 @@ data class Particle(
     val charge: String,
     val spin: String,
     val companionParticles: ArrayList<String> = ArrayList()
-) {
+
+// TODO: La interface Parceable és més eficient per Android, però no tan trivial
+): Serializable {
 
     // Second constructor with optional parameters
 //    constructor(name: String, family: Family) : this(
