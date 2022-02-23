@@ -32,7 +32,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/particles_list"
         android:name="com.example.button_2fragment_app.ParticleFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

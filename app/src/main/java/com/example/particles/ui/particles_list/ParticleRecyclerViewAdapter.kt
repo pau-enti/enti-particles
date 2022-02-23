@@ -18,8 +18,10 @@ import com.example.particles.databinding.ItemListParticleBinding
 /**
  * Adapter que presenta una llista de particules
  */
-class ParticleRecyclerViewAdapter(val context: Context, private val particles: List<Particle>) :
+class ParticleRecyclerViewAdapter(val context: Context, val particles: ArrayList<Particle>) :
     RecyclerView.Adapter<ParticleRecyclerViewAdapter.ViewHolder>() {
+
+    private var modifiedElement: Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -44,13 +46,21 @@ class ParticleRecyclerViewAdapter(val context: Context, private val particles: L
             // Sabem que es mostrarà "bé" perquè Particle és un data class
 //            context.toast(particle.toString())
 
+            modifiedElement = holder.absoluteAdapterPosition
+
             val intent = Intent(context, ParticleEditActivity::class.java)
-            intent.putExtra(INTENT_EXTRA_PARTICLE_ID, position)
+            intent.putExtra(INTENT_EXTRA_PARTICLE_ID, modifiedElement)
             context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int = particles.size
+
+    fun notifyParticleUpdated() {
+        modifiedElement?.let {
+            notifyItemChanged(it)
+        }
+    }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemListParticleBinding.bind(view)

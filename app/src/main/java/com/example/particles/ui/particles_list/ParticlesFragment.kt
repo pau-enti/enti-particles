@@ -2,8 +2,6 @@ package com.example.particles.ui.particles_list
 
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipDescription
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +14,7 @@ import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.FragmentParticlesListBinding
 import com.google.android.material.chip.Chip
+import kotlin.reflect.safeCast
 
 
 class ParticlesFragment : Fragment() {
@@ -37,7 +36,7 @@ class ParticlesFragment : Fragment() {
         val suggestedValues = Particle.Family.values().map { it.name } + Particles.map { it.name }
 
         // Init adapter llista de particules
-        binding.list.adapter = ParticleRecyclerViewAdapter(ctx, particles)
+        binding.particlesList.adapter = ParticleRecyclerViewAdapter(ctx, particles)
 
         // Init adapter per fer la findbar
         binding.searchBar.setAdapter(
@@ -76,6 +75,23 @@ class ParticlesFragment : Fragment() {
         return retView
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Notify some particle can have changed its name
+        ParticleRecyclerViewAdapter::class.safeCast(binding.particlesList.adapter)?.notifyParticleUpdated()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun refreshData() {
+        // En aquest cas, totes les dades de la llista poden haver canviat. Aquí s'hi arriba quan
+        // es resetejen totes les dades
+        val adapter = ParticleRecyclerViewAdapter::class.safeCast(binding.particlesList.adapter) ?: return
+        adapter.particles.clear()
+        adapter.particles.addAll(Particles)
+        adapter.notifyDataSetChanged()
+    }
+
     /**
      * Aquesta funció serveix per filtrar els elements de la llista que es veuran desprès d'haver
      * sel·leccionat algun filtre. En cas de no haver-hi cap filtre, es mostren tots els elemnts
@@ -104,6 +120,6 @@ class ParticlesFragment : Fragment() {
             particles.addAll(Particles)
 
         // IMPORTANTÍSSIM! Hem de notificar a la vista que hem actualitzat els elements de la llista
-        binding.list.adapter?.notifyDataSetChanged()
+        binding.particlesList.adapter?.notifyDataSetChanged()
     }
 }

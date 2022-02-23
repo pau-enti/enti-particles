@@ -2,7 +2,6 @@ package com.example.particles.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Telephony
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.particles.LoginActivity
@@ -13,9 +12,9 @@ import com.example.particles.databinding.ActivityMainBinding
 import com.example.particles.utils.toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import java.io.FileInputStream
 import java.io.IOException
 import java.io.ObjectInputStream
+import kotlin.reflect.safeCast
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Creem l'adapter pel ViewPager i el coloquem on toca
-        val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        val sectionsPagerAdapter = PageViewAdapter(supportFragmentManager)
         binding.viewPager.adapter = sectionsPagerAdapter
 
         // Amaga el floating action button en funcio de la pagina que es mostra
@@ -61,9 +60,16 @@ class MainActivity : AppCompatActivity() {
 
         // Afegim una acció al botó flotant
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Do you want to know something?", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Do you want to reset all data?", Snackbar.LENGTH_LONG)
                 .setAction("YES") {
-                    toast("Maybe we live in a simulation")
+                    // Carregem les dades de nou
+                    Particles.resetParticles()
+
+                    // Notifiquem a l'adapter PageViewAdapter que alguna de les pàgines ha canviat
+                    // el contingut. En aquest cas, la de la info de partícules
+                    PageViewAdapter::class.safeCast(binding.viewPager.adapter)?.refreshData()
+
+                    toast("You left the universe as it was")
                 }.show()
         }
 

@@ -8,11 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
 import com.example.particles.data.Particles
 import com.example.particles.databinding.FragmentParticlesListBinding
-import com.example.particles.ui.particles_list.ParticleRecyclerViewAdapter
 import com.example.particles.utils.SimpleAdapter
 import kotlin.random.Random
 
@@ -41,7 +39,7 @@ class ParticlesWithSimpleAdapterFragment : Fragment() {
 
         // Només utilitzo el context si no és null; sino, finalitzo activity
         context?.let {
-            binding.list.adapter = adapter
+            binding.particlesList.adapter = adapter
         } ?: activity?.finish()
 
         return binding.root
