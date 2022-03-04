@@ -15,8 +15,7 @@ data class Particle(
     var family: Family,
     var mass: Double, // MeV / c^2
     var charge: String,
-    var spin: String,
-    var companionParticles: ArrayList<String> = ArrayList()
+    var spin: String
 
 // TODO: La interface Parceable és més eficient per Android, però no tan trivial
 ): Serializable {
