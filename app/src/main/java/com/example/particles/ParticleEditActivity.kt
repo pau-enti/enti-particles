@@ -55,12 +55,6 @@ class ParticleEditActivity : AppCompatActivity() {
             binding.particleMassInput.setText(p.mass.toString())
             binding.particleChargeInput.setText(p.charge)
             binding.particleSpinInput.setText(p.spin)
-
-            val list = p.companionParticles.fold("") { acc, s ->
-                "$acc*$s\n"
-            }
-
-            binding.companionParticlesList.text = list
         }
     }
 
