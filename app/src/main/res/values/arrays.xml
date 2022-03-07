@@ -9,4 +9,16 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="new_particles">
+        <item>Antiquark up</item>
+        <item>Antiquark down</item>
+        <item>Antiquark strange</item>
+        <item>Antiquark charm</item>
+        <item>Antielectron</item>
+        <item>Antimuon</item>
+        <item>Antitau</item>
+    </string-array>
+
+    <string-array name="empty"/>
 </resources>

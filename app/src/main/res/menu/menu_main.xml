@@ -4,13 +4,15 @@
     tools:context="com.example.particles.ui.main.MainActivity">
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/ic_star_death"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_logout"
+        android:icon="@drawable/ic_baseline_login_24"
         android:orderInCategory="100"
         android:title="Logout"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

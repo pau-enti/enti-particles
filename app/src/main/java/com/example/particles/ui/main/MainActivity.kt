@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    // This bool is used when enters to settings that can modify particles view
+    private var needsRefresh = false
+
     companion object {
         const val USER_EXTRA = "USERNAME_EXTRA"
     }
@@ -76,8 +79,10 @@ class MainActivity : AppCompatActivity() {
         // Gestionem el menú
         binding.menuMainActivity.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
                 R.id.action_logout -> logout()
+                R.id.action_settings -> startActivity(
+                    Intent(this, SettingsActivity::class.java)
+                ).also { needsRefresh = true }
                 else -> return@setOnMenuItemClickListener false
             }
             true
@@ -111,6 +116,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (needsRefresh) {
+            needsRefresh = false
+            PageViewAdapter::class.safeCast(binding.viewPager.adapter)?.refreshData()
+        }
+    }
 
     private fun logout() {
         FirebaseAuth.getInstance().signOut()

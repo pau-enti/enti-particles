@@ -2,11 +2,13 @@ package com.example.particles.ui.particles_list
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.ParticleEditActivity
 import com.example.particles.ParticleEditActivity.Companion.INTENT_EXTRA_PARTICLE_ID
@@ -39,7 +41,9 @@ class ParticleRecyclerViewAdapter(val context: Context, val particles: ArrayList
 
         // Set color
         // It converts the ID to the properly color and set it to the image
-        holder.image.setColorFilter(context.getColor(particle.family.color()))
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        if (prefs.getBoolean("colorParticles", true))
+            holder.image.setColorFilter(context.getColor(particle.family.color()))
 
         // Set on item click listener
         holder.view.setOnClickListener {
