@@ -3,10 +3,12 @@ package com.example.particles.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.particles.LoginActivity
 import com.example.particles.R
 import com.example.particles.SettingsActivity
+import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding
 import com.example.particles.utils.toast
@@ -121,6 +123,23 @@ class MainActivity : AppCompatActivity() {
 
         if (needsRefresh) {
             needsRefresh = false
+
+            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+            val newParticles = prefs.getStringSet("extraParticles", HashSet())
+
+            Particles.resetParticles()
+
+            newParticles?.forEach { p ->
+                Particles.add(Particle(p, Particle.Family.ANTIPARTICLE))
+            }
+
+            Particles.apply {
+                // Before the clear, we need to save the new list
+                val aux = Particles.distinctBy { it.name }
+                clear()
+                addAll(aux)
+            }
+
             PageViewAdapter::class.safeCast(binding.viewPager.adapter)?.refreshData()
         }
     }

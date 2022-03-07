@@ -10,10 +10,10 @@
 
 
         <MultiSelectListPreference
+            android:key="extraParticles"
             android:defaultValue="@array/empty"
             android:entries="@array/new_particles"
             android:entryValues="@array/new_particles"
-            android:key="extraParticles"
             android:title="Extra particles"
             app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>

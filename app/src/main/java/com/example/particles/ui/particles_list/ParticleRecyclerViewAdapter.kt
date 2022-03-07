@@ -44,6 +44,8 @@ class ParticleRecyclerViewAdapter(val context: Context, val particles: ArrayList
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         if (prefs.getBoolean("colorParticles", true))
             holder.image.setColorFilter(context.getColor(particle.family.color()))
+        else
+            holder.image.setColorFilter(context.getColor(R.color.gray))
 
         // Set on item click listener
         holder.view.setOnClickListener {
