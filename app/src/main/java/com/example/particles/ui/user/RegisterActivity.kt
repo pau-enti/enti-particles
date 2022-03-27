@@ -1,12 +1,13 @@
-package com.example.particles
+package com.example.particles.ui.user
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.particles.LoginActivity.Companion.isValidEmail
-import com.example.particles.LoginActivity.Companion.isValidPassword
+import com.example.particles.R
+import com.example.particles.ui.user.LoginActivity.Companion.isValidEmail
+import com.example.particles.ui.user.LoginActivity.Companion.isValidPassword
 import com.example.particles.databinding.ActivityRegisterBinding
 import com.example.particles.ui.main.MainActivity
 import com.example.particles.utils.toast

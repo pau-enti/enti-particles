@@ -1,4 +1,4 @@
-package com.example.particles
+package com.example.particles.ui
 
 import android.content.Context
 import android.content.SharedPreferences

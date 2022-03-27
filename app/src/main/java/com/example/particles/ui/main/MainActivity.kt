@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.example.particles.LoginActivity
+import com.example.particles.ui.user.LoginActivity
 import com.example.particles.R
-import com.example.particles.SettingsActivity
+import com.example.particles.ui.user.SettingsActivity
 import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding

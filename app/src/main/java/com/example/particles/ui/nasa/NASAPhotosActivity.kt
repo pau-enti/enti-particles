@@ -1,4 +1,4 @@
-package com.example.particles
+package com.example.particles.ui.nasa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +10,9 @@ class NASAPhotosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        binding = ActivityNasaPhotosBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
     }
 }

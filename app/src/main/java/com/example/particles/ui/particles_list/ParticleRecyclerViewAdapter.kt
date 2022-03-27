@@ -10,8 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.particles.ParticleEditActivity
-import com.example.particles.ParticleEditActivity.Companion.INTENT_EXTRA_PARTICLE_ID
+import com.example.particles.ui.ParticleEditActivity
+import com.example.particles.ui.ParticleEditActivity.Companion.INTENT_EXTRA_PARTICLE_ID
 import com.example.particles.R
 import com.example.particles.data.Particle
 import com.example.particles.databinding.ItemListParticleBinding

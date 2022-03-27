@@ -1,10 +1,9 @@
-package com.example.particles
+package com.example.particles.ui.user
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -16,10 +15,7 @@ import com.example.particles.ui.main.MainActivity
 import com.example.particles.utils.applyTransparency
 import com.example.particles.utils.toast
 import com.google.firebase.auth.FirebaseAuth
-import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
-import java.io.FileOutputStream
-import java.io.ObjectOutputStream
+import com.example.particles.R
 
 
 class LoginActivity : AppCompatActivity() {

@@ -1,8 +1,9 @@
-package com.example.particles
+package com.example.particles.ui.user
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
+import com.example.particles.R
 import com.example.particles.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
