@@ -14,14 +14,12 @@ interface APINasa {
 //    @GET("search?q=pillars%20of%20creation")
 //    fun getPhoto(): Call<Any>
 
-      @Headers("Accept: application/json", "X-TheySaidSo-Api-Secret:paugarcia95")
+//      @Headers("Accept: application/json", "X-TheySaidSo-Api-Secret:paugarcia95")
 //      @GET("quote/random")
-      @GET("qod/")
+      @GET("random.json/")
       fun getPhrase(): Call<QuotesResponse>
 
-      data class QuotesResponse(val contents: Quotes)
-      data class Quotes(val quotes: List<Quote>)
-      data class Quote(val author: String, val quote: String)
+      data class QuotesResponse(val author: String, val quote: String)
 
 
 }

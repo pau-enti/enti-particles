@@ -24,16 +24,16 @@ class NASAPhotosActivity : AppCompatActivity() {
         binding.buttonAPI.setOnClickListener {
             val outside = Retrofit.Builder()
 //                .baseUrl("https://images-api.nasa.gov/")
-                .baseUrl("https://quotes.rest/")
+                .baseUrl("http://quotes.stormconsultancy.co.uk/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
             val call = outside.create(APINasa::class.java).getPhrase()
-            println("YASYHASA")
+
+            println("New Quote:")
             call.enqueue(object : Callback<APINasa.QuotesResponse> {
                 override fun onResponse(call: Call<APINasa.QuotesResponse>, response: Response<APINasa.QuotesResponse>) {
-                    println(response.body()?.contents?.quotes ?: "nothing")
-                    println("YEEEEEEEEEEEEEEEEEEEE")
+                    println(response.body()?.quote ?: "error produced")
                 }
 
                 override fun onFailure(call: Call<APINasa.QuotesResponse>, t: Throwable) {
