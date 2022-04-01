@@ -15,9 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class NasaPhotosActivity : AppCompatActivity() {
-    lateinit var binding: ActivityNasaPhotosBinding
-
-    val adapter = NasaPhotosRecyclerAdapter(this)
+    private lateinit var binding: ActivityNasaPhotosBinding
+    private val adapter = NasaPhotosRecyclerAdapter(this)
+    private val theOutside = Retrofit.Builder()
+        .baseUrl("https://images-api.nasa.gov/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,25 +30,11 @@ class NasaPhotosActivity : AppCompatActivity() {
 
         binding.photosList.adapter = adapter
 
-        val theOutside = Retrofit.Builder()
-            .baseUrl("https://images-api.nasa.gov/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-
-        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val call = theOutside.create(APINasa::class.java).getPhoto(query ?: "")
-
-                call.enqueue(object : Callback<NasaPhotosCollection> {
-                    override fun onResponse(call: Call<NasaPhotosCollection>, response: Response<NasaPhotosCollection>) {
-                        adapter.updatePhotosList(response.body()?.getPhotos())
-                    }
-
-                    override fun onFailure(call: Call<NasaPhotosCollection>, t: Throwable) {
-                        toast("error")
-                    }
-                })
+                preformSearch(query ?: "")
+                binding.searchView.clearFocus() // Hide keywoard
                 return true
             }
 
@@ -54,6 +43,23 @@ class NasaPhotosActivity : AppCompatActivity() {
                 return true
             }
 
+        })
+    }
+
+    private fun preformSearch(query: String) {
+        val call = theOutside.create(APINasa::class.java).getPhoto(query)
+
+        call.enqueue(object : Callback<NasaPhotosCollection> {
+            override fun onResponse(
+                call: Call<NasaPhotosCollection>,
+                response: Response<NasaPhotosCollection>
+            ) {
+                adapter.updatePhotosList(response.body()?.getPhotos())
+            }
+
+            override fun onFailure(call: Call<NasaPhotosCollection>, t: Throwable) {
+                toast("error")
+            }
         })
     }
 }
