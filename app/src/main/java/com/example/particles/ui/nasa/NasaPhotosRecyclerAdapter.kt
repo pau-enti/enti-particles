@@ -5,11 +5,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.particles.R
 import com.example.particles.databinding.ItemListNasaPhotoBinding
 import com.example.particles.ui.nasa.rest.NasaPhoto
+import com.squareup.picasso.Picasso
 
 class NasaPhotosRecyclerAdapter(val context: Context) :
     RecyclerView.Adapter<NasaPhotosRecyclerAdapter.ViewHolder>() {
@@ -24,24 +23,19 @@ class NasaPhotosRecyclerAdapter(val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        val inflater = LayoutInflater.from(context)
-//        val view = ItemListNasaPhotoBinding.inflate(inflater).root
-//
-//        return ViewHolder(view)
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.item_list_nasa_photo, parent, false)
+        val inflater = LayoutInflater.from(context)
+        val view = ItemListNasaPhotoBinding.inflate(inflater).root
 
-        // Assignem el layout al ViewHolder
         return ViewHolder(view)
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Toast.makeText(context, "yasdgasdad", Toast.LENGTH_SHORT).show()
+        Picasso.get().load(photosList?.get(position)?.link).into(holder.image)
+        holder.title.text = photosList?.get(position)?.title
     }
 
     override fun getItemCount(): Int {
-        return 3 //photosList?.size ?: 0
+        return photosList?.size ?: 0
     }
 
     @SuppressLint("NotifyDataSetChanged")

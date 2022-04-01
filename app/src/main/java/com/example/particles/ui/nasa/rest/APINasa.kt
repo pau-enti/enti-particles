@@ -2,10 +2,11 @@ package com.example.particles.ui.nasa.rest
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface APINasa {
 
-    @GET("search?q=pillars%20of%20creation")
-    fun getPhoto(): Call<NasaPhotosCollection>
+    @GET("search")
+    fun getPhoto(@Query("q") query: String): Call<NasaPhotosCollection>
 
 }
