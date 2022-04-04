@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.particles.ui.DragAndDropFragment
 import com.example.particles.ui.StandardModelFragment
-import com.example.particles.ui.particles_list.ParticlesFragment
+import com.example.particles.ui.particles.ParticlesFragment
 
 
 /**

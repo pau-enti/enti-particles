@@ -30,6 +30,7 @@ class NasaPhotosActivity : AppCompatActivity() {
 
         binding.photosList.adapter = adapter
 
+        preformSearch("eruption of sun")
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

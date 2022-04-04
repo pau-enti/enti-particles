@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipsGroup"
-        tools:context=".ui.particles_list.ParticlesFragment"
+        tools:context=".ui.particles.ParticlesFragment"
         tools:listitem="@layout/item_list_particle">
 
     </androidx.recyclerview.widget.RecyclerView>

@@ -1,4 +1,4 @@
-package com.example.particles.ui.particles_list
+package com.example.particles.ui.particles
 
 import android.content.Context
 import android.content.Intent
