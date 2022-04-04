@@ -32,7 +32,8 @@ class NasaPhotosRecyclerAdapter(val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get().load(photosList?.get(position)?.link).into(holder.image)
+//        Picasso.get().load(photosList?.get(position)?.link).into(holder.image)
+        Picasso.Builder(context).build().load(photosList?.get(position)?.link).placeholder(R.drawable.image_placeholder).into(holder.image)
         holder.title.text = photosList?.get(position)?.title
     }
 

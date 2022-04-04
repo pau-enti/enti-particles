@@ -52,7 +52,7 @@ class NasaPhotosActivity : AppCompatActivity() {
 
     private fun preformSearch(query: String) {
         val call = theOutside.create(APINasa::class.java).getPhoto(query)
-        binding.searchTitle.text = "Searching... $query"
+        binding.searchTitle.text = query
         binding.progressNasaSearch.isVisible = true
 
         call.enqueue(object : Callback<NasaPhotosCollection> {
@@ -61,7 +61,6 @@ class NasaPhotosActivity : AppCompatActivity() {
                 response: Response<NasaPhotosCollection>
             ) {
                 binding.progressNasaSearch.isGone = true
-                binding.searchTitle.text = "Results about: $query"
                 adapter.updatePhotosList(response.body()?.getPhotos())
             }
 
