@@ -47,4 +47,5 @@
     <string name="register_ok">User created successfully!</string>
     <string name="stars_life_phases">Stars life phases</string>
     <string name="stars_death_phases">Stars death phases</string>
+    <string name="error_on_search">An error occurred :(</string>
 </resources>

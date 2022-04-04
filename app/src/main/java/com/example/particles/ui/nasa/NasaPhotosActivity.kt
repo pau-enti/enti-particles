@@ -3,6 +3,9 @@ package com.example.particles.ui.nasa
 import android.os.Bundle
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import com.example.particles.R
 import com.example.particles.databinding.ActivityNasaPhotosBinding
 import com.example.particles.ui.nasa.rest.APINasa
 import com.example.particles.ui.nasa.rest.NasaPhotosCollection
@@ -49,17 +52,22 @@ class NasaPhotosActivity : AppCompatActivity() {
 
     private fun preformSearch(query: String) {
         val call = theOutside.create(APINasa::class.java).getPhoto(query)
+        binding.searchTitle.text = "Searching... $query"
+        binding.progressNasaSearch.isVisible = true
 
         call.enqueue(object : Callback<NasaPhotosCollection> {
             override fun onResponse(
                 call: Call<NasaPhotosCollection>,
                 response: Response<NasaPhotosCollection>
             ) {
+                binding.progressNasaSearch.isGone = true
+                binding.searchTitle.text = "Results about: $query"
                 adapter.updatePhotosList(response.body()?.getPhotos())
             }
 
             override fun onFailure(call: Call<NasaPhotosCollection>, t: Throwable) {
-                toast("error")
+                binding.progressNasaSearch.isGone = true
+                binding.searchTitle.text = getString(R.string.error_on_search)
             }
         })
     }

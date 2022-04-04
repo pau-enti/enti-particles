@@ -17,23 +17,48 @@
 
     </SearchView>
 
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Showing results about: Artistic Blackhole"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/photosList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        tools:listitem="@layout/item_list_nasa_photo"
-        tools:itemCount="3"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layoutManager="LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" >
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_list_nasa_photo">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/progressNasaSearch"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
