@@ -33,12 +33,13 @@ class NasaPhotosActivity : AppCompatActivity() {
 
         binding.photosList.adapter = adapter
 
-        preformSearch("eruption of sun")
+        preformSearch("Milky Way")
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 preformSearch(query ?: "")
                 binding.searchView.clearFocus() // Hide keywoard
+                binding.photosList.smoothScrollToPosition(0)
                 return true
             }
 
@@ -61,7 +62,13 @@ class NasaPhotosActivity : AppCompatActivity() {
                 response: Response<NasaPhotosCollection>
             ) {
                 binding.progressNasaSearch.isGone = true
-                adapter.updatePhotosList(response.body()?.getPhotos())
+
+                val res = response.body()?.getPhotos()
+
+                if (res?.isNotEmpty() == true)
+                    adapter.updatePhotosList(res)
+                else
+                    binding.searchTitle.text = "The search \"$query\" produced 0 results!"
             }
 
             override fun onFailure(call: Call<NasaPhotosCollection>, t: Throwable) {

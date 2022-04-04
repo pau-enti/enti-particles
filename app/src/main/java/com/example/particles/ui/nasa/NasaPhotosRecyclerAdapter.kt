@@ -32,8 +32,18 @@ class NasaPhotosRecyclerAdapter(val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Alternativa sense fer ús de placeholder (llavors no cal context)
 //        Picasso.get().load(photosList?.get(position)?.link).into(holder.image)
-        Picasso.Builder(context).build().load(photosList?.get(position)?.link).placeholder(R.drawable.image_placeholder).into(holder.image)
+
+        // Carreguem la imatge del link al layout
+        // Tenim en compte que trigarà un temps, hi afegim un placeholder
+        Picasso.Builder(context)
+            .build()
+            .load(photosList?.get(position)?.link)
+            .placeholder(R.drawable.image_placeholder)
+            .into(holder.image)
+
+        // Títol de la imatge
         holder.title.text = photosList?.get(position)?.title
     }
 
