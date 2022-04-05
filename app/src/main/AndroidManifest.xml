@@ -18,6 +18,11 @@
         <activity
             android:name=".ui.nasa.NasaPhotosActivity"
             android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".ui.nasa.ZoomInZoomOut"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
