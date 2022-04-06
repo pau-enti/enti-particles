@@ -1,6 +1,8 @@
 package com.example.particles.ui.nasa
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.PointF
 import android.os.Bundle
@@ -11,14 +13,16 @@ import android.view.View.OnTouchListener
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.R
+import com.example.particles.utils.toast
 import kotlin.math.sqrt
+import kotlin.reflect.safeCast
 
 
 /**
  * @author https://stackoverflow.com/questions/6650398/android-imageview-zoom-in-and-zoom-out
  */
 @SuppressLint("ClickableViewAccessibility")
-class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
+class ImageViewerActivity : AppCompatActivity(), OnTouchListener {
     // These matrices will be used to scale points of the image
     var matrix = Matrix()
     var savedMatrix = Matrix()
@@ -33,8 +37,19 @@ class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zoom)
+
+        val byteArray = intent.extras?.getByteArray(EXTRA_IMAGE_TO_VIEW) ?: return
+        val image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+
+        if (image == null) {
+            toast("Cannot visualize this image :(")
+            finish()
+            return
+        }
+
         val view = findViewById<View>(R.id.imageView) as ImageView
         view.setOnTouchListener(this)
+        view.setImageBitmap(image)
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
@@ -115,6 +130,7 @@ class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
 
     companion object {
         private const val TAG = "ZoomActivity"
+        const val EXTRA_IMAGE_TO_VIEW = "EXTRA_IMAGE_TO_VIEW"
 
         // The 3 states (events) which the user is trying to perform
         const val NONE = 0

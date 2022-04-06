@@ -2,6 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.particles.ui.main.MainActivity">
+
+    <item android:title="NASA Search"
+        android:id="@+id/nasa_search"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_star_death"
@@ -15,4 +20,6 @@
         android:orderInCategory="100"
         android:title="Logout"
         app:showAsAction="ifRoom" />
+
+
 </menu>

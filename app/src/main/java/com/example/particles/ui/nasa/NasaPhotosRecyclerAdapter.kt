@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.particles.R
 import com.example.particles.databinding.ItemListNasaPhotoBinding
 import com.example.particles.ui.nasa.rest.NasaPhoto
 import com.squareup.picasso.Picasso
@@ -40,8 +39,7 @@ class NasaPhotosRecyclerAdapter(val context: Context) :
         Picasso.Builder(context)
             .build()
             .load(photosList?.get(position)?.link)
-            .placeholder(R.drawable.image_placeholder)
-            .into(holder.image)
+            .into((holder.image))
 
         // Títol de la imatge
         holder.title.text = photosList?.get(position)?.title

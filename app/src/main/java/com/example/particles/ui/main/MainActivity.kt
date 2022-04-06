@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.example.particles.ui.user.LoginActivity
 import com.example.particles.R
-import com.example.particles.ui.user.SettingsActivity
 import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding
+import com.example.particles.ui.nasa.NasaPhotosActivity
+import com.example.particles.ui.user.LoginActivity
+import com.example.particles.ui.user.SettingsActivity
 import com.example.particles.utils.toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -82,9 +83,9 @@ class MainActivity : AppCompatActivity() {
         binding.menuMainActivity.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_logout -> logout()
-                R.id.action_settings -> startActivity(
-                    Intent(this, SettingsActivity::class.java)
-                ).also { needsRefresh = true }
+                R.id.nasa_search -> startActivity(Intent(this, NasaPhotosActivity::class.java))
+                R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
+                    .also { needsRefresh = true }
                 else -> return@setOnMenuItemClickListener false
             }
             true
