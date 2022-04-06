@@ -10,6 +10,7 @@
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_particle_edit.xml" value="0.33" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_zoom.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/fragment_drag_and_drop.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/fragment_particles_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_chip.xml" value="0.36666666666666664" />
@@ -21,7 +22,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

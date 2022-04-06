@@ -1,6 +1,6 @@
 package com.example.particles.ui.nasa
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.graphics.Matrix
 import android.graphics.PointF
 import android.os.Bundle
@@ -11,8 +11,13 @@ import android.view.View.OnTouchListener
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.R
+import kotlin.math.sqrt
 
 
+/**
+ * @author https://stackoverflow.com/questions/6650398/android-imageview-zoom-in-and-zoom-out
+ */
+@SuppressLint("ClickableViewAccessibility")
 class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
     // These matrices will be used to scale points of the image
     var matrix = Matrix()
@@ -36,7 +41,7 @@ class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
         val view = v as ImageView
         view.scaleType = ImageView.ScaleType.MATRIX
         val scale: Float
-        dumpEvent(event)
+
         when (event.action and MotionEvent.ACTION_MASK) {
             MotionEvent.ACTION_DOWN -> {
                 matrix.set(view.imageMatrix)
@@ -92,7 +97,7 @@ class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
     private fun spacing(event: MotionEvent): Float {
         val x = event.getX(0) - event.getX(1)
         val y = event.getY(0) - event.getY(1)
-        return Math.sqrt((x * x + y * y).toDouble()).toFloat()
+        return sqrt((x * x + y * y).toDouble()).toFloat()
     }
 
     /*
@@ -107,44 +112,9 @@ class ZoomInZoomOut : AppCompatActivity(), OnTouchListener {
         point[x / 2] = y / 2
     }
 
-    /** Show an event in the LogCat view, for debugging  */
-    private fun dumpEvent(event: MotionEvent) {
-        val names = arrayOf(
-            "DOWN",
-            "UP",
-            "MOVE",
-            "CANCEL",
-            "OUTSIDE",
-            "POINTER_DOWN",
-            "POINTER_UP",
-            "7?",
-            "8?",
-            "9?"
-        )
-        val sb = StringBuilder()
-        val action = event.action
-        val actionCode = action and MotionEvent.ACTION_MASK
-        sb.append("event ACTION_").append(names[actionCode])
-        if (actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP) {
-            sb.append("(pid ").append(action shr MotionEvent.ACTION_POINTER_ID_SHIFT)
-            sb.append(")")
-        }
-        sb.append("[")
-        for (i in 0 until event.pointerCount) {
-            sb.append("#").append(i)
-            sb.append("(pid ").append(event.getPointerId(i))
-            sb.append(")=").append(event.getX(i).toInt())
-            sb.append(",").append(event.getY(i).toInt())
-            if (i + 1 < event.pointerCount) sb.append(";")
-        }
-        sb.append("]")
-        Log.d("Touch Events ---------", sb.toString())
-    }
 
     companion object {
-        private const val TAG = "Touch"
-        private const val MIN_ZOOM = 1f
-        private const val MAX_ZOOM = 1f
+        private const val TAG = "ZoomActivity"
 
         // The 3 states (events) which the user is trying to perform
         const val NONE = 0
