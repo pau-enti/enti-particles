@@ -16,10 +16,11 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.chat.ChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.nasa.NasaPhotosActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".ui.nasa.ImageViewerActivity"
             android:exported="true" />

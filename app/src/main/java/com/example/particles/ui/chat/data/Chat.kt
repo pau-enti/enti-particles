@@ -1,6 +1,7 @@
 package com.example.particles.ui.chat.data
 
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.reflect.safeCast
@@ -12,8 +13,14 @@ class Chat private constructor(
     var name: String,
     val messages: ArrayList<ChatMessage>
 ) {
-    fun sendMessage(message: String) {
+    val db = Firebase.firestore.collection("chats")
 
+    fun sendMessage(message: String) {
+        db.document(id).update("messages", FieldValue.arrayUnion(hashMapOf(
+            "author" to ownerUserId,
+            "content" to message,
+            "time" to Timestamp.now()
+        )))
     }
 
     companion object {
