@@ -9,6 +9,7 @@ import com.example.particles.R
 import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding
+import com.example.particles.ui.chat.ChatActivity
 import com.example.particles.ui.nasa.NasaPhotosActivity
 import com.example.particles.ui.user.LoginActivity
 import com.example.particles.ui.user.SettingsActivity
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         binding.menuMainActivity.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_logout -> logout()
+                R.id.chat -> startActivity(Intent(this, ChatActivity::class.java))
                 R.id.nasa_search -> startActivity(Intent(this, NasaPhotosActivity::class.java))
                 R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
                     .also { needsRefresh = true }
