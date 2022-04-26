@@ -20,6 +20,12 @@ class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = nu
         notifyDataSetChanged()
     }
 
+    fun notifyMessageSent() {
+        chat?.let {
+            notifyItemInserted(it.messages.size - 1)
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 

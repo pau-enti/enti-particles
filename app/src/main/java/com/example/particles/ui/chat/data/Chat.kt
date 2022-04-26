@@ -13,9 +13,13 @@ class Chat private constructor(
     var name: String,
     val messages: ArrayList<ChatMessage>
 ) {
-    val db = Firebase.firestore.collection("chats")
+    private val db = Firebase.firestore.collection("chats")
 
     fun sendMessage(message: String) {
+        // Update local
+        messages.add(ChatMessage(ownerUserId, message, Timestamp.now()))
+
+        // Update remote database
         db.document(id).update("messages", FieldValue.arrayUnion(hashMapOf(
             "author" to ownerUserId,
             "content" to message,

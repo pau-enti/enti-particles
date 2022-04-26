@@ -36,7 +36,8 @@ class ChatActivity : AppCompatActivity() {
             val message = binding.messageInput.text
             if (!message.isNullOrBlank()) {
                 chat?.sendMessage(message.toString())
-                toast(message)
+                adapter.notifyMessageSent()
+                binding.chatView.smoothScrollToPosition(chat?.messages?.size ?: 0)
                 binding.messageInput.setText("")
             }
         }
