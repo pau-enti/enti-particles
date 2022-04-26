@@ -15,6 +15,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var db: CollectionReference
 
     private var chat: Chat? = null
+    private val adapter = ChatRecyclerViewAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +23,13 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.chatView.adapter = adapter
+
         db = Firebase.firestore.collection("chats")
         Chat.openChat("UfiBPE5Iut7IvlWgwJ7q", "pau.g.gozalvez@gmai.com") {
             chat = it
+            adapter.updateChat(chat)
+            toast("Updated!")
         }
 
         binding.messageSend.setOnClickListener {

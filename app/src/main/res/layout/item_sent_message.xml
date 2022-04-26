@@ -9,22 +9,23 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="32dp"
-        android:background="#A1A1A1"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="#00BCD4"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/othersMessage"
+        app:layout_constraintBottom_toBottomOf="@+id/myMessage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/othersMessage"
-        app:layout_constraintTop_toTopOf="@+id/othersMessage" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/myMessage" />
 
     <TextView
-        android:id="@+id/othersMessage"
+        android:id="@+id/myMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:padding="10dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
