@@ -1,9 +1,12 @@
 package com.example.particles.ui.chat.data
 
 import com.google.firebase.Timestamp
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.reflect.safeCast
 
 class Chat private constructor(
@@ -11,20 +14,32 @@ class Chat private constructor(
     val ownerUserId: String,
     val receiverUserId: String,
     var name: String,
-    val messages: ArrayList<ChatMessage>
+    var messages: ArrayList<ChatMessage>,
+    var onMessageReceived: (() -> Unit)? = null
 ) {
-    private val db = Firebase.firestore.collection("chats")
+    // private val db = Firebase.firestore.collection("chats")
+    private val db =
+        Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference("chat")
 
     fun sendMessage(message: String) {
         // Update local
         messages.add(ChatMessage(ownerUserId, message, Timestamp.now()))
 
         // Update remote database
-        db.document(id).update("messages", FieldValue.arrayUnion(hashMapOf(
-            "author" to ownerUserId,
-            "content" to message,
-            "time" to Timestamp.now()
-        )))
+        db.document(id).update(
+            "messages", FieldValue.arrayUnion(
+                hashMapOf(
+                    "author" to ownerUserId,
+                    "content" to message,
+                    "time" to Timestamp.now()
+                )
+            )
+        )
+    }
+
+    fun closeChat() {
+        timer.cancel()
     }
 
     companion object {
