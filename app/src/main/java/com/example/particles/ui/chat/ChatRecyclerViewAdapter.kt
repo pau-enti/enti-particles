@@ -22,7 +22,7 @@ class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = nu
 
     fun notifyMessageSent() {
         chat?.let {
-            notifyItemInserted(it.messages.size - 1)
+            //notifyItemInserted(it.messages.size - 1)
         }
     }
 
@@ -40,14 +40,14 @@ class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = nu
     override fun getItemViewType(position: Int): Int {
         // 0 -> sent message
         // 1 -> received message
-        return if (chat?.messages?.get(position)?.author == chat?.ownerUserId) SENT_TYPE else RECEIVED_TYPE
+        return 0//if (chat?.messages?.get(position)?.author == chat?.ownerUserId) SENT_TYPE else RECEIVED_TYPE
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.message.text = chat?.messages?.get(position)?.content
+        //holder.message.text = chat?.messages?.get(position)?.content
     }
 
-    override fun getItemCount(): Int = chat?.messages?.size ?: 0
+    override fun getItemCount(): Int =0// chat?.messages?.size ?: 0
 
     inner class ViewHolder(view: View, type: Int) : RecyclerView.ViewHolder(view) {
         val message: TextView = if (type == SENT_TYPE)

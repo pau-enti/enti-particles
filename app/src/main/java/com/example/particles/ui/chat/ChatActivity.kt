@@ -22,22 +22,22 @@ class ChatActivity : AppCompatActivity() {
 
         binding.chatView.adapter = adapter
 
-        Chat.openChat("UfiBPE5Iut7IvlWgwJ7q", "pau.g.gozalvez@gmail.com") {
-            chat = it
-            adapter.updateChat(chat)
-            chat?.onMessageReceived = {
-                adapter.notifyMessageSent()
-            }
-        }
-
-        binding.messageSend.setOnClickListener {
-            val message = binding.messageInput.text
-            if (!message.isNullOrBlank()) {
-                chat?.sendMessage(message.toString())
-                adapter.notifyMessageSent()
-                binding.chatView.smoothScrollToPosition(chat?.messages?.size ?: 0)
-                binding.messageInput.setText("")
-            }
+//        Chat.openChat("UfiBPE5Iut7IvlWgwJ7q", "pau.g.gozalvez@gmail.com") {
+//            chat = it
+//            adapter.updateChat(chat)
+//            chat?.onMessageReceived = {
+//                adapter.notifyMessageSent()
+//            }
+//        }
+//
+//        binding.messageSend.setOnClickListener {
+//            val message = binding.messageInput.text
+//            if (!message.isNullOrBlank()) {
+//                chat?.sendMessage(message.toString())
+//                adapter.notifyMessageSent()
+//                binding.chatView.smoothScrollToPosition(chat?.messages?.size ?: 0)
+//                binding.messageInput.setText("")
+//            }
 
             val db =
                 Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -53,18 +53,15 @@ class ChatActivity : AppCompatActivity() {
 //                )
 //            )
 
-            db.get().addOnSuccessListener {
-                val chats = it.value as List<*>
-                val chat = chats[0] as Map<*, *>
-                val name = chat["name"]
-                val u1 = chat["user1"]
-                val u2 = chat["user2"]
-            }
-        }
-    }
+            db.child("0").get().addOnSuccessListener {
+//                val chats = it.value as List<*>
+//                val chat = chats[0] as Map<*, *>
+//                val name = chat["name"]
+//                val u1 = chat["user1"]
+//                val u2 = chat["user2"]
 
-    override fun onDestroy() {
-        super.onDestroy()
-        chat?.closeChat()
+                val c = it.getValue(Chat::class.java)
+           // }
+        }
     }
 }
