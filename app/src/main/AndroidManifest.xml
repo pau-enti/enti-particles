@@ -28,7 +28,7 @@
             android:name=".ui.nasa.NasaPhotosActivity"
             android:exported="true"/>
         <activity
-            android:name=".ui.nasa.ImageViewerActivity"
+            android:name=".ui.nasa.ZoomableImageTouchListener"
             android:exported="true" />
         <activity
             android:name=".ui.ParticleEditActivity"

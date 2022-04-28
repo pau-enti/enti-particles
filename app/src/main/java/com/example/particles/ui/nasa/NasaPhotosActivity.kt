@@ -28,6 +28,8 @@ class NasaPhotosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.hide()
+
         binding = ActivityNasaPhotosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
