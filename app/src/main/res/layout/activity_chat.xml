@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.chat.ChatActivity">
 
+    <EditText
+        android:id="@+id/user"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="pau.garcia@enti.cat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatView"
         android:layout_width="match_parent"
@@ -16,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/messageInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user"
         tools:itemCount="3"
         tools:listitem="@layout/item_sent_message" />
 

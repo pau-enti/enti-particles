@@ -20,8 +20,11 @@ class ChatActivity : AppCompatActivity() {
 
         binding.chatView.adapter = adapter
 
-        Chat.openChat("0", "pau.garcia@enti.cat") {
-            chat = it ?: Chat.createChat("0", "pau.garcia@enti.cat", "someone@enti.cat", "Tonight's party", arrayListOf())
+        // TODO provisional
+        val user = binding.user.text.toString()
+
+        Chat.openChat("0", user) {
+            chat = it ?: Chat.createChat("0", user, "someone@enti.cat", "Tonight's party", arrayListOf())
             adapter.updateChat(chat)
 
             chat.onMessageReceived = {
