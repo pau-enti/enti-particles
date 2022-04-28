@@ -1,16 +1,17 @@
 package com.example.particles.ui.chat
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.databinding.ActivityChatBinding
-import com.example.particles.ui.chat.data.Chat
+import com.example.particles.ui.chat.model.Chat
 
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChatBinding
-
-    private lateinit var chat: Chat
     private val adapter = ChatRecyclerViewAdapter(this)
+
+    private val chatViewModel: ChatViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +24,14 @@ class ChatActivity : AppCompatActivity() {
         // TODO provisional
         val user = binding.user.text.toString()
 
-        Chat.openChat("0", user) {
-            chat = it ?: Chat.createChat("0", user, "someone@enti.cat", "Tonight's party", arrayListOf())
+        chatViewModel.openChat("0", user) {
+            if (it != null) {
+                chat = it
+            } else {
+                chat = Chat("0", user, "someone@enti.cat", "Tonight's party")
+                chatViewModel.createChat(chat, user)
+            }
+
             adapter.updateChat(chat)
 
             chat.onMessageReceived = {
@@ -36,8 +43,9 @@ class ChatActivity : AppCompatActivity() {
 
         binding.messageSend.setOnClickListener {
             val message = binding.messageInput.text
+
             if (!message.isNullOrBlank()) {
-                chat.sendMessage(message.toString())
+                chatViewModel.sendMessage(chat, message.toString())
                 adapter.notifyNewMessage()
 
                 binding.chatView.scrollToPosition(chat.messages.size)

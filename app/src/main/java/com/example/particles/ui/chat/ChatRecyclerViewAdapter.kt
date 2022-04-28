@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
 import com.example.particles.databinding.ItemReceivedMessageBinding
 import com.example.particles.databinding.ItemSentMessageBinding
-import com.example.particles.ui.chat.data.Chat
+import com.example.particles.ui.chat.model.Chat
 
 
 class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = null) :
