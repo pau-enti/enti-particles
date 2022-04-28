@@ -21,21 +21,28 @@ class ChatActivity : AppCompatActivity() {
         binding.chatView.adapter = adapter
 
         Chat.openChat("0", "pau.garcia@enti.cat") {
-            chat = it ?: Chat("0", "pau.garcia@enti.cat", "someone@enti.cat", "Tonight's party", arrayListOf())
+            chat = it ?: Chat.createChat("0", "pau.garcia@enti.cat", "someone@enti.cat", "Tonight's party", arrayListOf())
             adapter.updateChat(chat)
-            binding.chatView.scrollToPosition(chat.messages?.size ?: 0)
+
+            chat.onMessageReceived = {
+                adapter.notifyNewMessage()
+            }
+
+            binding.chatView.scrollToPosition(chat.messages.size)
         }
 
         binding.messageSend.setOnClickListener {
             val message = binding.messageInput.text
             if (!message.isNullOrBlank()) {
                 chat.sendMessage(message.toString())
-                adapter.notifyMessageSent()
+                adapter.notifyNewMessage()
 
-                binding.chatView.scrollToPosition(chat.messages?.size ?: 0)
+                binding.chatView.scrollToPosition(chat.messages.size)
                 binding.messageInput.setText("")
             }
         }
+
+
 
     }
 }

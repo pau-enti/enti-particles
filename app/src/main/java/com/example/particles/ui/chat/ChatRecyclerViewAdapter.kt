@@ -20,7 +20,7 @@ class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = nu
         notifyDataSetChanged()
     }
 
-    fun notifyMessageSent() {
+    fun notifyNewMessage() {
         chat?.messages?.let {
             notifyItemInserted(it.size - 1)
         }
