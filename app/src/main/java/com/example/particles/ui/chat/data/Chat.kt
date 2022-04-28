@@ -1,11 +1,9 @@
 package com.example.particles.ui.chat.data
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.Exclude
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+
 
 data class Chat(
     val id: String? = null,
@@ -23,16 +21,23 @@ data class Chat(
 
     @get:Exclude
     var onMessageReceived: ((Chat) -> Unit)? = null
+        set(value) {
+            field = value
+            updateListeners()
+        }
 
-    init {
+    fun updateListeners() {
         if (id != null) {
             db.child(id).addValueEventListener(object : ValueEventListener {
 
                 @Suppress("UNCHECKED_CAST")
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.child("messages").getValue(ArrayList::class.java)?.let {
+                    val typeIndicator: GenericTypeIndicator<ArrayList<ChatMessage>> =
+                        object : GenericTypeIndicator<ArrayList<ChatMessage>>() {}
+
+                    (snapshot.child("messages").getValue(typeIndicator))?.let {
                         // TODO we should update all fields
-                        messages = it as ArrayList<ChatMessage>
+                        messages = it
                     }
                     onMessageReceived?.invoke(this@Chat)
                 }
