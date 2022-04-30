@@ -18,25 +18,18 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ChatRecyclerViewAdapter(this, binding.chatView.layoutManager)
+        adapter = ChatRecyclerViewAdapter(this, chatViewModel, binding.chatView.layoutManager)
         binding.chatView.adapter = adapter
 
         // TODO provisional
         val user = binding.user.text.toString()
         chatViewModel.openChat("0", user)
 
-        chatViewModel.chat.observe(this) { chat ->
-            chat ?: return@observe
-            adapter.updateChat(chat)
-        }
-
         binding.messageSend.setOnClickListener {
             val message = binding.messageInput.text
 
             if (!message.isNullOrBlank()) {
-                val user = binding.user.text.toString()
-                adapter.author = user
-
+                chatViewModel.messagesAuthor = binding.user.text.toString()
                 chatViewModel.sendMessage(message.toString())
                 adapter.notifyNewMessage()
                 binding.messageInput.setText("")
