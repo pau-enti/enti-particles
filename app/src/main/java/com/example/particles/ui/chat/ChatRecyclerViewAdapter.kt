@@ -12,18 +12,22 @@ import com.example.particles.databinding.ItemSentMessageBinding
 import com.example.particles.ui.chat.model.Chat
 
 
-class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = null) :
+class ChatRecyclerViewAdapter(val context: Context, private val layoutManager: RecyclerView.LayoutManager?) :
     RecyclerView.Adapter<ChatRecyclerViewAdapter.ViewHolder>() {
+
+    private var chat: Chat? = null
+    var author: String? = null
 
     fun updateChat(chat: Chat) {
         this.chat = chat
         notifyDataSetChanged()
+        layoutManager?.scrollToPosition(chat.messages.size)
     }
 
     fun notifyNewMessage() {
         chat?.messages?.let {
-//            notifyItemInserted(it.size - 1)
             notifyDataSetChanged()
+            layoutManager?.scrollToPosition(chat?.messages?.size ?: 0)
         }
     }
 
@@ -41,7 +45,7 @@ class ChatRecyclerViewAdapter(val context: Context, private var chat: Chat? = nu
     override fun getItemViewType(position: Int): Int {
         // 0 -> sent message
         // 1 -> received message
-        return if (chat?.messages?.get(position)?.author == chat?.owner) SENT_TYPE else RECEIVED_TYPE
+        return if (chat?.messages?.get(position)?.author == author) SENT_TYPE else RECEIVED_TYPE
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

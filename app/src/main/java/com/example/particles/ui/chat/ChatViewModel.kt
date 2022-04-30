@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.particles.ui.chat.model.Chat
 import com.example.particles.ui.chat.model.ChatMessage
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.GenericTypeIndicator
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -18,63 +15,64 @@ class ChatViewModel : ViewModel() {
         Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference("chats")
 
+    var messagesAuthor: String? = null
+
     fun createChat(chat: Chat, owner: String) {
-        chat.owner = owner
+        messagesAuthor = owner
         chat.id?.let {
             db.child(it).setValue(chat) // insert it on the db
         }
     }
 
-    fun sendMessage(chat: Chat, message: String) {
-        val newMessage = ChatMessage(chat.owner, message, System.currentTimeMillis())
+    fun sendMessage(message: String) {
+        val cht = chat.value ?: return
+        val id = cht.id ?: return
+        val newMessage = ChatMessage(messagesAuthor, message, System.currentTimeMillis())
 
         // Update local
-        chat.messages.add(newMessage)
+        cht.messages.add(newMessage)
 
         // Update remote database
-        chat.id?.let {
-            db.child(it)                                     // this chat
-                .child("messages")                  // messages array
-                .child("${chat.messages.size - 1}")     // message id
-                .setValue(newMessage)
-        }
+        db.child(id)                                     // this chat
+            .child("messages")                  // messages array
+            .child("${cht.messages.size - 1}")     // message id
+            .setValue(newMessage)
     }
 
-    fun openChat(id: String, owner: String) {
+    fun openChat(id: String, ownerId: String) {
         val request = db.child(id).get()
 
         // TODO onFailure is not caught
         request.addOnSuccessListener {
-            try {
-                it.getValue(Chat::class.java)?.apply {
-                    this.owner = owner
-                    chat.postValue(this)
-                }
-            } catch (e: Exception) {
+            if (it == null)
+                TODO() // create chat
+
+            it.getValue(Chat::class.java)?.apply {
+                messagesAuthor = ownerId
+                chat.postValue(this)
+                subscribe(this)
             }
         }
     }
 
-    fun subscribe(chat: Chat) {
-        if (chat.id != null) {
-            db.child(chat.id).addValueEventListener(object : ValueEventListener {
+    private fun subscribe(cht: Chat) {
+        val id = cht.id ?: return
 
-                @Suppress("UNCHECKED_CAST")
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val typeIndicator: GenericTypeIndicator<ArrayList<ChatMessage>> =
-                        object : GenericTypeIndicator<ArrayList<ChatMessage>>() {}
+        db.child(id).addValueEventListener(object : ValueEventListener {
 
-                    (snapshot.child("messages").getValue(typeIndicator))?.let {
-                        // TODO we should update all fields
-                        chat.messages = it
-                    }
-                    onMessageReceived?.invoke(this@Chat)
+            override fun onCancelled(error: DatabaseError) = Unit
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                // TODO we should update all fields
+                val typeIndicator = object : GenericTypeIndicator<ArrayList<ChatMessage>>() {}
+                val dataBaseMessages = snapshot.child("messages").getValue(typeIndicator)
+                dataBaseMessages?.let {
+                    cht.messages = it
                 }
 
-                override fun onCancelled(error: DatabaseError) {
-                    // nothing
-                }
-            })
-        }
+                chat.postValue(cht)
+            }
+        })
     }
 }

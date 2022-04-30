@@ -13,12 +13,4 @@ data class Chat(
     val user2: String? = null,
     var name: String? = null,
     var messages: ArrayList<ChatMessage> = arrayListOf()
-) {
-
-    @get:Exclude
-    var owner: String? = null
-
-    @get:Exclude
-    var receiver: String? = if (owner == user1) user2 else user1
-        private set
-}
+)
