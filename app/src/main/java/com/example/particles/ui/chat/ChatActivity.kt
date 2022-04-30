@@ -3,6 +3,7 @@ package com.example.particles.ui.chat
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import com.example.particles.databinding.ActivityChatBinding
 
 class ChatActivity : AppCompatActivity() {
@@ -24,6 +25,10 @@ class ChatActivity : AppCompatActivity() {
         // TODO provisional
         val user = binding.user.text.toString()
         chatViewModel.openChat("0", user)
+
+        chatViewModel.chat.observe(this) {
+            binding.progressBar.isGone = true
+        }
 
         binding.messageSend.setOnClickListener {
             val message = binding.messageInput.text

@@ -15,9 +15,8 @@
         android:theme="@style/Theme.Physics_model"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.chat.ChatActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" >
+            android:name=".ui.chats.ChatsListActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,11 +24,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.nasa.NasaPhotosActivity"
-            android:exported="true"/>
+            android:name=".ui.chat.ChatActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
         <activity
-            android:name=".ui.nasa.ZoomableImageTouchListener"
+            android:name=".ui.nasa.NasaPhotosActivity"
             android:exported="true" />
+
         <activity
             android:name=".ui.ParticleEditActivity"
             android:exported="false" />
@@ -48,9 +50,7 @@
             android:name=".ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Physics_model.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.Physics_model.NoActionBar"></activity>
     </application>
 
 </manifest>

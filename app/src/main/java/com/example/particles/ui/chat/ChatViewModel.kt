@@ -45,6 +45,7 @@ class ChatViewModel : ViewModel() {
         // TODO onFailure is not caught
         request.addOnSuccessListener {
             if (it == null)
+                //createChat()
                 TODO() // create chat
 
             it.getValue(Chat::class.java)?.apply {
