@@ -13,6 +13,11 @@ class ChatActivity : AppCompatActivity() {
 
     private val chatViewModel: ChatViewModel by viewModels()
 
+    companion object {
+        const val EXTRA_USER_ID = "EXTRA_USER_ID"
+        const val EXTRA_CHAT_ID = "EXTRA_CHAT_ID"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,8 +28,9 @@ class ChatActivity : AppCompatActivity() {
         binding.chatView.adapter = adapter
 
         // TODO provisional
-        val user = binding.user.text.toString()
-        chatViewModel.openChat("0", user)
+        val user = intent.extras?.getString(EXTRA_USER_ID) ?: return
+        val chatId = intent.extras?.getString(EXTRA_CHAT_ID) ?: return
+        chatViewModel.openChat(chatId, user)
 
         chatViewModel.chat.observe(this) {
             binding.progressBar.isGone = true
@@ -34,7 +40,7 @@ class ChatActivity : AppCompatActivity() {
             val message = binding.messageInput.text
 
             if (!message.isNullOrBlank()) {
-                chatViewModel.messagesAuthor = binding.user.text.toString()
+                chatViewModel.messagesAuthor = user
                 chatViewModel.sendMessage(message.toString())
                 adapter.notifyNewMessage()
                 binding.messageInput.setText("")
