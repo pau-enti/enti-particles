@@ -4,7 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.particles.ui.chat.model.Chat
 import com.example.particles.ui.chat.model.ChatMessage
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -20,7 +23,7 @@ class ChatViewModel : ViewModel() {
     fun createChat(chat: Chat, owner: String) {
         messagesAuthor = owner
         chat.id?.let {
-            db.child(it).setValue(chat) // insert it on the db
+            db.child(it.toString()).setValue(chat) // insert it on the db
         }
     }
 
@@ -33,7 +36,7 @@ class ChatViewModel : ViewModel() {
         cht.messages.add(newMessage)
 
         // Update remote database
-        db.child(id)                                     // this chat
+        db.child(id.toString())                                     // this chat
             .child("messages")                  // messages array
             .child("${cht.messages.size - 1}")     // message id
             .setValue(newMessage)
@@ -45,7 +48,7 @@ class ChatViewModel : ViewModel() {
         // TODO onFailure is not caught
         request.addOnSuccessListener {
             if (it == null)
-                //createChat()
+            //createChat()
                 TODO() // create chat
 
             it.getValue(Chat::class.java)?.apply {
@@ -59,7 +62,7 @@ class ChatViewModel : ViewModel() {
     private fun subscribe(cht: Chat) {
         val id = cht.id ?: return
 
-        db.child(id).addValueEventListener(object : ValueEventListener {
+        db.child(id.toString()).addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(error: DatabaseError) = Unit
 

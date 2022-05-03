@@ -16,6 +16,6 @@ class ContactsActivity : AppCompatActivity() {
         binding = ActivityChatsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.contactsRecyclerView.adapter = ContactsRecyclerViewAdapter(contactsVM)
+        binding.contactsRecyclerView.adapter = ContactsRecyclerViewAdapter(this)
     }
 }
