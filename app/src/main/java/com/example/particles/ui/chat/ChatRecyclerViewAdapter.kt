@@ -46,7 +46,7 @@ class ChatRecyclerViewAdapter(
         // 0 -> sent message
         // 1 -> received message
         val messages = chat?.messages ?: return 0
-        val author = chat?.me ?: return 0
+        val author = User.current
         return if (messages[position].author == author) SENT_TYPE else RECEIVED_TYPE
     }
 

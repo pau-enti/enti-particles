@@ -1,9 +1,15 @@
 package com.example.particles.ui.contacts
 
+import android.R
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.InputType
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.databinding.ActivityChatsListBinding
+import com.example.particles.ui.chat.User
+
 
 class ContactsActivity : AppCompatActivity() {
 
@@ -29,6 +35,21 @@ class ContactsActivity : AppCompatActivity() {
             val name = binding.newContact.text.toString()
             binding.newContact.setText("")
             contactsVM.addContact(this, Contact(name, name))
+        }
+
+        binding.userButton.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+            val input = EditText(this)
+            input.inputType = InputType.TYPE_CLASS_TEXT
+
+            dialog.setView(input)
+                .setTitle("Who are you?")
+                .setPositiveButton("Modify") { _, _ ->
+                    User.current = input.text.toString()
+                }
+                .setNegativeButton("Cancel", null)
+                .setIcon(R.drawable.ic_baseline_emoji_people_24)
+                .show()
         }
     }
 }

@@ -19,7 +19,4 @@ data class Chat(
     companion object {
         fun idChatOf(user1: String, user2: String): Int = setOf(user1, user2).hashCode()
     }
-
-    @get:Exclude
-    var me: String = ""
 }

@@ -18,10 +18,8 @@ class ChatViewModel : ViewModel() {
         Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference("chats")
 
-    val messagesAuthor: String = "Pau"
-
     private fun createChat(user: String) {
-        val cht = Chat(messagesAuthor, user, "Chat of $messagesAuthor with $user")
+        val cht = Chat(User.current, user, "Chat of ${User.current} with $user")
         db.child(cht.id.toString()).setValue(cht) // insert it on the db
         chat.postValue(cht)
         subscribe(cht)
@@ -30,7 +28,7 @@ class ChatViewModel : ViewModel() {
     fun sendMessage(message: String) {
         val cht = chat.value ?: return
         val id = cht.id ?: return
-        val newMessage = ChatMessage(messagesAuthor, message, System.currentTimeMillis())
+        val newMessage = ChatMessage(User.current, message, System.currentTimeMillis())
 
         // Update local
         cht.messages.add(newMessage)
@@ -43,7 +41,7 @@ class ChatViewModel : ViewModel() {
     }
 
     fun openChat(user: String) {
-        val id = Chat.idChatOf(messagesAuthor, user).toString()
+        val id = Chat.idChatOf(User.current, user).toString()
         val request = db.child(id).get()
 
         // TODO onFailure is not caught
@@ -64,7 +62,6 @@ class ChatViewModel : ViewModel() {
 
     private fun subscribe(cht: Chat) {
         val id = cht.id ?: return
-        cht.me = messagesAuthor // todo
 
         db.child(id.toString()).addValueEventListener(object : ValueEventListener {
 
