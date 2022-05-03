@@ -1,4 +1,4 @@
-package com.example.particles.ui.chats
+package com.example.particles.ui.contacts
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

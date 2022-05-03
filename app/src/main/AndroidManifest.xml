@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Physics_model"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.chats.ContactsActivity"
+            android:name=".ui.contacts.ContactsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chat.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chats_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chats_list.xml" value="0.1" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_nasa_photos.xml" value="0.36102564102564105" />
@@ -16,6 +16,7 @@
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/fragment_drag_and_drop.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/fragment_particles_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_chip.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_contact.xml" value="0.33" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_list_nasa_photo.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_list_particle.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_list_text.xml" value="0.36666666666666664" />
