@@ -1,36 +1,42 @@
 package com.example.particles.ui.contacts
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.FileNotFoundException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
 class ContactsViewModel : ViewModel() {
     val contacts = MutableLiveData<ArrayList<Contact>>()
-    private val dataFilename = "contacts.dat"
+    private val dataFilename = "chat_contacts.dat"
 
-    private fun saveContacts() {
-        val fos = FileOutputStream(dataFilename)
-        val oos = ObjectOutputStream(fos)
-
-        oos.writeObject(contacts.value)
-        oos.close()
+    private fun saveContacts(context: Context) {
+        val data = contacts.value ?: return
+        context.openFileOutput(dataFilename, Context.MODE_PRIVATE).use {
+            val oos = ObjectOutputStream(it)
+            oos.writeObject(data)
+            oos.close()
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun loadContacts() {
-        val fin = FileInputStream(dataFilename)
-        val oin = ObjectInputStream(fin)
-
-        val readContacts = oin.readObject() as ArrayList<Contact>
-        oin.close()
-        contacts.postValue(readContacts)
+    fun loadContacts(context: Context) {
+        try {
+            context.openFileInput(dataFilename).use {
+                val iin = ObjectInputStream(it)
+                val data = iin.readObject() ?: return
+                val readContacts = data as ArrayList<Contact>
+                contacts.postValue(readContacts)
+                iin.close()
+            }
+        } catch (e: FileNotFoundException) {
+            // pass
+        }
     }
 
-    fun addContact(contact: Contact) {
+    fun addContact(context: Context, contact: Contact) {
         contacts.value?.add(contact)
-        saveContacts()
+        saveContacts(context)
     }
 }

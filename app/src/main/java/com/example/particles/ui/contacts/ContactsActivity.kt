@@ -1,8 +1,8 @@
 package com.example.particles.ui.contacts
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.databinding.ActivityChatsListBinding
 
 class ContactsActivity : AppCompatActivity() {
@@ -19,13 +19,16 @@ class ContactsActivity : AppCompatActivity() {
 
         binding.contactsRecyclerView.adapter = adapter
 
+        contactsVM.loadContacts(this)
+
         contactsVM.contacts.observe(this) {
-            adapter.notifyDataSetChanged()
+            adapter.updateContacts(it)
         }
 
         binding.addContactButton.setOnClickListener {
             val name = binding.newContact.text.toString()
-            contactsVM.addContact(Contact(name, name))
+            binding.newContact.setText("")
+            contactsVM.addContact(this, Contact(name, name))
         }
     }
 }

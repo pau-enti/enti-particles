@@ -17,6 +17,11 @@ class ContactsRecyclerViewAdapter(val context: Context) :
 
     private var contacts: List<Contact> = listOf()
 
+    fun updateContacts(contacts: List<Contact>) {
+        this.contacts = contacts
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.item_contact, parent, false)
