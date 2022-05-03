@@ -1,5 +1,7 @@
 package com.example.particles.ui.chat.model
 
+import com.google.firebase.database.Exclude
+
 
 data class Chat(
     var id: Int? = null,
@@ -17,4 +19,7 @@ data class Chat(
     companion object {
         fun idChatOf(user1: String, user2: String): Int = setOf(user1, user2).hashCode()
     }
+
+    @get:Exclude
+    var me: String = ""
 }

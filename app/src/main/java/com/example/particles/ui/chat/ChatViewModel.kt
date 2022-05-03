@@ -21,8 +21,10 @@ class ChatViewModel : ViewModel() {
     val messagesAuthor: String = "Pau"
 
     private fun createChat(user: String) {
-        val chat = Chat(messagesAuthor, user, "Chat of $messagesAuthor with $user")
-        db.child(chat.id.toString()).setValue(chat) // insert it on the db
+        val cht = Chat(messagesAuthor, user, "Chat of $messagesAuthor with $user")
+        db.child(cht.id.toString()).setValue(cht) // insert it on the db
+        chat.postValue(cht)
+        subscribe(cht)
     }
 
     fun sendMessage(message: String) {
@@ -46,7 +48,7 @@ class ChatViewModel : ViewModel() {
 
         // TODO onFailure is not caught
         request.addOnSuccessListener {
-            if (it == null)
+            if (it.value == null)
                 return@addOnSuccessListener createChat(user)
 
             it.getValue(Chat::class.java)?.apply {
@@ -62,6 +64,7 @@ class ChatViewModel : ViewModel() {
 
     private fun subscribe(cht: Chat) {
         val id = cht.id ?: return
+        cht.me = messagesAuthor // todo
 
         db.child(id.toString()).addValueEventListener(object : ValueEventListener {
 

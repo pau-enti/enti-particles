@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import com.example.particles.databinding.ActivityChatBinding
-import com.example.particles.ui.chat.model.Chat
 import com.example.particles.utils.toast
 
 class ChatActivity : AppCompatActivity() {
@@ -25,11 +24,12 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ChatRecyclerViewAdapter(this, chatViewModel, binding.chatView.layoutManager)
+        adapter = ChatRecyclerViewAdapter(binding.chatView.layoutManager)
         binding.chatView.adapter = adapter
 
         // TODO provisional
         val user = intent.extras?.getString(EXTRA_USER_ID) ?: return
+        supportActionBar?.title = user
         chatViewModel.openChat(user)
 
         chatViewModel.chat.observe(this) {
@@ -37,8 +37,10 @@ class ChatActivity : AppCompatActivity() {
 
             if (it == null) {
                 toast("Chat not found :(")
-                finish()
+                return@observe finish()
             }
+
+            adapter.notifyNewMessages(it)
         }
 
         binding.messageSend.setOnClickListener {

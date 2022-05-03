@@ -5,30 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
 import com.example.particles.databinding.ItemReceivedMessageBinding
 import com.example.particles.databinding.ItemSentMessageBinding
+import com.example.particles.ui.chat.model.Chat
 
 
 @SuppressLint("NotifyDataSetChanged")
 class ChatRecyclerViewAdapter(
-    lifecycleOwner: LifecycleOwner,
-    private val chatViewModel: ChatViewModel,
     private val layoutManager: RecyclerView.LayoutManager?
 ) :
     RecyclerView.Adapter<ChatRecyclerViewAdapter.ViewHolder>() {
 
-    init {
-        chatViewModel.chat.observe(lifecycleOwner) { cht ->
-            notifyDataSetChanged()
-            layoutManager?.scrollToPosition((cht?.messages?.size ?: 1) - 1)
-        }
+    var chat: Chat? = null
+
+    fun notifyNewMessages(chat: Chat) {
+        this.chat = chat
+        notifyNewMessage()
     }
 
     fun notifyNewMessage() {
-        val messages = chatViewModel.chat.value?.messages ?: return
+        val messages = chat?.messages ?: return
         notifyDataSetChanged()
         layoutManager?.scrollToPosition(messages.size - 1)
     }
@@ -47,17 +45,17 @@ class ChatRecyclerViewAdapter(
     override fun getItemViewType(position: Int): Int {
         // 0 -> sent message
         // 1 -> received message
-        val messages = chatViewModel.chat.value?.messages ?: return 0
-        val author = chatViewModel.messagesAuthor ?: return 0
+        val messages = chat?.messages ?: return 0
+        val author = chat?.me ?: return 0
         return if (messages[position].author == author) SENT_TYPE else RECEIVED_TYPE
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val messages = chatViewModel.chat.value?.messages ?: return
+        val messages = chat?.messages ?: return
         holder.message.text = messages[position].content
     }
 
-    override fun getItemCount(): Int = chatViewModel.chat.value?.messages?.size ?: 0
+    override fun getItemCount(): Int = chat?.messages?.size ?: 0
 
     inner class ViewHolder(view: View, type: Int) : RecyclerView.ViewHolder(view) {
         val message: TextView = if (type == SENT_TYPE)
