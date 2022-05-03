@@ -34,7 +34,6 @@ class ContactsRecyclerViewAdapter(val context: Context) :
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
-            intent.putExtra(ChatActivity.EXTRA_CHAT_ID, contact.userId)
             intent.putExtra(ChatActivity.EXTRA_USER_ID, contact.userId)
             context.startActivity(intent)
         }

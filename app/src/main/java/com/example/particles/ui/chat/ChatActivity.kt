@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import com.example.particles.databinding.ActivityChatBinding
+import com.example.particles.ui.chat.model.Chat
 import com.example.particles.utils.toast
 
 class ChatActivity : AppCompatActivity() {
@@ -16,7 +17,6 @@ class ChatActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USER_ID = "EXTRA_USER_ID"
-        const val EXTRA_CHAT_ID = "EXTRA_CHAT_ID"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,7 @@ class ChatActivity : AppCompatActivity() {
 
         // TODO provisional
         val user = intent.extras?.getString(EXTRA_USER_ID) ?: return
-        val chatId = intent.extras?.getString(EXTRA_CHAT_ID) ?: return
-        chatViewModel.openChat(chatId, user)
+        chatViewModel.openChat(user)
 
         chatViewModel.chat.observe(this) {
             binding.progressBar.isGone = true
@@ -46,7 +45,6 @@ class ChatActivity : AppCompatActivity() {
             val message = binding.messageInput.text
 
             if (!message.isNullOrBlank()) {
-                chatViewModel.messagesAuthor = user
                 chatViewModel.sendMessage(message.toString())
                 adapter.notifyNewMessage()
                 binding.messageInput.setText("")

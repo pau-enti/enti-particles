@@ -18,13 +18,11 @@ class ChatViewModel : ViewModel() {
         Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference("chats")
 
-    var messagesAuthor: String? = null
+    val messagesAuthor: String = "Pau"
 
-    fun createChat(chat: Chat, owner: String) {
-        messagesAuthor = owner
-        chat.id?.let {
-            db.child(it.toString()).setValue(chat) // insert it on the db
-        }
+    private fun createChat(user: String) {
+        val chat = Chat(messagesAuthor, user, "Chat of $messagesAuthor with $user")
+        db.child(chat.id.toString()).setValue(chat) // insert it on the db
     }
 
     fun sendMessage(message: String) {
@@ -42,23 +40,23 @@ class ChatViewModel : ViewModel() {
             .setValue(newMessage)
     }
 
-    fun openChat(id: String, ownerId: String) {
+    fun openChat(user: String) {
+        val id = Chat.idChatOf(messagesAuthor, user).toString()
         val request = db.child(id).get()
 
         // TODO onFailure is not caught
         request.addOnSuccessListener {
             if (it == null)
-                chat.postValue(null)
+                return@addOnSuccessListener createChat(user)
 
             it.getValue(Chat::class.java)?.apply {
-                messagesAuthor = ownerId
                 chat.postValue(this)
                 subscribe(this)
             }
         }
 
         request.addOnFailureListener {
-            chat.postValue(null)
+            createChat(user)
         }
     }
 
