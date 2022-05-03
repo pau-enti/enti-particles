@@ -23,7 +23,7 @@ class ChatRecyclerViewAdapter(
     init {
         chatViewModel.chat.observe(lifecycleOwner) { cht ->
             notifyDataSetChanged()
-            layoutManager?.scrollToPosition(cht.messages.size - 1)
+            layoutManager?.scrollToPosition((cht?.messages?.size ?: 1) - 1)
         }
     }
 

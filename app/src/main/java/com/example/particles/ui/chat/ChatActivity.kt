@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import com.example.particles.databinding.ActivityChatBinding
+import com.example.particles.utils.toast
 
 class ChatActivity : AppCompatActivity() {
 
@@ -34,6 +35,11 @@ class ChatActivity : AppCompatActivity() {
 
         chatViewModel.chat.observe(this) {
             binding.progressBar.isGone = true
+
+            if (it == null) {
+                toast("Chat not found :(")
+                finish()
+            }
         }
 
         binding.messageSend.setOnClickListener {

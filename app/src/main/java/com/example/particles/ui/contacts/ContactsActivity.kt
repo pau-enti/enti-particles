@@ -9,6 +9,7 @@ class ContactsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityChatsListBinding
     private val contactsVM by viewModels<ContactsViewModel>()
+    private val adapter = ContactsRecyclerViewAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +17,15 @@ class ContactsActivity : AppCompatActivity() {
         binding = ActivityChatsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.contactsRecyclerView.adapter = ContactsRecyclerViewAdapter(this)
+        binding.contactsRecyclerView.adapter = adapter
+
+        contactsVM.contacts.observe(this) {
+            adapter.notifyDataSetChanged()
+        }
+
+        binding.addContactButton.setOnClickListener {
+            val name = binding.newContact.text.toString()
+            contactsVM.addContact(Contact(name, name))
+        }
     }
 }

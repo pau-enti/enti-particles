@@ -12,7 +12,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class ChatViewModel : ViewModel() {
-    val chat = MutableLiveData<Chat>()
+    val chat = MutableLiveData<Chat?>()
 
     private val db =
         Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -48,14 +48,17 @@ class ChatViewModel : ViewModel() {
         // TODO onFailure is not caught
         request.addOnSuccessListener {
             if (it == null)
-            //createChat()
-                TODO() // create chat
+                chat.postValue(null)
 
             it.getValue(Chat::class.java)?.apply {
                 messagesAuthor = ownerId
                 chat.postValue(this)
                 subscribe(this)
             }
+        }
+
+        request.addOnFailureListener {
+            chat.postValue(null)
         }
     }
 
