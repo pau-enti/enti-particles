@@ -72,6 +72,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2' // coroutines
 
     implementation 'io.github.imablanco:zoomy:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-service:2.4.1'
 
     //testImplementation 'junit:junit:'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
