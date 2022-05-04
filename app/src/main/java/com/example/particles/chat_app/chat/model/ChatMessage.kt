@@ -1,4 +1,4 @@
-package com.example.particles.ui.chat.model
+package com.example.particles.chat_app.chat.model
 
 import com.google.firebase.database.Exclude
 import java.util.*

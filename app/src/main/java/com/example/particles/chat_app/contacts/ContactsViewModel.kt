@@ -1,4 +1,4 @@
-package com.example.particles.ui.contacts
+package com.example.particles.chat_app.contacts
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData

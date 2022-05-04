@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chat.ChatActivity">
+    tools:context=".chat_app.chat.ChatActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,13 +23,14 @@
     <EditText
         android:id="@+id/messageInput"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:background="#3E673AB7"
+        android:background="@drawable/style_input_message"
         android:inputType="textMultiLine|text"
         android:minHeight="48dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/messageSend"
         app:layout_constraintStart_toStartOf="parent" />

@@ -9,7 +9,7 @@ import com.example.particles.R
 import com.example.particles.data.Particle
 import com.example.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding
-import com.example.particles.ui.chat.ChatActivity
+import com.example.particles.chat_app.chat.ChatActivity
 import com.example.particles.ui.nasa.NasaPhotosActivity
 import com.example.particles.ui.user.LoginActivity
 import com.example.particles.ui.user.SettingsActivity

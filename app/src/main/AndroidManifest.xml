@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Physics_model"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.contacts.ContactsActivity"
+            android:name="com.example.particles.chat_app.contacts.ContactsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.chat.ChatActivity"
+            android:name="com.example.particles.chat_app.chat.ChatActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
         </activity>

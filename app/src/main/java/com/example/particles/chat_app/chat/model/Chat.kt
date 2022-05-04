@@ -1,6 +1,4 @@
-package com.example.particles.ui.chat.model
-
-import com.google.firebase.database.Exclude
+package com.example.particles.chat_app.chat.model
 
 
 data class Chat(

@@ -1,4 +1,4 @@
-package com.example.particles.ui.contacts
+package com.example.particles.chat_app.contacts
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
 import com.example.particles.databinding.ItemContactBinding
-import com.example.particles.ui.chat.ChatActivity
+import com.example.particles.chat_app.chat.ChatActivity
 
 class ContactsRecyclerViewAdapter(val context: Context) :
     RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder>() {

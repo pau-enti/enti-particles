@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/drawable/style_input_message.xml" value="0.226" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chat.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chats_list.xml" value="0.33" />
         <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_contacts.xml" value="0.36666666666666664" />

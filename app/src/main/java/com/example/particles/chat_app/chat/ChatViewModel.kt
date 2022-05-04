@@ -1,9 +1,10 @@
-package com.example.particles.ui.chat
+package com.example.particles.chat_app.chat
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.particles.ui.chat.model.Chat
-import com.example.particles.ui.chat.model.ChatMessage
+import com.example.particles.chat_app.User
+import com.example.particles.chat_app.chat.model.Chat
+import com.example.particles.chat_app.chat.model.ChatMessage
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.GenericTypeIndicator
