@@ -1,26 +1,26 @@
 package com.example.particles.ui.contacts
 
-import android.R
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.particles.databinding.ActivityChatsListBinding
+import com.example.particles.R
+import com.example.particles.databinding.ActivityContactsBinding
 import com.example.particles.ui.chat.User
 
 
 class ContactsActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityChatsListBinding
+    lateinit var binding: ActivityContactsBinding
     private val contactsVM by viewModels<ContactsViewModel>()
     private val adapter = ContactsRecyclerViewAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityChatsListBinding.inflate(layoutInflater)
+        binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.contactsRecyclerView.adapter = adapter
