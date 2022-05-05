@@ -41,6 +41,7 @@ class ContactsActivity : AppCompatActivity() {
             val dialog = AlertDialog.Builder(this)
             val input = EditText(this)
             input.inputType = InputType.TYPE_CLASS_TEXT
+            input.setText(User.current)
 
             dialog.setView(input)
                 .setTitle("Who are you?")

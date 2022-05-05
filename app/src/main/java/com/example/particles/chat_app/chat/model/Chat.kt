@@ -10,8 +10,9 @@ data class Chat(
 ) {
     constructor(
         user1: String,
-        user2: String
-    ) : this(idChatOf(user1, user2), user1, user2)
+        user2: String,
+        name: String?=null
+    ) : this(idChatOf(user1, user2), user1, user2, name)
 
     companion object {
         fun idChatOf(user1: String, user2: String): Int = setOf(user1, user2).hashCode()
