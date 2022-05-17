@@ -10,6 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
 import com.example.particles.R
+import com.example.particles.chat_app.User
 import com.example.particles.chat_app.chat.ChatActivity
 import com.example.particles.chat_app.chat.model.Chat
 
@@ -24,7 +25,8 @@ class NotificationsService : LifecycleService() {
 
         notisVM.subscribeCurrentContacts(this).forEach { observableChats ->
             observableChats.observe(this) {
-                notifyNewMessage(it)
+                if (it.messages.lastOrNull()?.author != User.current)
+                    notifyNewMessage(it)
             }
         }
     }
