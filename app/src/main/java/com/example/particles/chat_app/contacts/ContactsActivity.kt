@@ -1,6 +1,7 @@
 package com.example.particles.chat_app.contacts
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.R
 import com.example.particles.databinding.ActivityContactsBinding
 import com.example.particles.chat_app.User
+import com.example.particles.chat_app.notifications.NotificationsService
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -52,5 +54,8 @@ class ContactsActivity : AppCompatActivity() {
                 .setIcon(R.drawable.ic_baseline_emoji_people_24)
                 .show()
         }
+
+        // Start notifications service
+        startService(Intent(this, NotificationsService::class.java))
     }
 }
