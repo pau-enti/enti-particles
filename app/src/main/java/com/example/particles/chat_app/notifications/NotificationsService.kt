@@ -35,20 +35,17 @@ class NotificationsService : LifecycleService() {
 
         val intent = Intent(this, ChatActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            extras?.putString(ChatActivity.EXTRA_USER_ID, chat.getInterlocutor())
+            putExtra(ChatActivity.EXTRA_USER_ID, chat.getInterlocutor())
         }
-        val pendingIntent: PendingIntent =
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
+        // Un pending intent és un intent que s'executarà en un futur
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_blur_on_24)
             .setContentTitle(chat.getInterlocutor())
             .setContentText(chat.messages.last().content)
-            /*.setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText("Much longer text that cannot fit one line...")
-            )*/
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
             // Fem que quan es cliqui, s'obri el xat i desaparegui la noti (amb l'autoCancel)
