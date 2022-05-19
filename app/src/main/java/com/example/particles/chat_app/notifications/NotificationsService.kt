@@ -13,6 +13,7 @@ import com.example.particles.R
 import com.example.particles.chat_app.User
 import com.example.particles.chat_app.chat.ChatActivity
 import com.example.particles.chat_app.chat.model.Chat
+import com.example.particles.utils.toast
 
 
 class NotificationsService : LifecycleService() {
@@ -29,6 +30,11 @@ class NotificationsService : LifecycleService() {
                     notifyNewMessage(it)
             }
         }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
+        return START_STICKY
     }
 
     fun notifyNewMessage(chat: Chat) {

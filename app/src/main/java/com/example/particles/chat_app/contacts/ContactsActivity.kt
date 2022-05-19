@@ -17,7 +17,7 @@ class ContactsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityContactsBinding
     private val contactsVM by viewModels<ContactsViewModel>()
-    private val adapter = ContactsRecyclerViewAdapter(this)
+    private lateinit var adapter: ContactsRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,7 @@ class ContactsActivity : AppCompatActivity() {
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        adapter = ContactsRecyclerViewAdapter(this, contactsVM)
         binding.contactsRecyclerView.adapter = adapter
 
         contactsVM.loadContacts(this)
@@ -57,5 +58,9 @@ class ContactsActivity : AppCompatActivity() {
 
         // Start notifications service
         startService(Intent(this, NotificationsService::class.java))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

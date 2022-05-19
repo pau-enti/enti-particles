@@ -49,4 +49,10 @@ class ContactsViewModel : ViewModel() {
         contacts.notifyObservers()
         saveContacts(context)
     }
+
+    fun deleteContact(context: Context, contact: Contact) {
+        contacts.value?.remove(contact)
+        contacts.notifyObservers()
+        saveContacts(context)
+    }
 }

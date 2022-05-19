@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
 import com.example.particles.databinding.ItemContactBinding
 import com.example.particles.chat_app.chat.ChatActivity
 
-class ContactsRecyclerViewAdapter(val context: Context) :
+class ContactsRecyclerViewAdapter(val context: Context, val contactsVM: ContactsViewModel) :
     RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder>() {
 
     private var contacts: List<Contact> = listOf()
@@ -36,6 +37,12 @@ class ContactsRecyclerViewAdapter(val context: Context) :
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra(ChatActivity.EXTRA_USER_ID, contact.userId)
             context.startActivity(intent)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            contactsVM.deleteContact(context, contact)
+            Toast.makeText(context, "User ${contact.name} deleted", Toast.LENGTH_SHORT).show()
+            true
         }
     }
 
