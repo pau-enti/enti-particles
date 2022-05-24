@@ -31,10 +31,7 @@ class ContactsActivity : AppCompatActivity() {
         binding.contactsRecyclerView.adapter = adapter
 
         // Init ads
-        MobileAds.initialize(this) {
-            val request =AdRequest.Builder().build()
-            binding.adView.loadAd(request)
-        }
+        MobileAds.initialize(this)
 
         contactsVM.loadContacts(this)
 
@@ -68,7 +65,12 @@ class ContactsActivity : AppCompatActivity() {
         startService(Intent(this, NotificationsService::class.java))
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onResume() {
+        super.onResume()
+        adapter.loadAd()
+
+        val request =AdRequest.Builder().build()
+        binding.adView.loadAd(request)
     }
 }
