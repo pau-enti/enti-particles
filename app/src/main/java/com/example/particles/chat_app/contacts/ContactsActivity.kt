@@ -11,6 +11,8 @@ import com.example.particles.R
 import com.example.particles.databinding.ActivityContactsBinding
 import com.example.particles.chat_app.User
 import com.example.particles.chat_app.notifications.NotificationsService
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -27,6 +29,12 @@ class ContactsActivity : AppCompatActivity() {
 
         adapter = ContactsRecyclerViewAdapter(this, contactsVM)
         binding.contactsRecyclerView.adapter = adapter
+
+        // Init ads
+        MobileAds.initialize(this) {
+            val request =AdRequest.Builder().build()
+            binding.adView.loadAd(request)
+        }
 
         contactsVM.loadContacts(this)
 
