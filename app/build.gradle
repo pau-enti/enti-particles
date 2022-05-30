@@ -10,11 +10,11 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.particles"
+        applicationId "com.enti.particles"
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 16
-        versionName "16.0"
+        versionCode 17
+        versionName "17.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
