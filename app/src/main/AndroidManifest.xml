@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Physics_model"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".StandardModelActivity"
+            android:name=".ui.particles2.StandardModelActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
