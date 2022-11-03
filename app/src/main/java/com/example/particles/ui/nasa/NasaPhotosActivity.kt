@@ -56,6 +56,7 @@ class NasaPhotosActivity : AppCompatActivity() {
     private fun preformSearch(query: String) {
         val call = theOutside.create(APINasa::class.java).getPhoto(query)
         binding.searchTitle.text = query
+        binding.searchTitle.isGone = true
         binding.progressNasaSearch.isVisible = true
 
         call.enqueue(object : Callback<NasaPhotosCollection> {
@@ -69,13 +70,16 @@ class NasaPhotosActivity : AppCompatActivity() {
 
                 if (res?.isNotEmpty() == true)
                     adapter.updatePhotosList(res)
-                else
+                else {
                     binding.searchTitle.text = "The search \"$query\" produced 0 results!"
+                    binding.searchTitle.isGone = false
+                }
             }
 
             override fun onFailure(call: Call<NasaPhotosCollection>, t: Throwable) {
                 binding.progressNasaSearch.isGone = true
                 binding.searchTitle.text = getString(R.string.error_on_search)
+                binding.searchTitle.isGone = false
             }
         })
     }

@@ -1,4 +1,4 @@
-package com.example.particles.chat_app.contacts
+package com.example.particles.ui.chat.contacts
 
 import android.app.Activity
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
-import com.example.particles.chat_app.chat.ChatActivity
+import com.example.particles.ui.chat.chat.ChatActivity
 import com.example.particles.databinding.ItemContactBinding
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest

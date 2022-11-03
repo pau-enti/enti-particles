@@ -1,4 +1,4 @@
-package com.example.particles.chat_app
+package com.example.particles.ui.chat
 
 object User {
     var current = "Pau"

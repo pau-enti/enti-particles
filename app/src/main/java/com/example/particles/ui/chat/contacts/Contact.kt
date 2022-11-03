@@ -1,4 +1,4 @@
-package com.example.particles.chat_app.contacts
+package com.example.particles.ui.chat.contacts
 
 import java.io.Serializable
 import java.net.URI

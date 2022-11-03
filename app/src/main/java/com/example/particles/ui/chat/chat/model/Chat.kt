@@ -1,6 +1,6 @@
-package com.example.particles.chat_app.chat.model
+package com.example.particles.ui.chat.chat.model
 
-import com.example.particles.chat_app.User
+import com.example.particles.ui.chat.User
 
 
 data class Chat(

@@ -16,11 +16,7 @@
         <activity
             android:name=".ui.particles2.StandardModelActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -29,21 +25,26 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <service
-            android:name=".chat_app.notifications.NotificationsService"
+            android:name=".ui.chat.notifications.NotificationsService"
             android:stopWithTask="false" />
 
         <activity
-            android:name="com.example.particles.chat_app.contacts.ContactsActivity"
+            android:name="com.example.particles.ui.chat.contacts.ContactsActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name="com.example.particles.chat_app.chat.ChatActivity"
+            android:name="com.example.particles.ui.chat.chat.ChatActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".ui.nasa.NasaPhotosActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity
             android:name=".ui.ParticleEditActivity"
             android:exported="false" />

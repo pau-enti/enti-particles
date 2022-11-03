@@ -1,4 +1,4 @@
-package com.example.particles.chat_app.contacts
+package com.example.particles.ui.chat.contacts
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -9,8 +9,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.R
 import com.example.particles.databinding.ActivityContactsBinding
-import com.example.particles.chat_app.User
-import com.example.particles.chat_app.notifications.NotificationsService
+import com.example.particles.ui.chat.User
+import com.example.particles.ui.chat.notifications.NotificationsService
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 

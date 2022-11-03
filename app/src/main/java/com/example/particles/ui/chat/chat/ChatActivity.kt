@@ -1,4 +1,4 @@
-package com.example.particles.chat_app.chat
+package com.example.particles.ui.chat.chat
 
 import android.os.Bundle
 import androidx.activity.viewModels

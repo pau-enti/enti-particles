@@ -1,4 +1,4 @@
-package com.example.particles.chat_app.notifications
+package com.example.particles.ui.chat.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,10 +10,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
 import com.example.particles.R
-import com.example.particles.chat_app.User
-import com.example.particles.chat_app.chat.ChatActivity
-import com.example.particles.chat_app.chat.model.Chat
-import com.example.particles.utils.toast
+import com.example.particles.ui.chat.User
+import com.example.particles.ui.chat.chat.ChatActivity
+import com.example.particles.ui.chat.chat.model.Chat
 
 
 class NotificationsService : LifecycleService() {

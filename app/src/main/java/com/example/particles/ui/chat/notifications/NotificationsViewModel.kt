@@ -1,11 +1,11 @@
-package com.example.particles.chat_app.notifications
+package com.example.particles.ui.chat.notifications
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.particles.chat_app.User
-import com.example.particles.chat_app.chat.model.Chat
-import com.example.particles.chat_app.contacts.ContactsViewModel
+import com.example.particles.ui.chat.User
+import com.example.particles.ui.chat.chat.model.Chat
+import com.example.particles.ui.chat.contacts.ContactsViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
