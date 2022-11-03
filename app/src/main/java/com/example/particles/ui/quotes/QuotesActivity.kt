@@ -52,8 +52,6 @@ class QuotesActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Quote>, t: Throwable) {
                 binding.quoteTextView.text = "Something went wrong :("
                 binding.authorTextView.text = ""
-                binding.quotesBackground.animation.cancel()
-                binding.quotesBackground.setBackgroundColor(Color.RED)
             }
 
         })
