@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import com.example.particles.R
 import com.example.particles.databinding.ActivityNasaPhotosBinding
 import com.example.particles.ui.nasa.rest.APINasa
-import com.example.particles.ui.nasa.rest.NasaPhotosCollection
-import com.example.particles.utils.toast
+import com.example.particles.ui.nasa.rest.NasaPhoto
+import com.example.particles.ui.nasa.rest.Photos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,14 +59,16 @@ class NasaPhotosActivity : AppCompatActivity() {
         binding.searchTitle.isGone = true
         binding.progressNasaSearch.isVisible = true
 
-        call.enqueue(object : Callback<NasaPhotosCollection> {
+        call.enqueue(object : Callback<Photos> {
             override fun onResponse(
-                call: Call<NasaPhotosCollection>,
-                response: Response<NasaPhotosCollection>
+                call: Call<Photos>,
+                response: Response<Photos>
             ) {
                 binding.progressNasaSearch.isGone = true
 
-                val res = response.body()?.getPhotos()
+                val res = response.body()?.collection?.items?.map {
+                    NasaPhoto(it.data[0].title, it.data[0].description, "", it.links[0].href)
+                }
 
                 if (res?.isNotEmpty() == true)
                     adapter.updatePhotosList(res)
@@ -76,7 +78,7 @@ class NasaPhotosActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<NasaPhotosCollection>, t: Throwable) {
+            override fun onFailure(call: Call<Photos>, t: Throwable) {
                 binding.progressNasaSearch.isGone = true
                 binding.searchTitle.text = getString(R.string.error_on_search)
                 binding.searchTitle.isGone = false

@@ -1,4 +1,4 @@
-package com.example.particles.ui.quotes.todo
+package com.example.particles.ui.nasa.rest
 
 // JSON to koltin class
 // Proprety: Auto determine Nullable
