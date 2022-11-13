@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_star_life"
+        android:title="Person"
+        android:icon="@drawable/ic_star_life"/>
+    <item
+        android:id="@+id/menu_star_death"
+        android:title="Home"
+        android:icon="@drawable/ic_star_death"/>
+    <item
+        android:id="@+id/menu_star_not"
+        android:title="Settings"
+        android:icon="@drawable/ic_star_not"/>
+</menu>

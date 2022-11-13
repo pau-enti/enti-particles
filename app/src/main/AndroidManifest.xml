@@ -14,17 +14,21 @@
         android:theme="@style/Theme.Physics_model"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.fragments.BottomNavigationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.quotes.QuotesActivity"
             android:exported="true">
-
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".ui.particles2.StandardModelActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -36,7 +40,7 @@
 
         <activity
             android:name="com.example.particles.ui.chat.contacts.ContactsActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="com.example.particles.ui.chat.chat.ChatActivity"
             android:exported="true"
@@ -44,11 +48,7 @@
         <activity
             android:name=".ui.nasa.NasaPhotosActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.ParticleEditActivity"
