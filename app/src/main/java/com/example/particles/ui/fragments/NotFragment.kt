@@ -17,9 +17,14 @@ class NotFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentNotBinding.inflate(inflater)
-
-
+        binding = FragmentNotBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    fun getResponse(): String? {
+        return if (::binding.isInitialized)
+            binding.editTextTextPersonName.text.toString()
+        else
+            null
     }
 }

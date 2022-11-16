@@ -16,7 +16,7 @@ class StarFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentStarBinding.inflate(inflater)
+        binding = FragmentStarBinding.inflate(inflater, container, false)
 
 
         return binding.root

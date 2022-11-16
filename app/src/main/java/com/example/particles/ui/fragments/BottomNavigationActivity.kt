@@ -1,6 +1,7 @@
 package com.example.particles.ui.fragments
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.particles.R
@@ -21,22 +22,24 @@ class BottomNavigationActivity : AppCompatActivity() {
         binding = ActivityBottomNavegationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        setCurrentFragment(star, "star")
+        setCurrentFragment(star)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_star_life -> setCurrentFragment(star, "star")
-                R.id.menu_star_death -> setCurrentFragment(death, "death")
-                R.id.menu_star_not -> setCurrentFragment(not, "not")
+                R.id.menu_star_life -> setCurrentFragment(star)
+                R.id.menu_star_death -> setCurrentFragment(death)
+                R.id.menu_star_not -> setCurrentFragment(not)
             }
             true
         }
 
-
     }
 
-    private fun setCurrentFragment(fragment: Fragment, tag: String) {
+    private fun setCurrentFragment(fragment: Fragment) {
+        not.getResponse()?.let {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+
         supportFragmentManager.beginTransaction().apply {
             supportFragmentManager.fragments.forEach {
                 hide(it)

@@ -27,7 +27,7 @@ class QuotesFragment : Fragment() {
     ): View {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityQuotesBinding.inflate(layoutInflater)
+        binding = ActivityQuotesBinding.inflate(inflater, container, false)
 
         nextQuote()
 
