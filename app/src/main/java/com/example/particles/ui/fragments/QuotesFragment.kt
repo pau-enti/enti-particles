@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.particles.databinding.ActivityQuotesBinding
@@ -64,6 +65,55 @@ class QuotesFragment : Fragment() {
             }
 
         })
+
+        ///////////// HANGMAN TEST
+        val TEST = true
+        if (TEST) {
+            val hangman = Retrofit.Builder()
+                .baseUrl("https://hangman-api.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(ApiQuotes::class.java)
+
+            hangman.newGame().enqueue(object : Callback<ApiQuotes.HangmanGame> {
+                override fun onResponse(
+                    call: Call<ApiQuotes.HangmanGame>,
+                    response: Response<ApiQuotes.HangmanGame>,
+                ) {
+                    Toast.makeText(this@QuotesFragment.context,
+                        "${response.body()?.hangman}",
+                        Toast.LENGTH_SHORT).show()
+
+                    response.body()?.token?.let {
+                        hangman.getSolution(it).enqueue(object : Callback<ApiQuotes.HangmanGame> {
+                            override fun onResponse(
+                                call: Call<ApiQuotes.HangmanGame>,
+                                response: Response<ApiQuotes.HangmanGame>,
+                            ) {
+                                Toast.makeText(this@QuotesFragment.context,
+                                    "${response.body()?.solution}",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onFailure(
+                                call: Call<ApiQuotes.HangmanGame>,
+                                t: Throwable
+                            ) {
+                                Toast.makeText(this@QuotesFragment.context,
+                                    "error: $t",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+
+                        })
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiQuotes.HangmanGame>, t: Throwable) {
+                    Toast.makeText(this@QuotesFragment.context, "$t", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+        }
     }
 
     var lastColor = 0
