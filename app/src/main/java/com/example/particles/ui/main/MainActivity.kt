@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.particles.R
-import com.example.particles.data.Particle
-import com.example.particles.data.Particles
+import com.example.particles.ui.particles.data.Particle
+import com.example.particles.ui.particles.data.Particles
 import com.example.particles.databinding.ActivityMainBinding
 import com.example.particles.ui.chat.chat.ChatActivity
 import com.example.particles.ui.nasa.NasaPhotosActivity

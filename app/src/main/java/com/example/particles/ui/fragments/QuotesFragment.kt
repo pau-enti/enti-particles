@@ -67,7 +67,7 @@ class QuotesFragment : Fragment() {
         })
 
         ///////////// HANGMAN TEST
-        val TEST = true
+        val TEST = false
         if (TEST) {
             val hangman = Retrofit.Builder()
                 .baseUrl("https://hangman-api.herokuapp.com/")
