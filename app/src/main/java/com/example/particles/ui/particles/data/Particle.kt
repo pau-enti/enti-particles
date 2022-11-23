@@ -1,4 +1,4 @@
-package com.example.particles.data
+package com.example.particles.ui.particles.data
 
 import com.example.particles.R
 import java.io.Serializable

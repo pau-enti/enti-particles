@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.particles.R
-import com.example.particles.data.Particle
-import com.example.particles.data.Particles
+import com.example.particles.ui.particles.data.Particle
+import com.example.particles.ui.particles.data.Particles
 import com.example.particles.databinding.FragmentParticlesListBinding
 import com.google.android.material.chip.Chip
 import kotlin.reflect.safeCast

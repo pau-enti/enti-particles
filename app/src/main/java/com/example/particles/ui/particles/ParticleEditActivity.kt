@@ -1,12 +1,12 @@
-package com.example.particles.ui
+package com.example.particles.ui.particles
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.example.particles.data.Particle
-import com.example.particles.data.Particles
+import com.example.particles.ui.particles.data.Particle
+import com.example.particles.ui.particles.data.Particles
 import com.example.particles.databinding.ActivityParticleEditBinding
 import java.io.FileOutputStream
 import java.io.ObjectOutputStream

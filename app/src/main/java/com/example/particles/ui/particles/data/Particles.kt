@@ -1,6 +1,6 @@
-package com.example.particles.data
+package com.example.particles.ui.particles.data
 
-import com.example.particles.data.Particle.Family.*
+import com.example.particles.ui.particles.data.Particle.Family.*
 
 /**
  * Collection of particles of the Standard Model
