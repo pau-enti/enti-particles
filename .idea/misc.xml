@@ -3,36 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2775" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1755" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2775" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/drawable/style_input_message.xml" value="0.226" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chat.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_chats_list.xml" value="0.33" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_contacts.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_nasa_photos.xml" value="0.36102564102564105" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_nasaphotos.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_particle_edit.xml" value="0.33" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/activity_zoom.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/fragment_drag_and_drop.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/fragment_particles_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_chip.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_contact.xml" value="0.33" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_list_nasa_photo.xml" value="0.36102564102564105" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_list_particle.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_list_text.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_received_message.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/layout/item_sent_message.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pgarz/AndroidStudioProjects/ParticlesApp/app/src/main/res/xml/root_preferences.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/drawable/shape_background_quote_button.xml" value="0.2985" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/layout/activity_bottom_navegation.xml" value="0.1" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/layout/activity_nasa_photos.xml" value="0.3625" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/layout/activity_quotes.xml" value="0.3625" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/layout/item_list_nasa_photo.xml" value="0.3625" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/layout/settings_activity.xml" value="0.3484375" />
+        <entry key="..\:/Users/PauGarcia/AndroidStudioProjects/enti-particles/app/src/main/res/layout/test_layout.xml" value="0.3625" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
