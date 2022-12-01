@@ -5,13 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.particles.R
 import com.example.particles.databinding.ActivityContactsBinding
 import com.example.particles.ui.chat.User
 import com.example.particles.ui.chat.notifications.NotificationsService
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 
 
@@ -72,5 +75,15 @@ class ContactsActivity : AppCompatActivity() {
 
         val request =AdRequest.Builder().build()
         binding.adView.loadAd(request)
+        binding.adView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                Toast.makeText(this@ContactsActivity, "${p0.responseInfo}", Toast.LENGTH_SHORT).show()
+                super.onAdFailedToLoad(p0)
+            }
+        }
     }
 }

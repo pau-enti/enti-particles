@@ -67,7 +67,7 @@ class ContactsRecyclerViewAdapter(val activity: Activity, val contactsVM: Contac
                     activity.startActivity(intent)
                 }
 
-                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                     activity.startActivity(intent)
                 }
 
