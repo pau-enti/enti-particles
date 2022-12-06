@@ -8,34 +8,31 @@ import java.io.ObjectOutputStream
 
 class ContactsViewModel : ViewModel() {
     val contacts = MutableLiveData<ArrayList<Contact>>()
-    private val dataFilename = "chat_contacts.dat"
+    private val DATA_FILENAME = "chat_contacts.dat"
 
     private fun MutableLiveData<*>.notifyObservers() {
         value = value // xd
     }
 
-    private fun saveContacts(context: Context) {
+    private fun saveData(context: Context) {
         val data = contacts.value ?: return
-        context.openFileOutput(dataFilename, Context.MODE_PRIVATE).use {
+        context.openFileOutput(DATA_FILENAME, Context.MODE_PRIVATE).use {
             val oos = ObjectOutputStream(it)
             oos.writeObject(data)
-            oos.close()
         }
     }
 
-    fun loadContacts(context: Context) {
+    fun loadData(context: Context) {
         try {
-            context.openFileInput(dataFilename).use {
+            context.openFileInput(DATA_FILENAME).use {
                 val iin = ObjectInputStream(it)
                 val data = iin.readObject() ?: return@use
 
-                @Suppress("UNCHECKED_CAST")
-                val readContacts = data as ArrayList<Contact>
-
-                contacts.value = readContacts
-                iin.close()
+                if (data is ArrayList<*> ) {
+                    contacts.value = data.filterIsInstance<Contact>() as ArrayList
+                }
             }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             // pass
         }
 
@@ -47,12 +44,12 @@ class ContactsViewModel : ViewModel() {
     fun addContact(context: Context, contact: Contact) {
         contacts.value?.add(contact)
         contacts.notifyObservers()
-        saveContacts(context)
+        saveData(context)
     }
 
     fun deleteContact(context: Context, contact: Contact) {
         contacts.value?.remove(contact)
         contacts.notifyObservers()
-        saveContacts(context)
+        saveData(context)
     }
 }

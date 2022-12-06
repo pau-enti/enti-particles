@@ -21,7 +21,7 @@ import com.google.android.gms.ads.MobileAds
 class ContactsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityContactsBinding
-    private val contactsVM by viewModels<ContactsViewModel>()
+    private val contactsVM: ContactsViewModel by viewModels()
     private lateinit var adapter: ContactsRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class ContactsActivity : AppCompatActivity() {
         // Init ads
         MobileAds.initialize(this)
 
-        contactsVM.loadContacts(this)
+        contactsVM.loadData(this)
 
         contactsVM.contacts.observe(this) {
             adapter.updateContacts(it)

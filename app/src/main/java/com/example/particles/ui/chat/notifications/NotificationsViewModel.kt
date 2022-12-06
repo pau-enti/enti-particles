@@ -22,7 +22,7 @@ class NotificationsViewModel : ViewModel() {
             .getReference("chats")
 
     fun subscribeCurrentContacts(context: Context): ArrayList<MutableLiveData<Chat>> {
-        contactsVM.loadContacts(context)
+        contactsVM.loadData(context)
         contactsVM.contacts.value?.forEachIndexed { index, contact ->
             val subscription = MutableLiveData(Chat(User.current, contact.userId))
             chats.add(subscription)
