@@ -58,10 +58,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-
-    // Realtime database
-//    implementation platform('com.google.firebase:firebase-bom:29.3.1') // està comentat pq ja s'importa abans
-    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx' // Realtime database
 
     // Retrofit
     implementation "com.squareup.picasso:picasso:2.71828" // obtenir imatges

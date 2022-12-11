@@ -30,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
         // TODO provisional
         val user = intent.extras?.getString(EXTRA_USER_ID) ?: return
         supportActionBar?.title = user
-        chatViewModel.openChat(user)
+        chatViewModel.openChatWith(user)
 
         chatViewModel.chat.observe(this) {
             binding.progressBar.isGone = true
@@ -43,7 +43,7 @@ class ChatActivity : AppCompatActivity() {
             adapter.notifyNewMessages(it)
         }
 
-        binding.messageSend.setOnClickListener {
+        binding.sendButton.setOnClickListener {
             val message = binding.messageInput.text
 
             if (!message.isNullOrBlank()) {

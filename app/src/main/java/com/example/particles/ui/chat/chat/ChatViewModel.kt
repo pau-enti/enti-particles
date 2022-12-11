@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.particles.ui.chat.User
 import com.example.particles.ui.chat.chat.model.Chat
 import com.example.particles.ui.chat.chat.model.ChatMessage
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.GenericTypeIndicator
@@ -13,13 +14,17 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class ChatViewModel : ViewModel() {
-    val chat = MutableLiveData<Chat?>()
+    val chat = MutableLiveData<Chat>()
 
     private val db =
         Firebase.database("https://particles-38ca0-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference("chats")
 
-    private fun createChat(user: String) {
+    private val currentUser: String
+        get() = FirebaseAuth.getInstance().currentUser?.email
+            ?: throw IllegalStateException("Not logged in")
+
+    private fun createChatWith(user: String) {
         val cht = Chat(User.current, user, "Chat of ${User.current} with $user")
         db.child(cht.id.toString()).setValue(cht) // insert it on the db
         chat.postValue(cht)
@@ -41,23 +46,22 @@ class ChatViewModel : ViewModel() {
             .setValue(newMessage)
     }
 
-    fun openChat(user: String) {
-        val id = Chat.idChatOf(User.current, user).toString()
+    fun openChatWith(user: String) {
+        val id = Chat.idChatOf(currentUser, user).toString()
         val request = db.child(id).get()
 
-        // TODO onFailure is not caught
         request.addOnSuccessListener {
-            if (it.value == null)
-                return@addOnSuccessListener createChat(user)
+            val data = it.value
 
-            it.getValue(Chat::class.java)?.apply {
-                chat.postValue(this)
-                subscribe(this)
-            }
+            if (data == null || data !is Chat)
+                return@addOnSuccessListener createChatWith(user)
+
+            chat.postValue(data!!)
+            subscribe(data)
         }
 
         request.addOnFailureListener {
-            createChat(user)
+            createChatWith(user)
         }
     }
 
@@ -69,13 +73,12 @@ class ChatViewModel : ViewModel() {
             override fun onCancelled(error: DatabaseError) = Unit
 
             override fun onDataChange(snapshot: DataSnapshot) {
-
-                // TODO we should update all fields
                 val typeIndicator = object : GenericTypeIndicator<ArrayList<ChatMessage>>() {}
-                val dataBaseMessages = snapshot.child("messages").getValue(typeIndicator)
-                dataBaseMessages?.let {
-                    cht.messages = it
-                }
+                val messages = snapshot.child("messages").getValue(typeIndicator)
+
+                if (messages != null) {
+                    cht.messages = messages
+                } // else { some error happened }
 
                 chat.postValue(cht)
             }

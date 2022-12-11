@@ -5,34 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.particles.R
-import com.example.particles.ui.chat.User
 import com.example.particles.databinding.ItemReceivedMessageBinding
 import com.example.particles.databinding.ItemSentMessageBinding
-import com.example.particles.ui.chat.chat.model.Chat
+import com.example.particles.ui.chat.User
+import com.example.particles.ui.chat.chat.model.ChatMessage
+import com.example.particles.ui.user.LoginActivity
 
 
 @SuppressLint("NotifyDataSetChanged")
 class ChatRecyclerViewAdapter(
-    private val layoutManager: RecyclerView.LayoutManager?
+    lifecycleOwner: LifecycleOwner,
+    chatViewModel: ChatViewModel
 ) :
-    RecyclerView.Adapter<ChatRecyclerViewAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ChatRecyclerViewAdapter.ChatVH>() {
 
-    var chat: Chat? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var messages: ArrayList<ChatMessage> = ArrayList()
 
-    fun notifyNewMessages(chat: Chat) {
-        this.chat = chat
-        notifyNewMessage()
+    init {
+        chatViewModel.chat.observe(lifecycleOwner) {
+            messages = it.messages
+            notifyDataSetChanged()
+            layoutManager?.scrollToPosition(messages.size - 1)
+        }
     }
 
-    fun notifyNewMessage() {
-        val messages = chat?.messages ?: return
-        notifyDataSetChanged()
-        layoutManager?.scrollToPosition(messages.size - 1)
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatVH {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         val view = if (viewType == SENT_TYPE)
@@ -40,29 +42,34 @@ class ChatRecyclerViewAdapter(
         else
             layoutInflater.inflate(R.layout.item_received_message, parent, false)
 
-        return ViewHolder(view, viewType)
+        return ChatVH(view, viewType)
     }
 
     override fun getItemViewType(position: Int): Int {
         // 0 -> sent message
         // 1 -> received message
-        val messages = chat?.messages ?: return 0
         val author = User.current
         return if (messages[position].author == author) SENT_TYPE else RECEIVED_TYPE
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val messages = chat?.messages ?: return
+    override fun onBindViewHolder(holder: ChatVH, position: Int) {
         holder.message.text = messages[position].content
     }
 
-    override fun getItemCount(): Int = chat?.messages?.size ?: 0
+    override fun getItemCount(): Int = messages.size
 
-    inner class ViewHolder(view: View, type: Int) : RecyclerView.ViewHolder(view) {
+    inner class ChatVH(view: View, type: Int) : RecyclerView.ViewHolder(view) {
         val message: TextView = if (type == SENT_TYPE)
             ItemSentMessageBinding.bind(view).myMessage
         else
             ItemReceivedMessageBinding.bind(view).othersMessage
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        // L'objecte layoutManager està a la vista XML, hem d'esperar a que s'enganxi a la vista
+        // per tal d'obtenir-lo.
+        layoutManager = recyclerView.layoutManager
+        super.onAttachedToRecyclerView(recyclerView)
     }
 
     companion object {

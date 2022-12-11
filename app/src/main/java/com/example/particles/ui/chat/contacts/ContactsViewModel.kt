@@ -10,8 +10,8 @@ class ContactsViewModel : ViewModel() {
     val contacts = MutableLiveData<ArrayList<Contact>>()
     private val DATA_FILENAME = "chat_contacts.dat"
 
-    private fun MutableLiveData<*>.notifyObservers() {
-        value = value // xd
+    private fun <T> MutableLiveData<T>.notifyObservers() {
+        postValue(value)
     }
 
     private fun saveData(context: Context) {
