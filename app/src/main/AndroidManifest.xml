@@ -38,11 +38,7 @@
         <activity
             android:name="com.example.particles.ui.chat.contacts.ContactsActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.particles.ui.chat.chat.ChatActivity"
@@ -71,7 +67,13 @@
             android:name=".ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Physics_model.NoActionBar" />
+            android:theme="@style/Theme.Physics_model.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

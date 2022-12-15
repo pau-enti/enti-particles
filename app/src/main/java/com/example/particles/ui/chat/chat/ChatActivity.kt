@@ -24,10 +24,9 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ChatRecyclerViewAdapter(binding.chatView.layoutManager)
+        adapter = ChatRecyclerViewAdapter(this, chatViewModel)
         binding.chatView.adapter = adapter
 
-        // TODO provisional
         val user = intent.extras?.getString(EXTRA_USER_ID) ?: return
         supportActionBar?.title = user
         chatViewModel.openChatWith(user)
@@ -39,8 +38,6 @@ class ChatActivity : AppCompatActivity() {
                 toast("Chat not found :(")
                 return@observe finish()
             }
-
-            adapter.notifyNewMessages(it)
         }
 
         binding.sendButton.setOnClickListener {
@@ -48,7 +45,6 @@ class ChatActivity : AppCompatActivity() {
 
             if (!message.isNullOrBlank()) {
                 chatViewModel.sendMessage(message.toString())
-                adapter.notifyNewMessage()
                 binding.messageInput.setText("")
             }
         }
