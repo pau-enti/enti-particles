@@ -9,10 +9,12 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.particles.R
 import com.example.particles.ui.chat.User
 import com.example.particles.ui.chat.chat.ChatActivity
 import com.example.particles.ui.chat.chat.model.Chat
+import kotlin.properties.ReadOnlyProperty
 
 
 class NotificationsService : LifecycleService() {
@@ -37,15 +39,28 @@ class NotificationsService : LifecycleService() {
     }
 
     fun notifyNewMessage(chat: Chat) {
-        if (chat.messages.isNullOrEmpty())
+        if (chat.messages.isEmpty())
             return
 
         val intent = Intent(this, ChatActivity::class.java).apply {
+            // Intent.FLAG_ACTIVITY_NEW_TASK =  indica que la actividad debe iniciarse como la raíz
+            // de una nueva tarea. Esto significa que la actividad se colocará en la raíz de la pila
+            // de tareas y será el punto de partida para una nueva tarea.
+
+
+            // Intent.FLAG_ACTIVITY_CLEAR_TASK = indica que todas las actividades en la tarea
+            // deben borrarse antes de que se inicie la nueva actividad. Esto significa que cuando
+            // se inicie la nueva actividad, será la única actividad en la tarea y el usuario no
+            // podrá volver a las actividades anteriores en la tarea utilizando la tecla BACK.
+
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra(ChatActivity.EXTRA_USER_ID, chat.getInterlocutor())
         }
 
-        // Un pending intent és un intent que s'executarà en un futur
+        //  Un PendingIntent es un objeto que se puede utilizar para enviar una intención (un
+        //  mensaje que indica a Android que debe realizar una acción) en el futuro.
+
+        // PendingIntent.FLAG_UPDATE_CURRENT si l'activity existeix, la manté però la refresca
         val pendingIntent: PendingIntent =
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
