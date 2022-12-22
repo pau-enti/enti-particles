@@ -9,12 +9,10 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.particles.R
 import com.example.particles.ui.chat.User
 import com.example.particles.ui.chat.chat.ChatActivity
 import com.example.particles.ui.chat.chat.model.Chat
-import kotlin.properties.ReadOnlyProperty
 
 
 class NotificationsService : LifecycleService() {
@@ -54,7 +52,7 @@ class NotificationsService : LifecycleService() {
             // podrá volver a las actividades anteriores en la tarea utilizando la tecla BACK.
 
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra(ChatActivity.EXTRA_USER_ID, chat.getInterlocutor())
+            putExtra(ChatActivity.EXTRA_USER_ID, chat.whoIsInterlocutor())
         }
 
         //  Un PendingIntent es un objeto que se puede utilizar para enviar una intención (un
@@ -66,7 +64,7 @@ class NotificationsService : LifecycleService() {
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_blur_on_24)
-            .setContentTitle(chat.getInterlocutor())
+            .setContentTitle(chat.whoIsInterlocutor())
             .setContentText(chat.messages.last().content)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 

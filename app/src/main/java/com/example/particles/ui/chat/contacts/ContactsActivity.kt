@@ -35,7 +35,7 @@ class ContactsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Cal fer login pq sino a l'altre activity peta
-        FirebaseAuth.getInstance().signInAnonymously()
+         FirebaseAuth.getInstance().signInAnonymously()
 
         adapter = ContactsRecyclerViewAdapter(this, contactsVM)
         binding.contactsRecyclerView.adapter = adapter

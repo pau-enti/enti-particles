@@ -20,7 +20,7 @@ data class Chat(
         fun idChatOf(user1: String, user2: String): Int = setOf(user1, user2).hashCode()
     }
 
-    fun getInterlocutor(): String {
+    fun whoIsInterlocutor(): String {
         return (if (User.current == user1) user2 else user1) ?: "¿Somebody?"
     }
 }
