@@ -16,6 +16,10 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -29,6 +33,9 @@ class ContactsActivity : AppCompatActivity() {
 
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Cal fer login pq sino a l'altre activity peta
+        FirebaseAuth.getInstance().signInAnonymously()
 
         adapter = ContactsRecyclerViewAdapter(this, contactsVM)
         binding.contactsRecyclerView.adapter = adapter
@@ -76,10 +83,6 @@ class ContactsActivity : AppCompatActivity() {
         val request =AdRequest.Builder().build()
         binding.adView.loadAd(request)
         binding.adView.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-            }
-
             override fun onAdFailedToLoad(p0: LoadAdError) {
                 Toast.makeText(this@ContactsActivity, "${p0.responseInfo}", Toast.LENGTH_SHORT).show()
                 super.onAdFailedToLoad(p0)
