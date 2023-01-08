@@ -19,9 +19,18 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".ui.fragments.BottomNavigationActivity"
+            android:name=".ui.dragging.DragAndDropActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.fragments.BottomNavigationActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".ui.quotes.QuotesActivity"
             android:exported="true"></activity>
@@ -37,12 +46,8 @@
 
         <activity
             android:name="com.example.particles.ui.chat.contacts.ContactsActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.particles.ui.chat.chat.ChatActivity"
@@ -62,9 +67,9 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.user.LoginActivity"
+            android:exported="true"
             android:label="Login"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity
@@ -74,7 +79,7 @@
             android:name=".ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Physics_model.NoActionBar" >
+            android:theme="@style/Theme.Physics_model.NoActionBar">
 
         </activity>
     </application>
