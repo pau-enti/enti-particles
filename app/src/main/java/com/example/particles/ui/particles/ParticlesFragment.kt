@@ -43,6 +43,7 @@ class ParticlesFragment : Fragment() {
             ArrayAdapter(
                 ctx,
                 R.layout.item_list_text,
+                R.id.textView6,
                 suggestedValues
             )
         )

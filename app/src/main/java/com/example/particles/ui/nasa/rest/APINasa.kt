@@ -7,6 +7,6 @@ import retrofit2.http.Query
 interface APINasa {
 
     @GET("search")
-    fun getPhoto(@Query("q") query: String): Call<Photos>
+    fun getPhoto(@Query("q") query: String): Call<NasaPhotos>
 
 }

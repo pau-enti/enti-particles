@@ -3,6 +3,8 @@ package com.example.particles.ui.nasa.rest
 import com.google.gson.annotations.SerializedName
 import java.lang.Exception
 
+// OLD: Manual way
+@Deprecated("Use @NasaPhotos instead")
 data class NasaPhotosCollection(@SerializedName("collection") val data: PhotosList) {
     data class PhotosList(@SerializedName("items") val photosList: List<InternalPhoto>)
     data class InternalPhoto(@SerializedName("links") val links: List<Link>, val data: List<Data>)

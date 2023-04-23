@@ -9,7 +9,7 @@ import com.example.particles.R
 import com.example.particles.databinding.ActivityNasaPhotosBinding
 import com.example.particles.ui.nasa.rest.APINasa
 import com.example.particles.ui.nasa.rest.NasaPhoto
-import com.example.particles.ui.nasa.rest.Photos
+import com.example.particles.ui.nasa.rest.NasaPhotos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,14 +59,16 @@ class NasaPhotosActivity : AppCompatActivity() {
         binding.searchTitle.isGone = true
         binding.progressNasaSearch.isVisible = true
 
-        call.enqueue(object : Callback<Photos> {
+        call.enqueue(object : Callback<NasaPhotos> {
             override fun onResponse(
-                call: Call<Photos>,
-                response: Response<Photos>
+                call: Call<NasaPhotos>,
+                response: Response<NasaPhotos>
             ) {
                 binding.progressNasaSearch.isGone = true
 
-                val res = response.body()?.collection?.items?.map {
+                val res = response.body()?.collection?.items?.mapNotNull {
+                    if (it.data == null || it.links == null)
+                        return@mapNotNull null
                     NasaPhoto(it.data[0].title, it.data[0].description, "", it.links[0].href)
                 }
 
@@ -78,7 +80,7 @@ class NasaPhotosActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Photos>, t: Throwable) {
+            override fun onFailure(call: Call<NasaPhotos>, t: Throwable) {
                 binding.progressNasaSearch.isGone = true
                 binding.searchTitle.text = getString(R.string.error_on_search)
                 binding.searchTitle.isGone = false

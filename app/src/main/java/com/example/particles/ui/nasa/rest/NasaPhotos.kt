@@ -5,7 +5,7 @@ package com.example.particles.ui.nasa.rest
 // Other: Enable inner class model
 // Extensions: Let propreties cammel names
 
-data class Photos(
+data class NasaPhotos(
     val collection: Collection
 ) {
     data class Collection(

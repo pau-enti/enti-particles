@@ -103,11 +103,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
         if (Particles.isEmpty()) {
-            val data = try {
+            /*val data = try {
                 openFileInput(Particles.PARTICLES_FILENAME).use { io ->
                     ObjectInputStream(io).use {
                         // Si tot va bé, l'objecte llegit estarà dins de "data"
-                        it.readObject() as Particles
+                        val data = it.readObject()
+                        if (data is Particles)
+                            data
+                        else null
                     }
                 }
             } catch (e: IOException) {
@@ -116,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
             if (data?.isNotEmpty() == true)
                 Particles.addAll(data)
-            else
+            else*/
                 Particles.resetParticles()
         }
     }
